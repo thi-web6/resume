@@ -8,8 +8,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link rel="icon" href="assets/img/favicon.png">
-    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" href="./assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap">
@@ -23,7 +23,402 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    
+    <!-- Inline CSS sebagai fallback jika main.css tidak berhasil dimuat -->
+    <style>
+        /* Basic styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #444;
+        }
+        
+        .dark-background {
+            background-color: #040b14;
+            color: #fff;
+        }
+        
+        .light-background {
+            background-color: #f8f9fa;
+        }
+        
+        /* Header styling */
+        .header {
+            width: 300px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            padding: 0 15px;
+            overflow-y: auto;
+            z-index: 999;
+            transition: all 0.5s;
+        }
+        
+        .profile-img {
+            margin: 15px auto;
+            display: block;
+            width: 120px;
+        }
+        
+        .profile-img img {
+            border: 8px solid #2c2f3f;
+        }
+        
+        .sitename {
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+        }
+        
+        .social-links a {
+            font-size: 18px;
+            display: inline-block;
+            background: #212431;
+            color: #fff;
+            line-height: 1;
+            padding: 8px 0;
+            margin-right: 4px;
+            border-radius: 50%;
+            text-align: center;
+            width: 36px;
+            height: 36px;
+            transition: 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #149ddd;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        /* Nav Menu */
+        .nav-menu {
+            padding: 30px 0 0 0;
+        }
+        
+        .nav-menu * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .nav-menu > ul > li {
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .nav-menu a, .nav-menu a:focus {
+            display: flex;
+            align-items: center;
+            color: #a8a9b4;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+        
+        .nav-menu a i, .nav-menu a:focus i {
+            font-size: 24px;
+            padding-right: 8px;
+            color: #6f7180;
+        }
+        
+        .nav-menu a:hover, .nav-menu .active, .nav-menu .active:focus, .nav-menu li:hover > a {
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .nav-menu a:hover i, .nav-menu .active i, .nav-menu .active:focus i, .nav-menu li:hover > a i {
+            color: #149ddd;
+        }
+        
+        /* Header Toggle */
+        .header-toggle {
+            position: fixed;
+            right: 15px;
+            top: 15px;
+            z-index: 9998;
+            border: 0;
+            font-size: 24px;
+            transition: all 0.4s;
+            outline: none;
+            background-color: #149ddd;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 0;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .main {
+            margin-left: 300px;
+        }
+        
+        /* Page Title */
+        .page-title {
+            padding: 20px 0;
+            border-bottom: 1px solid #272f3b;
+        }
+        
+        .page-title h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .breadcrumbs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .breadcrumbs ol {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+        
+        .breadcrumbs ol li + li {
+            padding-left: 10px;
+        }
+        
+        .breadcrumbs ol li + li::before {
+            display: inline-block;
+            padding-right: 10px;
+            color: #7f8184;
+            content: "/";
+        }
+        
+        .breadcrumbs .current {
+            color: #149ddd;
+        }
+        
+        /* Portfolio Details Section */
+        .section {
+            padding: 60px 0;
+            overflow: hidden;
+        }
+        
+        .portfolio-details .portfolio-details-slider img {
+            width: 100%;
+        }
+        
+        .portfolio-details .portfolio-details-slider .swiper-pagination {
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            opacity: 1;
+            border: 1px solid #149ddd;
+        }
+        
+        .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
+            background-color: #149ddd;
+        }
+        
+        .portfolio-details .portfolio-info {
+            padding: 30px;
+            box-shadow: 0px 0 30px rgba(5, 13, 24, 0.08);
+            margin-bottom: 30px;
+            background: #fff;
+        }
+        
+        .portfolio-details .portfolio-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .portfolio-details .portfolio-info ul {
+            list-style: none;
+            padding: 0;
+            font-size: 15px;
+        }
+        
+        .portfolio-details .portfolio-info ul li + li {
+            margin-top: 10px;
+        }
+        
+        .portfolio-details .portfolio-description {
+            padding: 30px;
+            box-shadow: 0px 0 30px rgba(5, 13, 24, 0.08);
+            background: #fff;
+        }
+        
+        .portfolio-details .portfolio-description h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+       .footer {
+        background-color: #f8f9fa;
+        padding: 25px 0;
+        font-size: 14px;
+        width: 100%;
+        position: relative;
+        clear: both;
+        margin-top: 50px;
+        border-top: 1px solid #e9ecef;
+    }
+    
+    .footer .copyright {
+        margin-bottom: 10px;
+        color: #444;
+    }
+    
+    .footer .credits {
+        color: #666;
+    }
+    
+    .footer a {
+        color: #149ddd;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    
+    .footer a:hover {
+        color: #0e76a8;
+        text-decoration: underline;
+    }
+    
+    /* Additional Responsive Improvements */
+    @media (max-width: 1199px) {
+        .main {
+            margin-left: 0;
+            width: 100%;
+        }
+        
+        .header.open-menu {
+            left: 0;
+        }
+        
+        #portfolio-details .portfolio-info,
+        #portfolio-details .portfolio-description {
+            padding: 20px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .page-title h1 {
+            font-size: 24px;
+        }
+        
+        .portfolio-details-slider img {
+            max-height: 400px;
+            object-fit: cover;
+        }
+        
+        #portfolio-details .portfolio-info,
+        #portfolio-details .portfolio-description {
+            margin-bottom: 20px;
+        }
+    }
+    
+    @media (max-width: 575px) {
+        .page-title {
+            padding: 15px 0;
+        }
+        
+        .page-title h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .breadcrumbs ol {
+            font-size: 12px;
+        }
+        
+        .section {
+            padding: 40px 0;
+        }
+    }
+    
+    /* Fixed Footer for very short content */
+    html, body {
+        min-height: 100%;
+        position: relative;
+    }
+    
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    .main {
+        flex: 1;
+    }
+        
+        /* Scroll Top Button */
+        .scroll-top {
+            position: fixed;
+            visibility: hidden;
+            opacity: 0;
+            right: 15px;
+            bottom: 15px;
+            z-index: 996;
+            background: #149ddd;
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            transition: all 0.4s;
+        }
+        
+        .scroll-top i {
+            font-size: 28px;
+            color: #fff;
+            line-height: 0;
+        }
+        
+        .scroll-top:hover {
+            background: #2eafec;
+            color: #fff;
+        }
+        
+        .scroll-top.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1199px) {
+            .header {
+                left: -300px;
+            }
+            
+            .main {
+                margin-left: 0;
+            }
+            
+            .header.open-menu {
+                left: 0;
+            }
+            
+            .main.shift-content {
+                margin-left: 300px;
+            }
+        }
+    </style>
 </head>
 
 <body class="portfolio-details-page">
@@ -32,10 +427,10 @@
         <i class="header-toggle d-xl-none bi bi-list"></i>
 
         <div class="profile-img">
-            <img src="assets/img/favicon.png" alt="Profile" class="img-fluid rounded-circle">
+            <img src="https://thi-web6.github.io/resume/assets/img/favicon.png" alt="Profile" class="img-fluid rounded-circle">
         </div>
 
-        <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+        <a href="https://thi-web6.github.io/resume/index.html" class="logo d-flex align-items-center justify-content-center">
             <h1 class="sitename">Abdurrohman Al Fathi</h1>
         </a>
 
@@ -48,11 +443,11 @@
 
         <nav id="navbar" class="nav-menu navbar">
             <ul>
-                <li><a href="#hero" class="nav-link scrollto active"><i class="bi bi-house-door"></i> <span>Home</span></a></li>
-                <li><a href="#about" class="nav-link scrollto"><i class="bi bi-person"></i> <span>About</span></a></li>
-                <li><a href="#resume" class="nav-link scrollto"><i class="bi bi-file-earmark"></i> <span>Resume</span></a></li>
-                <li><a href="#portfolio" class="nav-link scrollto"><i class="bi bi-collection"></i> <span>Portfolio</span></a></li>
-                <li><a href="#CTF" class="nav-link scrollto"><i class="bi bi-shield-check"></i> <span>CTF</span></a></li>
+                <li><a href="./index.html#hero" class="nav-link scrollto"><i class="bi bi-house-door"></i> <span>Home</span></a></li>
+                <li><a href="./index.html#about" class="nav-link scrollto"><i class="bi bi-person"></i> <span>About</span></a></li>
+                <li><a href="./index.html#resume" class="nav-link scrollto"><i class="bi bi-file-earmark"></i> <span>Resume</span></a></li>
+                <li><a href="./index.html#portfolio" class="nav-link scrollto active"><i class="bi bi-collection"></i> <span>Portfolio</span></a></li>
+                <li><a href="./index.html#CTF" class="nav-link scrollto"><i class="bi bi-shield-check"></i> <span>CTF</span></a></li>
             </ul>
         </nav>
     </header>
@@ -65,7 +460,7 @@
                 <h1 class="mb-2 mb-lg-0">Portfolio Details</h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="https://thi-web6.github.io/resume/index.html">Home</a></li>
                         <li class="current">Portfolio Details</li>
                     </ol>
                 </nav>
@@ -80,7 +475,7 @@
                         <div class="portfolio-details-slider swiper">
                             <div class="swiper-wrapper align-items-center">
                                 <div class="swiper-slide">
-                                    <img src="assets/img/portfolio/portofolio-det.png" alt="Portfolio Details" class="img-fluid">
+                                    <img src="https://thi-web6.github.io/resume/assets/img/portfolio/portofolio-det.png" alt="Portfolio Details" class="img-fluid">
                                 </div>
                             </div>
                             <div class="swiper-pagination"></div>
@@ -92,19 +487,16 @@
                             <h3>Project Information</h3>
                             <ul>
                                 <li><strong>Category:</strong> Web design</li>
-                                <li><strong>Client:</strong> ASU Company</li>
-                                <li><strong>Project Date:</strong> 01 March, 2020</li>
-                                <li><strong>Project URL:</strong> <a href="#" target="_blank">www.example.com</a></li>
+                                <li><strong>Client:</strong> Andre Bara (SPSS Team)</li>
+                                <li><strong>Project Date:</strong> 25 januari, 2025</li>
+                                <li><strong>Project URL:</strong> <a href="https://soefat-tb.wuaze.com" target="_blank">soefat-tb.com</a></li>
                             </ul>
                         </div>
                         
                         <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
                             <h2>Project Overview</h2>
                             <p>
-                                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. 
-                                Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. 
-                                Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos.
-                            </p>
+                               Website Pramuka Soefat SMK Taruna Bangsa hadir sebagai pusat informasi digital yang menampilkan kegiatan kepramukaan di sekolah kami. Dirancang dengan tampilan modern dan responsif, web ini menjadi jembatan antara anggota pramuka, alumni, dan masyarakat umum. Platform ini memudahkan akses informasi kegiatan, dokumentasi, prestasi, dan nilai-nilai kepramukaan yang kami junjung tinggi dalam membentuk generasi muda berkarakter kuat dan berwawasan luas.
                         </div>
                     </div>
                 </div>
@@ -112,20 +504,17 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer id="footer" class="footer position-relative light-background">
-        <div class="container">
-            <div class="copyright text-center">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">iPortfolio</strong> <span>All Rights Reserved</span></p>
-            </div>
-            <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
+  <!-- Updated Footer HTML -->
+<footer id="footer" class="footer light-background">
+    <div class="container">
+        <div class="copyright text-center mb-2">
+            <p>© <span>Copyright</span> <strong class="px-1">TB-Portfolio</strong> <span>All Rights Reserved</span></p>
         </div>
-    </footer>
+    </div>
+</footer>
 
     <!-- Scroll Top Button -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <a href="#header" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
         <i class="bi bi-arrow-up-short"></i>
     </a>
 
@@ -137,20 +526,89 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@9.0.0/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 
-    <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <!-- Main JS (dengan path yang sudah dikoreksi) -->
+    <script src="./assets/js/main.js"></script>
 
-    <!-- Initialize Swiper -->
+    <!-- Inline JavaScript sebagai fallback jika main.js tidak berhasil dimuat -->
     <script>
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            speed: 600,
-            autoplay: {
-                delay: 5000
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
+        document.addEventListener('DOMContentLoaded', () => {
+            // Toggle menu
+            const headerToggle = document.querySelector('.header-toggle');
+            const header = document.getElementById('header');
+            const main = document.querySelector('.main');
+            
+            if (headerToggle) {
+                headerToggle.addEventListener('click', () => {
+                    header.classList.toggle('open-menu');
+                    main.classList.toggle('shift-content');
+                });
+            }
+            
+            // Activate navbar links on scroll
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            function activateNavLink() {
+                let position = window.scrollY + 200;
+                
+                navLinks.forEach(link => {
+                    if (!link.hash) return;
+                    
+                    let section = document.querySelector(link.hash);
+                    if (!section) return;
+                    
+                    if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+                        navLinks.forEach(item => item.classList.remove('active'));
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('load', activateNavLink);
+            window.addEventListener('scroll', activateNavLink);
+            
+            // Initialize AOS
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+            
+            // Initialize Swiper
+            const swiper = new Swiper('.swiper', {
+                loop: true,
+                speed: 600,
+                autoplay: {
+                    delay: 5000
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                }
+            });
+            
+            // Scroll to Top Button
+            const scrollTop = document.getElementById('scroll-top');
+            
+            if (scrollTop) {
+                const toggleScrollTop = function() {
+                    if (window.scrollY > 100) {
+                        scrollTop.classList.add('active');
+                    } else {
+                        scrollTop.classList.remove('active');
+                    }
+                };
+                
+                window.addEventListener('load', toggleScrollTop);
+                document.addEventListener('scroll', toggleScrollTop);
+                
+                scrollTop.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
             }
         });
     </script>
