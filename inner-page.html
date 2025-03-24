@@ -1,98 +1,204 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Dokumentasi Cybersecurity</title>
-  <meta content="Dokumentasi dan Write Up terkait cybersecurity" name="description">
-  <meta content="Cybersecurity, Write Up, LKS, Nasional, Security" name="keywords">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Cybersecurity - Rohman</title>
+    <meta name="description" content="Koleksi write-up cybersecurity profesional oleh Abdurrohman Al Fathi, mencakup LKS, eksploitasi sistem, dan kompetisi nasional.">
+    <meta name="keywords" content="Cybersecurity, Write Up, LKS Cybersecurity, System Exploitation, Security, CTF, Dokumentasi, Pentesting">
+    <meta name="author" content="Abdurrohman Al Fathi">
+    <meta name="robots" content="index, follow">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Dokumentasi Cybersecurity - Rohman">
+    <meta property="og:description" content="Jelajahi dokumentasi dan write-up cybersecurity dari kompetisi dan proyek oleh Abdurrohman Al Fathi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thi-web6.github.io/resume/inner-page.html">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630">
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
-  <style>
-    /* Optional: Customizing Tailwind configuration if needed */
-  </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Reset dan Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            font-family: 'Inter', sans-serif;
+            color: #e5e7eb;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header { background: #1f2937; padding: 3rem 1rem; text-align: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+        header h1 { font-size: 2.5rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; letter-spacing: 1px; }
+        header p { font-size: 1.25rem; color: #34d399; margin-top: 0.75rem; }
+
+        /* Navbar */
+        .navbar { background: #1e293b; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); padding: 1rem 0; }
+        .navbar-brand { font-size: 1.75rem; font-weight: 600; color: #fff !important; transition: color 0.3s ease; }
+        .navbar-brand:hover { color: #34d399 !important; }
+        .navbar-brand i { color: #60a5fa; margin-right: 0.5rem; }
+        .navbar-nav .nav-link { color: #60a5fa !important; font-size: 1rem; padding: 0.5rem 1rem; transition: color 0.3s ease; }
+        .navbar-nav .nav-link:hover { color: #93c5fd !important; }
+
+        /* Card Section */
+        .card-section { padding: 2rem 0; }
+        .card { background: #1e293b; border: none; border-radius: 0.75rem; padding: 1.5rem; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .card p { color: #9ca3af; margin-bottom: 1rem; }
+        .card a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; color: #fff; text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+        .card a i { font-size: 1rem; }
+        .card a:hover { transform: scale(1.05); }
+        .card-blue h3 { color: #60a5fa; }
+        .card-blue a { background: linear-gradient(90deg, #60a5fa, #3b82f6); }
+        .card-blue a:hover { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .card-green h3 { color: #34d399; }
+        .card-green a { background: linear-gradient(90deg, #34d399, #10b981); }
+        .card-green a:hover { background: linear-gradient(90deg, #10b981, #34d399); }
+        .card-purple h3 { color: #a78bfa; }
+        .card-purple a { background: linear-gradient(90deg, #a78bfa, #8b5cf6); }
+        .card-purple a:hover { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+
+        /* Footer */
+        footer { background: #1f2937; padding: 2rem; text-align: center; box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.3); margin-top: auto; }
+        footer p { font-size: 1rem; color: #6b7280; }
+        footer p span { color: #34d399; }
+
+        /* Animations */
+        .fade-in { animation: fadeIn 1.2s ease-in-out; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(96, 165, 250, 0); } 100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 2rem 0.75rem; }
+            header h1 { font-size: 2rem; }
+            header p { font-size: 1rem; }
+            .navbar-brand { font-size: 1.5rem; }
+            .nav-link { font-size: 0.875rem; }
+            .card { padding: 1.25rem; }
+            .card h3 { font-size: 1.25rem; }
+            .card p { font-size: 0.875rem; }
+            .card a { padding: 0.5rem 1rem; font-size: 0.875rem; }
+        }
+        @media (max-width: 480px) {
+            header { padding: 1.5rem 0.5rem; }
+            header h1 { font-size: 1.75rem; }
+            header p { font-size: 0.875rem; }
+            .navbar-brand { font-size: 1.25rem; }
+            .nav-link { font-size: 0.75rem; }
+            .card { padding: 1rem; }
+            .card h3 { font-size: 1.125rem; }
+            .card p { font-size: 0.75rem; }
+            .card a { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+        }
+    </style>
 </head>
+<body>
+    <!-- Header -->
+    <header class="animate__animated animate__fadeInDown">
+        <div class="container mx-auto px-4">
+            <h1>Dokumentasi Cybersecurity</h1>
+            <p class="animate__animated animate__fadeIn" style="animation-delay: 0.3s;">Koleksi Write-Up oleh Abdurrohman Al Fathi</p>
+        </div>
+    </header>
 
-<body class="bg-gray-900 text-white font-sans m-0 p-0 flex flex-col min-h-screen">
-  <!-- ======= Header ======= -->
-  <header class="bg-gray-800 py-6 text-center">
-    <h1 class="text-4xl text-blue-400">Dokumentasi Cybersecurity</h1>
-  </header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#"><i class="fas fa-shield-alt"></i> Write-Up Hub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- ======= Main Content ======= -->
-  <main id="main" class="flex-grow py-8">
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="bg-gray-700 py-4 mb-8">
-      <div class="container mx-auto flex justify-between items-center">
-        <h2 class="text-xl font-semibold">Write Up Cybersecurity</h2>
-        <ol class="flex space-x-4">
-          <li><a href="index.html" class="text-blue-400 hover:underline">Home</a></li>
-          <li>Write Up</li>
-        </ol>
-      </div>
-    </section>
+    <!-- Main Content -->
+    <main class="flex-grow py-8">
+        <section class="card-section container mx-auto px-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col">
+                    <div class="card card-blue fade-in" data-aos="fade-up">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fas fa-file-alt text-blue-400 me-3"></i>
+                            <h3>LKS Cybersecurity 2024</h3>
+                        </div>
+                        <p>Dokumentasi kompetisi keamanan siber</p>
+                        <a href="assets/img/portfolio/lks2024.pdf" target="_blank" class="pulse"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-green fade-in" data-aos="fade-up" data-aos-delay="100">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fas fa-code text-green-400 me-3"></i>
+                            <h3>System Exploitation</h3>
+                        </div>
+                        <p>Teknik dan strategi eksploitasi sistem</p>
+                        <a href="assets/img/portfolio/radarbiru.pdf" target="_blank" class="pulse"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-purple fade-in" data-aos="fade-up" data-aos-delay="200">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fas fa-list text-purple-400 me-3"></i>
+                            <h3>Kisi-Kisi LKS</h3>
+                        </div>
+                        <p>Kisi-kisi soal kompetisi keamanan siber</p>
+                        <a href="assets/img/portfolio/Kisi Kisi Soal LKS Cybersecurity Kota Bekasi.pdf" target="_blank" class="pulse"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <!-- ======= Table Section ======= -->
-    <section class="container mx-auto px-6">
-      <h3 class="text-2xl mb-4">Dokumentasi Write Up Rohman</h3>
-      <table class="w-full table-auto border-collapse text-sm">
-        <thead>
-          <tr class="bg-gray-800 text-white">
-            <th class="px-4 py-2">No.</th>
-            <th class="px-4 py-2">Write Up Name</th>
-            <th class="px-4 py-2">Issued By</th>
-            <th class="px-4 py-2">Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-gray-700 hover:bg-gray-600">
-            <td class="px-4 py-2">01</td>
-            <td class="px-4 py-2">LKS Cybersecurity 2024</td>
-            <td class="px-4 py-2">MGMP</td>
-            <td class="px-4 py-2"><a href="assets/img/portfolio/lks2024.pdf" target="_blank" class="text-blue-400 hover:underline">Lihat Disini</a></td>
-          </tr>
-          <tr class="bg-gray-700 hover:bg-gray-600">
-            <td class="px-4 py-2">02</td>
-            <td class="px-4 py-2">System Exploitation</td>
-            <td class="px-4 py-2">Kang Top Hackerone</td>
-            <td class="px-4 py-2"><a href="assets/img/portfolio/radarbiru.pdf" target="_blank" class="text-blue-400 hover:underline">Lihat Disini</a></td>
-          </tr>
-          <tr class="bg-gray-700 hover:bg-gray-600">
-            <td class="px-4 py-2">03</td>
-            <td class="px-4 py-2">Kisi-Kisi LKS</td>
-            <td class="px-4 py-2">MGMP</td>
-            <td class="px-4 py-2"><a href="assets/img/portfolio/Kisi Kisi Soal LKS Cybersecurity Kota Bekasi.pdf" target="_blank" class="text-blue-400 hover:underline">Lihat Disini</a></td>
-          </tr>
-          <tr class="bg-gray-700 hover:bg-gray-600">
-            <td class="px-4 py-2">04</td>
-            <td class="px-4 py-2">Write Up Nasional</td>
-            <td class="px-4 py-2">Aji And Friends</td>
-            <td class="px-4 py-2"><a href="assets/img/portfolio/WriteNasional.pdf" target="_blank" class="text-blue-400 hover:underline">Lihat Disini</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
+    <!-- Footer -->
+    <footer class="animate__animated animate__fadeInUp">
+        <p>© 2025 Dokumentasi Cybersecurity oleh <span>Abdurrohman Al Fathi</span></p>
+    </footer>
 
-  <!-- ======= Footer ======= -->
-  <footer class="bg-gray-800 text-center py-4">
-    <p>&copy; 2025 Cybersecurity Documentation. All rights reserved.</p>
-  </footer>
+    <!-- Vendor JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 1000, easing: 'ease-in-out', once: true });
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+        // Initialize WOW.js
+        new WOW().init();
+
+        // GSAP Animations
+        gsap.from('header', { y: -100, opacity: 0, duration: 1.2, ease: 'power3.out' });
+        gsap.from('.card', { opacity: 0, y: 20, stagger: 0.2, duration: 0.8, ease: 'power2.out', delay: 0.5 });
+    </script>
 </body>
-
 </html>
