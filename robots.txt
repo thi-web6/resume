@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://thi-web6.github.io/resume/sitemap-new.xml
+Disallow: sitemap_new.xml/
+Sitemap: https://thi-web6.github.io/resume/sitemap.xml
