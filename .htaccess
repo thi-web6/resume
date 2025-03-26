@@ -1,0 +1,49 @@
+Options +FollowSymLinks -Indexes
+RewriteEngine On
+
+# Redirect HTTP ke HTTPS (Pastikan SSL aktif)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Blokir akses ke file sensitif
+<FilesMatch "^(error_log|php.ini|php5.ini|install.php|.env)$">
+    Require all denied
+</FilesMatch>
+
+# Blokir Query String yang mencurigakan (Lebih fleksibel)
+RewriteCond %{QUERY_STRING} (eval\(|base64_encode\(|shell_exec\(|system\() [NC]
+RewriteRule ^ - [F,L]
+
+# Batasi akses direktori (Proteksi tambahan)
+<IfModule mod_autoindex.c>
+    IndexIgnore *
+</IfModule>
+
+# Pastikan ModSecurity tidak memblokir akses normal
+<IfModule mod_security.c>
+    SecRuleRemoveById 981173 981257
+</IfModule>
+
+# Proteksi dasar terhadap serangan XSS dan injeksi
+Header set X-XSS-Protection "1; mode=block"
+Header always append X-Frame-Options DENY
+Header set X-Content-Type-Options nosniff
+
+# **Rate Limiting yang lebih fleksibel** (Mencegah DDoS tanpa memblokir admin)
+<IfModule mod_ratelimit.c>
+    SetEnvIf Request_URI "^/admin" ADMIN_ACCESS
+    SetEnvIf Request_URI "^/wp-admin" ADMIN_ACCESS
+    SetOutputFilter RATE_LIMIT
+    SetEnv rate-limit 10
+    SetEnvIf ADMIN_ACCESS rate-limit 0
+</IfModule>
+
+# Konfigurasi header untuk file XML (sitemap)
+<IfModule mod_headers.c>
+    <FilesMatch "\.xml$">
+        Header set Content-Type "application/xml"
+    </FilesMatch>
+</IfModule>
+
+# Alternatif fallback jika mod_headers tidak tersedia
+AddType application/xml .xml
