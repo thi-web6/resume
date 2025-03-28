@@ -1,6 +1,6 @@
 # Abdurrohman Al Fathi's Cybersecurity Resume
 
-![Profile](assets/img/profile-image.jpeg)
+![Profile](assets/img/favicon.png)
 
 Selamat datang di repositori resume online saya! Ini adalah portofolio digital yang menampilkan perjalanan saya sebagai seorang siswa SMK Taruna Bangsa yang fokus pada **keamanan siber**, **penetration testing**, dan **Capture The Flag (CTF)**. Di sini kamu bisa lihat pencapaian, keterampilan, dan proyek-proyek yang udah aku kerjakan.
 
