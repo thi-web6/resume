@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +27,9 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap">
-    
+    <!-- Favicons -->
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -45,8 +46,7 @@
             color: #444;
             min-height: 100vh;
             position: relative;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
         }
         
         .dark-background {
@@ -58,29 +58,47 @@
             background-color: #f8f9fa;
         }
         
+        /* Overlay untuk mobile menu */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
         /* Header styling */
         .header {
             width: 300px;
             position: fixed;
             top: 0;
-            left: 0;
+            left: -300px;
             bottom: 0;
             padding: 0 15px;
             overflow-y: auto;
             z-index: 999;
-            transition: all 0.5s;
+            transition: left 0.3s ease;
+            background-color: #040b14;
         }
         
-        /* Hide scrollbar for header */
-.header::-webkit-scrollbar {
-    width: 0;
-    display: none;
-}
+        .header.open-menu {
+            left: 0;
+        }
 
-.header {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-}
+        .header::-webkit-scrollbar {
+            width: 0;
+            display: none;
+        }
+
+        .header {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
 
         .profile-img {
             margin: 15px auto;
@@ -178,7 +196,7 @@
             position: fixed;
             right: 15px;
             top: 15px;
-            z-index: 9998;
+            z-index: 1000;
             border: 0;
             font-size: 24px;
             transition: all 0.4s;
@@ -197,8 +215,8 @@
         
         /* Main Content */
         .main {
-            margin-left: 300px;
-            flex: 1;
+            transition: margin-left 0.3s ease;
+            margin-left: 0;
         }
         
         /* Page Title */
@@ -333,27 +351,47 @@
         }
         
         /* Responsive Styles */
-        @media (max-width: 1199px) {
+        @media (min-width: 1200px) {
             .header {
-                left: -300px;
-            }
-            
-            .main {
-                margin-left: 0;
-            }
-            
-            .header.open-menu {
                 left: 0;
             }
             
-            .main.shift-content {
+            .main {
                 margin-left: 300px;
+            }
+            
+            .header-toggle {
+                display: none;
+            }
+            
+            .overlay {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1199px) {
+            .header.open-menu + .overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .main.shift-content {
+                margin-left: 0;
+                filter: blur(2px);
             }
         }
         
         @media (max-width: 768px) {
+            .header {
+                width: 260px;
+            }
+            
             .profile-img {
                 width: 100px;
+            }
+            
+            .sitename {
+                font-size: 20px;
             }
             
             .skills-section {
@@ -411,6 +449,10 @@
 </head>
 
 <body>
+    
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
     <!-- Header Toggle for mobile -->
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
@@ -440,7 +482,7 @@
 
         <nav id="navbar" class="nav-menu navbar">
             <ul>
-                <li><a href="./index.html#hero" class="nav-link scrollto active"><i class="bi bi-house-door"></i> <span>Home</span></a></li>
+                <li><a href="./index.html#home" class="nav-link scrollto active"><i class="bi bi-house-door"></i> <span>Home</span></a></li>
                 <li><a href="#achievements" class="nav-link scrollto"><i class="bi bi-trophy"></i> <span>Achievements</span></a></li>
                 <li><a href="#skills" class="nav-link scrollto"><i class="bi bi-gear"></i> <span>Skills</span></a></li>
             </ul>
@@ -494,10 +536,13 @@
                         <div class="motivational-section" data-aos="fade-up" data-aos-delay="300">
                             <h3>My Learning Journey</h3>
                             <div class="motivational-quote mb-3">
-                                <p>"Tingkatkan keterampilanmu dalam keamanan siber dan tujuilah akhirat, bukan hanya mencari kesenangan dunia semata."</p>
+                                <p>"Perusahaan menghabiskan jutaan dolar untuk firewall, enkripsi, dan perangkat akses aman, dan itu semua sia-sia karena tidak ada satu pun dari langkah-langkah ini yang menangani mata rantai terlemah dalam keamanan: orang-orang yang menggunakan, mengelola, mengoperasikan, dan bertanggung jawab atas sistem komputer."</p>
+                            </div>
+                            <div class="motivational-quote mb-3">
+                                <p>"Lebih baik engkau menghabiskan masa mudamu untuk meningkatkan value mu dibidang apapun daripada habis masa muda yang hanya merasakan pahitnya mencintai seseorang."</p>
                             </div>
                             <div class="motivational-quote">
-                                <p>"Lebih baik engkau menghabiskan masa mudamu untuk meningkatkan value mu dibidang apapun daripada habis masa muda yang hanya merasakan pahitnya mencintai seseorang"</p>
+                                <p>"Dalam dunia yang terhubung, pengetahuan adalah kekuatan, dan informasi adalah senjata."</p>
                             </div>
                         </div>
                     </div>
@@ -583,7 +628,7 @@
     <!-- Footer -->
     <footer id="footer" class="footer light-background">
         <div class="container">
-            <p class="mb-1">&copy; 2025 Abdurrohman Al Fathi. All Rights Reserved.</p>
+            <p class="mb-1">© 2025 Abdurrohman Al Fathi. All Rights Reserved.</p>
             <small>Proudly created with passion at SMKS Taruna Bangsa</small>
         </div>
     </footer>
@@ -614,56 +659,66 @@
             const headerToggle = document.querySelector('.header-toggle');
             const header = document.getElementById('header');
             const main = document.getElementById('main');
+            const overlay = document.querySelector('.overlay');
             
             if (headerToggle) {
-                headerToggle.addEventListener('click', () => {
+                headerToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     header.classList.toggle('open-menu');
                     main.classList.toggle('shift-content');
                 });
             }
             
-            // Close sidebar when clicking outside
+            // Tutup sidebar saat klik overlay
+            overlay.addEventListener('click', () => {
+                header.classList.remove('open-menu');
+                main.classList.remove('shift-content');
+            });
+            
+            // Tutup sidebar saat klik di luar
             document.addEventListener('click', (event) => {
                 const target = event.target;
                 if (!header.contains(target) && 
                     !headerToggle.contains(target) && 
-                    header.classList.contains('open-menu')) {
+                    header.classList.contains('open-menu') &&
+                    !overlay.contains(target)) {
                     
                     header.classList.remove('open-menu');
                     main.classList.remove('shift-content');
                 }
             });
             
-            // Smooth scroll for nav links
-            const navLinks = document.querySelectorAll('.nav-link.scrollto');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId.startsWith('#')) {
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            // For mobile: close sidebar first
-                            if (window.innerWidth < 1200) {
-                                header.classList.remove('open-menu');
-                                main.classList.remove('shift-content');
-                            }
-                            
-                            // Scroll to element
-                            window.scrollTo({
-                                top: targetElement.offsetTop,
-                                behavior: 'smooth'
-                            });
-                            
-                            // Update active class
-                            navLinks.forEach(navLink => {
-                                navLink.classList.remove('active');
-                            });
-                            this.classList.add('active');
-                        }
-                    }
+   // Smooth scroll untuk nav links dan tutup sidebar di mobile
+const navLinks = document.querySelectorAll('.nav-link.scrollto');
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                if (window.innerWidth < 1200) {
+                    header.classList.remove('open-menu');
+                    main.classList.remove('shift-content');
+                }
+                
+                // Hapus e.preventDefault() untuk link "Home"
+                if (targetId === '#home') {
+                    window.location.href = './index.html#home'; // Ganti URL
+                } else {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('active');
                 });
-            });
+                this.classList.add('active');
+            }
+        }
+    });
+});
             
             // Scroll button visibility
             const scrollTop = document.getElementById('scroll-top');
@@ -675,7 +730,6 @@
                 }
             });
             
-            // Scroll to top when button clicked
             scrollTop.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.scrollTo({
@@ -687,7 +741,7 @@
             // Update active menu based on scroll position
             function updateActiveMenu() {
                 const sections = document.querySelectorAll('section');
-                const scrollPosition = window.scrollY + 200; // Offset
+                const scrollPosition = window.scrollY + 200;
                 
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
