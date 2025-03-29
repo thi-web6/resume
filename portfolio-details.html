@@ -1,436 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Abdurrohman Al Fathi - Cybersecurity Enthusiast, Ethical Hacker, and Data Analyst">
-    <meta name="keywords" content="cybersecurity, ethical hacking, data analysis, CTF, penetration testing">
-    <meta name="author" content="Abdurrohman Al Fathi">
-    <title>Abdurrohman Al Fathi | Cybersecurity Portfolio</title>
-
-    <!-- Open Graph / Social Media Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thi-web6.github.io/resume/">
-    <meta property="og:title" content="Abdurrohman Al Fathi - Cybersecurity Portfolio">
-    <meta property="og:description" content="Explore my journey in cybersecurity, ethical hacking, and data analysis.">
-    <meta property="og:image" content="https://thi-web6.github.io/resume/assets/img/writeup.png">
-
+    <title>Abdurrohman Al Fathi - Portfolio</title>
+    
     <!-- Favicon -->
     <link rel="icon" href="assets/img/favicon.png" type="image/png">
-
-    <!-- CSS CDNs -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-    <!-- Inline CSS -->
+    
+    <!-- Online CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --dark-color: #2c3e50;
-            --light-color: #f4f7f6;
-            --text-color: #333;
-            --shadow-sm: 0 5px 15px rgba(0,0,0,0.1);
-            --shadow-lg: 0 15px 30px rgba(0,0,0,0.2);
-        }
+      /* Root Variables */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --dark-color: #2c3e50;
+    --light-color: #f4f7f6;
+    --text-color: #333;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-color);
-            overflow-x: hidden;
-        }
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+    overflow-x: hidden;
+}
 
-        /* Typography */
-        html { font-size: 16px; }
-        @media (max-width: 768px) { html { font-size: 14px; } }
+/* Responsive Typography */
+html {
+    font-size: 16px;
+}
 
-        /* Profile Section */
-        .profile-section {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 4rem 0;
-            color: #fff;
-            text-align: center;
-        }
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
 
-        .profile-img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 6px solid rgba(255,255,255,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+/* Profile Section */
+.profile-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 4rem 0;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
 
-        .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-lg);
-        }
+.profile-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
+.profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
 
-        .social-links a {
-            color: #fff;
-            font-size: 1.8rem;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
 
-        .social-links a:hover {
-            transform: translateY(-5px);
-            color: rgba(255,255,255,0.8);
-        }
+.social-links a {
+    color: white;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
 
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 300px;
-            height: 100%;
-            background: linear-gradient(135deg, var(--dark-color), #34495e);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            z-index: 1050;
-            padding: 2rem;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
-        }
+.social-links a:hover {
+    transform: translateY(-5px);
+    color: rgba(255,255,255,0.8);
+}
 
-        .sidebar.active { transform: translateX(0); }
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--dark-color), #34495e);
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+    z-index: 1050;
+    padding: 2rem;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+}
 
-        .sidebar-toggle {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1100;
-            background: var(--primary-color);
-            color: #fff;
-            border: none;
-            padding: 0.625rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+.sidebar.active {
+    transform: translateX(0);
+}
 
-        .sidebar-toggle:hover { background: #2980b9; }
+.sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        .sidebar-menu {
-            list-style: none;
-            margin-top: 2rem;
-            padding: 0;
-        }
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
 
-        .sidebar-menu li { margin-bottom: 1rem; }
+.sidebar-menu li {
+    margin-bottom: 1rem;
+}
 
-        .sidebar-menu a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-            padding: 0.75rem 1rem;
-            border-radius: 5px;
-            background: rgba(255,255,255,0.05);
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
+.sidebar-menu a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 12px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.05);
+}
 
-        .sidebar-menu a:hover {
-            background: rgba(52,152,219,0.2);
-            transform: translateX(10px);
-        }
+.sidebar-menu a:hover {
+    background: rgba(52,152,219,0.2);
+    transform: translateX(10px);
+}
 
-        /* Portfolio */
-        .portfolio-details .img-fluid {
-            border-radius: 10px;
-            box-shadow: var(--shadow-lg);
-        }
+/* Carousel */
+#portfolioCarousel {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
 
-        .portfolio-info {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-sm);
-        }
+#portfolioCarousel .carousel-item {
+    max-height: 500px;
+    min-height: 300px;
+    overflow: hidden;
+}
 
-        .portfolio-info ul { list-style: none; padding: 0; }
+#portfolioCarousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+}
 
-        .portfolio-info li { margin-bottom: 0.75rem; }
+#portfolioCarousel .carousel-control-prev,
+#portfolioCarousel .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
-        /* Motivational Section */
-        .motivational-section {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: var(--shadow-sm);
-        }
+/* Skills Section */
+.skills-section .card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
 
-        .motivational-quote p {
-            font-style: italic;
-            color: #555;
-        }
+.skills-section .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
 
-        /* Skills Section */
-        .skills-section .card {
-            border: none;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
 
-        .skills-section .card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
+    .profile-img {
+        width: 200px;
+        height: 200px;
+    }
 
-        .skills-section ul { padding-left: 1.25rem; }
+    #portfolioCarousel .carousel-item {
+        max-height: 250px;
+        min-height: 200px;
+    }
 
-        /* Footer */
-        footer {
-            background: var(--dark-color);
-            color: #fff;
-            padding: 1.5rem 0;
-        }
+    .skills-section .row {
+        flex-direction: column;
+    }
+}
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar { width: 100%; max-width: 300px; }
-            .profile-img { width: 200px; height: 200px; }
-            .portfolio-details .row { flex-direction: column; }
-            .skills-section .row { flex-direction: column; }
-        }
+/* Utility Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .animate-fade { animation: fadeIn 1s ease-in; }
-    </style>
+.animate-fade {
+    animation: fadeIn 1s ease-in;
+}
+  </style>
 </head>
 <body>
     <!-- Sidebar Toggle -->
-    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle">
         <i class="fas fa-bars"></i>
     </button>
 
     <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar" aria-label="Main Navigation">
+    <div class="sidebar" id="sidebar">
         <ul class="sidebar-menu">
             <li><a href="index.html">Home</a></li>
             <li><a href="#skills">Skills</a></li>
         </ul>
-    </nav>
+    </div>
 
     <div class="container-fluid">
         <!-- Profile Section -->
-        <header class="profile-section" data-aos="fade-down">
+        <header class="profile-section text-center">
             <div class="container">
-                <img src="assets/img/profile-img.jpg" alt="Abdurrohman Al Fathi's Profile" class="profile-img mb-3" loading="lazy" data-aos="zoom-in">
+                <img src="assets/img/profile-img.jpg" alt="Abdurrohman Al Fathi" class="profile-img mb-3" data-aos="zoom-in">
                 <h1 class="display-5 mb-3">Abdurrohman Al Fathi</h1>
-                <p class="lead mb-4">Cybersecurity Enthusiast | Ethical Hacker | Data Analyst</p>
+                <p class="lead mb-4">Cybersecurity Enthusiast | Data Analyst | Ethical Hacker</p>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/man13.5791/" target="_blank" aria-label="Instagram" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" target="_blank" aria-label="LinkedIn" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://www.credly.com/users/abdurrohman-al-fathi" target="_blank" aria-label="Credly" title="Credly">
-                        <i class="fas fa-award"></i>
-                    </a>
-                    <a href="https://github.com/thi-web6" target="_blank" aria-label="GitHub" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
+                  <a href="https://www.instagram.com/man13.5791/" target="_blank" title="Instagram">
+                      <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" target="_blank" title="LinkedIn">
+                      <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://www.credly.com/users/abdurrohman-al-fathi" target="_blank" title="Credly">
+                      <i class="fas fa-award"></i>
+                  </a>
+                  <a href="https://github.com/thi-web6" target="_blank" title="GitHub">
+                      <i class="fab fa-github"></i>
+                  </a>
+              </div>
+          </div>
+      </header>
+
+      <!-- Portfolio Details -->
+      <main class="container my-5">
+          <div class="portfolio-details animate-fade">
+              <div class="row">
+                  <div class="col-lg-8">
+                    <img 
+                    src="https://assets-global.website-files.com/5f688092bdf2ee0b6b010f87/64a59700883a82beb1983664_Accredible_DigitalCredentialsBlog_02-DigitalBadge1.png" 
+                    alt="Portfolio Image" 
+                    class="img-fluid rounded shadow-lg"
+                >
+                  </div>
+                  
+                 <div class="col-lg-4">
+                    <div class="portfolio-info">
+                        <h3>Certifications & Achievements</h3>
+                        <ul>
+                            <li><strong>Category</strong>: Badges</li>
+                            <li><strong>Credential</strong>: <a href="https://www.credly.com/badges/522b87b1-be2d-4056-817e-2c752d744189" target="_blank">Certified Ethical Hacker</a></li>
+                            <li><strong>Credential</strong>: <a href="https://www.credly.com/badges/d4a8683b-d58c-49f5-80e4-521e3fe1b904" target="_blank">Cybersecurity Fundamentals</a></li>
+                            <li><strong>Credential</strong>: <a href="https://www.credly.com/badges/1e96e28e-6196-4419-9fea-f0bad6afcd6a" target="_blank">Intermediate Cybersecurity</a></li>
+                            <li><strong>Credential</strong>: <a href="https://www.credly.com/badges/54ad3745-4abe-453c-a2dc-44314b081b94" target="_blank">Data Analytics Professional</a></li>
+                            <li><strong>Credential</strong>: <a href="https://www.credly.com/badges/78317d32-87d4-4818-98cf-e71d390a2382" target="_blank">Data Science Professional</a></li>
+                            <li><strong>Credential</strong>: <a href="https://academy.dqlab.id/Certificate_check/result/DQLABINTR1VWCQLT#mycertificate" target="_blank">R Programming Basics</a></li>
+                            <li><strong>Credential</strong>: <a href="https://academy.dqlab.id/Certificate_check/result/DQLABINTP1KAVGIU#mycertificate" target="_blank">Python Programming Fundamentals</a></li>
+                            <li><strong>Credential</strong>: <a href="https://academy.dqlab.id/Certificate_check/result/DQLABSQLT1NVIMDT#mycertificate" target="_blank">SQL Programming Essentials</a></li>
+                            <li><strong>Credential</strong>: <a href="https://www.credly.com/badges/dc79c2c4-52b6-44b6-abb0-8fa5862086bb" target="_blank">Red Hat Partner Center Certified</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                      <div class="motivational-section">
+                          <h3>My Learning Journey</h3>
+                          <div class="motivational-quote mb-3">
+                              <p>"Tingkatkan keterampilanmu dalam keamanan siber dan tujuilah akhirat, bukan hanya mencari kesenangan dunia semata."</p>
+                          </div>
+                          <div class="motivational-quote">
+                              <p>"Lebih baik engkau menghabiskan masa mudamu untuk meningkatkan value mu dibidang apapun daripada habis masa muda yang hanya merasakan pahitnya mencintai seseorang"</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Skills Section -->
+<section class="skills-section my-5" data-aos="fade-up">
+    <h2 class="text-center mb-4">My Skills</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-lock text-primary me-2"></i>Cybersecurity
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li>Ethical Hacking</li>
+                        <li>Network Security</li>
+                        <li>Penetration Testing</li>
+                        <li>Incident Response</li>
+                        <li>CTF Player</li>
+                    </ul>
                 </div>
             </div>
-        </header>
-
-        <!-- Portfolio Details -->
-        <main class="container my-5">
-            <section class="portfolio-details animate-fade">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <img src="https://assets-global.website-files.com/5f688092bdf2ee0b6b010f87/64a59700883a82beb1983664_Accredible_DigitalCredentialsBlog_02-DigitalBadge1.png" 
-                             alt="Digital Badge Showcase" 
-                             class="img-fluid" 
-                             loading="lazy">
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="portfolio-info">
-                            <h3>Certifications & Achievements</h3>
-                            <ul>
-                                <li><strong>Category:</strong> Badges</li>
-                                <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/522b87b1-be2d-4056-817e-2c752d744189" target="_blank">Certified Ethical Hacker</a></li>
-                                <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/d4a8683b-d58c-49f5-80e4-521e3fe1b904" target="_blank">Cybersecurity Fundamentals</a></li>
-                                <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/1e96e28e-6196-4419-9fea-f0bad6afcd6a" target="_blank">Intermediate Cybersecurity</a></li>
-                                <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/54ad3745-4abe-453c-a2dc-44314b081b94" target="_blank">Data Analytics Professional</a></li>
-                                <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/78317d32-87d4-4818-98cf-e71d390a2382" target="_blank">Data Science Professional</a></li>
-                                <li><strong>Credential:</strong> <a href="https://academy.dqlab.id/Certificate_check/result/DQLABINTR1VWCQLT#mycertificate" target="_blank">R Programming Basics</a></li>
-                                <li><strong>Credential:</strong> <a href="https://academy.dqlab.id/Certificate_check/result/DQLABINTP1KAVGIU#mycertificate" target="_blank">Python Programming Fundamentals</a></li>
-                                <li><strong>Credential:</strong> <a href="https://academy.dqlab.id/Certificate_check/result/DQLABSQLT1NVIMDT#mycertificate" target="_blank">SQL Programming Essentials</a></li>
-                                <li><strong>Credential:</strong> <a href="https://www.credly.com/badges/dc79c2c4-52b6-44b6-abb0-8fa5862086bb" target="_blank">Red Hat Partner Center Certified</a></li>
-                            </ul>
-                        </div>
-                        <div class="motivational-section">
-                            <h3>My Learning Journey</h3>
-                            <div class="motivational-quote mb-3">
-                                <p>"Sharpen your cybersecurity skills for a higher purpose, beyond mere worldly pursuits."</p>
-                            </div>
-                            <div class="motivational-quote">
-                                <p>"Invest your youth in building your worth, not chasing fleeting emotions."</p>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-chart-line text-success me-2"></i>Data Analysis
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li>Python</li>
+                        <li>R Programming</li>
+                        <li>SQL</li>
+                        <li>Data Visualization</li>
+                    </ul>
                 </div>
-            </section>
-
-            <!-- Skills Section -->
-            <section class="skills-section my-5" id="skills" data-aos="fade-up">
-                <h2 class="text-center mb-4">My Skills</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-lock text-primary me-2"></i>Cybersecurity</h5>
-                                <ul>
-                                    <li>Ethical Hacking</li>
-                                    <li>Network Security</li>
-                                    <li>Penetration Testing</li>
-                                    <li>Incident Response</li>
-                                    <li>CTF Challenges</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-chart-line text-success me-2"></i>Data Analysis</h5>
-                                <ul>
-                                    <li>Python</li>
-                                    <li>R Programming</li>
-                                    <li>SQL</li>
-                                    <li>Data Visualization</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-laptop-code text-info me-2"></i>Programming</h5>
-                                <ul>
-                                    <li>JavaScript</li>
-                                    <li>HTML/CSS</li>
-                                    <li>PHP</li>
-                                    <li>Bash Scripting</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-server text-warning me-2"></i>System Administration</h5>
-                                <ul>
-                                    <li>Linux Server Management</li>
-                                    <li>Bash Scripting</li>
-                                    <li>Red Hat Certified</li>
-                                    <li>OpenShift Platform</li>
-                                    <li>Cloud Infrastructure</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-laptop-code text-info me-2"></i>Programming
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li>JavaScript</li>
+                        <li>HTML/CSS</li>
+                        <li>PHP</li>
+                        <li>Bash Linux</li>
+                    </ul>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-server text-warning me-2"></i>System Administration
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li>Linux Server Management</li>
+                        <li>Bash Scripting</li>
+                        <li>Red Hat Partner Center</li>
+                        <li>OpenShift Container Platform</li>
+                        <li>Cloud Infrastructure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
             <!-- Footer -->
-            <footer>
+            <footer class="bg-dark text-white text-center py-3">
                 <div class="container">
-                    <p class="mb-0">© 2025 Abdurrohman Al Fathi. All Rights Reserved.</p>
-                    <small>Proudly crafted at SMKS Taruna Bangsa</small>
+                    <p class="mb-0">&copy; 2025 Abdurrohman Al Fathi. All Rights Reserved.</p>
+                    <small>Proudly created with passion at SMKS Taruna Bangsa</small>
                 </div>
             </footer>
-        </main>
-    </div>
+        </div>
+    
+       <!-- Script -->
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+       <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+       <script>
+          document.addEventListener('DOMContentLoaded', () => {
+    // Sidebar Toggle
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    const body = document.body;
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebar = document.getElementById('sidebar');
-            const body = document.body;
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        body.classList.toggle('sidebar-open');
+        
+        // Prevent scroll when sidebar is open
+        body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
+    });
 
-            // Sidebar Toggle
-            sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-                body.classList.toggle('sidebar-open');
-                body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
-            });
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!sidebar.contains(event.target) && 
+            !sidebarToggle.contains(event.target) && 
+            sidebar.classList.contains('active')) {
+            
+            sidebar.classList.remove('active');
+            body.classList.remove('sidebar-open');
+            body.style.overflow = 'auto';
+        }
+    });
 
-            // Close Sidebar on Outside Click
-            document.addEventListener('click', (e) => {
-                if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('active')) {
-                    sidebar.classList.remove('active');
-                    body.classList.remove('sidebar-open');
-                    body.style.overflow = 'auto';
-                }
-            });
-
-            // Smooth Scroll for Sidebar Links
-            document.querySelectorAll('.sidebar-menu a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const href = link.getAttribute('href');
-                    if (href.startsWith('#')) {
-                        e.preventDefault();
-                        const target = document.getElementById(href.substring(1));
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            sidebar.classList.remove('active');
-                            body.classList.remove('sidebar-open');
-                            body.style.overflow = 'auto';
-                        }
-                    }
-                });
-            });
-
-            // AOS Initialization
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 50
-            });
-
-            // Lazy Load Images with Intersection Observer
-            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) img.src = img.dataset.src;
-                            img.classList.add('loaded');
-                            obs.unobserve(img);
-                        }
+    // Smooth Scroll for Sidebar Links
+    const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
                     });
-                }, { rootMargin: '0px 0px 100px 0px' });
-                lazyImages.forEach(img => observer.observe(img));
+                }
+            } else {
+                // Jika bukan ID, biarkan tautan berfungsi normal
+                sidebar.classList.remove('active');
+                body.classList.remove('sidebar-open');
+                body.style.overflow = 'auto';
             }
         });
-    </script>
-</body>
-</html>
+    });
+
+    // Intersection Observer for Animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const fadeInObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Apply fade-in to specific sections
+    const fadeElements = document.querySelectorAll('.skills-section, .portfolio-details');
+    fadeElements.forEach(el => {
+        fadeInObserver.observe(el);
+    });
+
+    // Carousel Auto Pause on Hover
+    const carousel = document.getElementById('portfolioCarousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => {
+            const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+            if (carouselInstance) {
+                carouselInstance.pause();
+            }
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+            if (carouselInstance) {
+                carouselInstance.cycle();
+            }
+        });
+    }
+
+    // AOS Initialization (if using AOS library)
+    if (window.AOS) {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 50
+        });
+    }
+
+    // Performance Optimization: Lazy Load Images
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const image = entry.target;
+                    image.src = image.dataset.src;
+                    image.classList.add('loaded');
+                    observer.unobserve(image);
+                }
+            });
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+});
+       </script>
+    </body>
+    </html>
