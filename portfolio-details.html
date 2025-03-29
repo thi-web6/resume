@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     <meta property="og:url" content="https://thi-web6.github.io/resume/">
     <meta property="og:title" content="Abdurrohman Al Fathi - Cybersecurity Expert" />
     <meta property="og:description" content="Professional portfolio of Abdurrohman Al Fathi, showcasing skills in cybersecurity, data analysis, and ethical hacking." />
-    <meta property="og:image" content="https://assets-global.website-files.com/5f688092bdf2ee0b6b010f87/64a59700883a82beb1983664_Accredible_DigitalCredentialsBlog_02-DigitalBadge1.png" />
+    <meta property="og:image" content="https://thi-web6.github.io/resume/assets/img/badge1.png" />
     <meta property="og:image:width" content="1080">
     <meta property="og:image:height" content="1080">
     <meta property="og:image:alt" content="Cybersecurity certification badges">
@@ -23,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Abdurrohman Al Fathi - Cybersecurity Portfolio" />
     <meta name="twitter:description" content="Showcasing skills in cybersecurity, data analysis, and ethical hacking." />
-    <meta name="twitter:image" content="https://assets-global.website-files.com/5f688092bdf2ee0b6b010f87/64a59700883a82beb1983664_Accredible_DigitalCredentialsBlog_02-DigitalBadge1.png" />
+    <meta name="twitter:image" content="https://thi-web6.github.io/resume/assets/img/badge1.png" />
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap">
@@ -35,9 +36,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.0.0/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     
     <style>
         /* Basic styling */
@@ -73,6 +71,17 @@
             transition: all 0.5s;
         }
         
+        /* Hide scrollbar for header */
+.header::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
+.header {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
         .profile-img {
             margin: 15px auto;
             display: block;
@@ -351,6 +360,53 @@
                 padding: 40px 0;
             }
         }
+        
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+            overflow: hidden;
+        }
+        
+        section .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        section .section-title::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: #149ddd;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Enhanced Animations */
+        .animate__fadeIn {
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Improved Card Styling */
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -361,7 +417,7 @@
     <!-- Header with sidebar -->
     <header id="header" class="header dark-background d-flex flex-column">
         <div class="profile-img">
-            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Abdurrohman Al Fathi" class="img-fluid">
+            <img src="assets/img/profile-img.jpg" alt="Abdurrohman Al Fathi" class="img-fluid">
         </div>
 
         <h1 class="sitename">Abdurrohman Al Fathi</h1>
@@ -384,7 +440,7 @@
 
         <nav id="navbar" class="nav-menu navbar">
             <ul>
-                <li><a href="#home" class="nav-link scrollto active"><i class="bi bi-house-door"></i> <span>Home</span></a></li>
+                <li><a href="./index.html#hero" class="nav-link scrollto active"><i class="bi bi-house-door"></i> <span>Home</span></a></li>
                 <li><a href="#achievements" class="nav-link scrollto"><i class="bi bi-trophy"></i> <span>Achievements</span></a></li>
                 <li><a href="#skills" class="nav-link scrollto"><i class="bi bi-gear"></i> <span>Skills</span></a></li>
             </ul>
@@ -543,7 +599,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9.0.0/swiper-bundle.min.js"></script>
-    <script src="src/main.tsx" type="module"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
