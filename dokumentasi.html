@@ -1,18 +1,124 @@
-<!DOCTYPEhtml>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios Android</title>
+    <meta name="title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios Android">
+    <meta name="description" content="Panduan lengkap rekayasa balik aplikasi SMK Taruna Bangsa Pelajar v1.2.3 untuk bypass mode kios menggunakan APKTool, Smali, dan ADB di Fedora 42. Tutorial cybersecurity ethical hacking.">
+    <meta name="keywords" content="rekayasa balik, reverse engineering, SMK Taruna Bangsa, APK modifikasi, bypass mode kios, Android security, APKTool, Smali, cybersecurity, ethical hacking, penetration testing, mobile security">
+    <meta name="author" content="Thi-Web6">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Indonesian">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thi-web6.github.io/reverse-engineering-smk-taruna-bangsa/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://thi-web6.github.io/reverse-engineering-smk-taruna-bangsa/">
+    <meta property="og:title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios">
+    <meta property="og:description" content="Panduan teknis lengkap untuk melakukan reverse engineering aplikasi SMK Taruna Bangsa Pelajar v1.2.3. Pelajari cara bypass mode kios menggunakan APKTool dan Smali di Fedora 42.">
+    <meta property="og:image" content="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Icon SMK Taruna Bangsa - Tutorial Rekayasa Balik Aplikasi Android">
+    <meta property="og:site_name" content="Thi-Web6 Cybersecurity">
+    <meta property="og:locale" content="id_ID">
+    <meta property="article:author" content="Thi-Web6">
+    <meta property="article:published_time" content="2025-06-06T00:00:00Z">
+    <meta property="article:modified_time" content="2025-06-06T00:00:00Z">
+    <meta property="article:section" content="Cybersecurity">
+    <meta property="article:tag" content="Reverse Engineering">
+    <meta property="article:tag" content="Android Security">
+    <meta property="article:tag" content="APK Modification">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://thi-web6.github.io/reverse-engineering-smk-taruna-bangsa/">
+    <meta property="twitter:title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios">
+    <meta property="twitter:description" content="Panduan teknis lengkap untuk melakukan reverse engineering aplikasi SMK Taruna Bangsa Pelajar v1.2.3. Pelajari cara bypass mode kios menggunakan APKTool dan Smali.">
+    <meta property="twitter:image" content="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
+    <meta property="twitter:image:alt" content="Tutorial Rekayasa Balik SMK Taruna Bangsa">
+    <meta property="twitter:creator" content="@thi_web6">
+    <meta property="twitter:site" content="@thi_web6">
+    
+    <!-- WhatsApp -->
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:secure_url" content="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#4776E6">
+    <meta name="msapplication-TileColor" content="#4776E6">
+    <meta name="application-name" content="Tutorial Rekayasa Balik SMK Taruna Bangsa">
+    
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar",
+        "description": "Panduan lengkap rekayasa balik aplikasi SMK Taruna Bangsa Pelajar v1.2.3 untuk bypass mode kios menggunakan APKTool, Smali, dan ADB di Fedora 42",
+        "image": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png",
+        "author": {
+            "@type": "Person",
+            "name": "Thi-Web6",
+            "url": "https://github.com/thi-web6"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Thi-Web6",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png"
+            }
+        },
+        "datePublished": "2025-06-06",
+        "dateModified": "2025-06-06",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://thi-web6.github.io/reverse-engineering-smk-taruna-bangsa/"
+        },
+        "articleSection": "Cybersecurity",
+        "keywords": "rekayasa balik, reverse engineering, SMK Taruna Bangsa, APK modifikasi, bypass mode kios, Android security",
+        "about": [
+            {
+                "@type": "Thing",
+                "name": "Reverse Engineering"
+            },
+            {
+                "@type": "Thing", 
+                "name": "Android Security"
+            },
+            {
+                "@type": "Thing",
+                "name": "APK Modification"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
+    <link rel="apple-touch-icon" href="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <!-- Vendor CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
     <!-- Prism CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #4776E6;
@@ -35,37 +141,81 @@
             color: var(--text-light);
             line-height: 1.7;
             min-height: 100vh;
+            overscroll-behavior: none;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-#sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 280px;
-    max-height: 100vh;
-    background: rgba(4, 5, 16, 0.95);
-    backdrop-filter: blur(10px);
-    border-right: 1px solid var(--border-color);
-    z-index: 100; /* Turunin z-index biar nggak nutupin konten */
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            max-height: 100vh;
+            background: rgba(4, 5, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border-color);
+            z-index: 100;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+        }
         #sidebar.show {
             transform: translateX(0);
         }
         .sidebar-content {
             padding: 30px 20px;
+            min-height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
+        
+        /* Back Button Styling */
+        .back-btn {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
+        }
+        .back-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .back-btn:hover:before {
+            left: 100%;
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(71, 118, 230, 0.4);
+        }
+        .back-btn i {
+            margin-right: 12px;
+            font-size: 18px;
+            color: var(--text-light);
+        }
+        
         .nav-list {
             list-style: none;
-            margin-top: 40px;
+            margin-top: 20px;
         }
         .nav-link {
             display: flex;
@@ -114,7 +264,7 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            z-index: 1001;
+            z-index: 300;
             background: rgba(71, 118, 230, 0.1);
             border: 1px solid var(--border-color);
             color: var(--text-light);
@@ -129,14 +279,15 @@
             transform: scale(1.05);
         }
         .main-content {
-    margin-left: 0;
-    min-height: 100vh;
-    padding: 80px 20px 40px;
-    transition: margin-left 0.3s ease;
-    overflow-y: auto; /* Biar konten scrollable */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling di iOS */
-}       
- .overlay {
+            margin-left: 0;
+            min-height: 100vh;
+            padding: 80px 20px 40px;
+            transition: margin-left 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            z-index: 150;
+        }
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -147,7 +298,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 999;
+            z-index: 99;
         }
         .overlay.active {
             opacity: 1;
@@ -223,25 +374,26 @@
             margin-bottom: 16px;
         }
         .code-block {
-    background: #1a1b26;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 24px 0;
-    position: relative;
-    z-index: 200; /* Biar di depan sidebar */
-}
- discussione: .code-block pre {
-    margin: 0;
-    padding: 24px;
-    overflow-x: auto;
-    overflow-y: auto; /* Tambah biar scroll vertikal kalo kode panjang */
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    line-height: 1.6;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling di iOS */
-}      
-  .code-block code {
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+            position: relative;
+            z-index: 200;
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 24px;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 400px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
+        }
+        .code-block code {
             color: #c9d1d9;
         }
         .copy-btn {
@@ -256,7 +408,7 @@
             font-size: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            z-index: 10;
+            z-index: 210;
         }
         .copy-btn:hover {
             background: var(--accent);
@@ -323,6 +475,7 @@
         @media (min-width: 768px) {
             #sidebar {
                 transform: translateX(0);
+                z-index: 100;
             }
             .main-content {
                 margin-left: 280px;
@@ -331,30 +484,45 @@
                 display: none;
             }
         }
-       @media (max-width: 767px) {
-    #sidebar {
-        width: 80vw;
-        max-height: 100vh;
-        overflow-y: auto;
-        z-index: 100; /* Pastiin sidebar di bawah code-block */
-    }
-    .sidebar-content {
-        padding-bottom: 80px;
-    }
-    .nav-list {
-        margin-bottom: 20px;
-    }
-    .main-content {
-        z-index: 150; /* Biar konten di atas sidebar */
-        padding-top: 100px; /* Kasih ruang buat hamburger */
-    }
-    .code-block {
-        z-index: 200; /* Pastiin code-block paling depan */
-    }
-    .mobile-nav-toggle {
-        z-index: 300; /* Hamburger selalu di depan */
-    }
-}
+        @media (max-width: 767px) {
+            #sidebar {
+                width: 80vw;
+                max-height: 100vh;
+                overflow-y: auto;
+                z-index: 100;
+            }
+            .sidebar-content {
+                padding-bottom: 80px;
+                overflow-y: auto;
+            }
+            .nav-list {
+                margin-bottom: 20px;
+            }
+            .main-content {
+                z-index: 150;
+                padding-top: 100px;
+                padding-bottom: 80px;
+            }
+            .code-block {
+                z-index: 200;
+            }
+            .mobile-nav-toggle {
+                z-index: 300;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 24px;
+            }
+            .code-block pre {
+                padding: 16px;
+                font-size: 13px;
+            }
+        }
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -399,413 +567,6 @@
             max-width: 800px;
             margin: 0 auto 32px;
         }
-:root {
-    --primary: #4776E6;
-    --accent: #8E54E9;
-    --bg-dark: #0a0b14;
-    --bg-darker: #040510;
-    --text-light: #f4f6fd;
-    --text-gray: #a8b2d1;
-    --border-color: rgba(71, 118, 230, 0.15);
-    --shadow: rgba(0, 0, 0, 0.3);
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #1a1b2e 100%);
-    color: var(--text-light);
-    line-height: 1.7;
-    min-height: 100vh;
-    overscroll-behavior: none; /* Cegah overscroll biar smooth */
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-#sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 280px;
-    max-height: 100vh;
-    background: rgba(4, 5, 16, 0.95);
-    backdrop-filter: blur(10px);
-    border-right: 1px solid var(--border-color);
-    z-index: 100;
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y; /* Biar scroll sidebar nggak ganggu */
-}
-#sidebar.show {
-    transform: translateX(0);
-}
-.sidebar-content {
-    padding: 30px 20px;
-    min-height: 100%;
-    overflow-y: auto; /* Scroll kalo nav list panjang */
-    -webkit-overflow-scrolling: touch;
-}
-.nav-list {
-    list-style: none;
-    margin-top: 40px;
-}
-.nav-link {
-    display: flex;
-    align-items: center;
-    color: var(--text-gray);
-    padding: 15px 20px;
-    margin-bottom: 8px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-}
-.nav-link:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    transition: width 0.3s ease;
-    opacity: 0.1;
-}
-.nav-link:hover::before,
-.nav-link.active::before {
-    width: 100%;
-}
-.nav-link i {
-    margin-right: 12px;
-    font-size: 18px;
-    width: 20px;
-    color: var(--accent);
-}
-.nav-link:hover,
-.nav-link.active {
-    color: var(--text-light);
-    transform: translateX(8px);
-}
-.nav-link:hover i,
-.nav-link.active i {
-    color: var(--primary);
-}
-.mobile-nav-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 300; /* Hamburger selalu di depan */
-    background: rgba(71, 118, 230, 0.1);
-    border: 1px solid var(--border-color);
-    color: var(--text-light);
-    padding: 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-.mobile-nav-toggle:hover {
-    background: rgba(71, 118, 230, 0.2);
-    transform: scale(1.05);
-}
-.main-content {
-    margin-left: 0;
-    min-height: 100vh;
-    padding: 80px 20px 40px;
-    transition: margin-left 0.3s ease;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    z-index: 150; /* Di atas sidebar, di bawah code-block */
-}
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 99; /* Di bawah sidebar */
-}
-.overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 24px;
-    line-height: 1.2;
-}
-h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 32px;
-    position: relative;
-}
-h2:after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    border-radius: 2px;
-}
-h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 16px;
-}
-p {
-    color: var(--text-gray);
-    margin-bottom: 16px;
-}
-.card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 32px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-.card:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-}
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    border-color: rgba(71, 118, 230, 0.3);
-}
-.card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    border: 2px solid var(--accent);
-    margin-bottom: 16px;
-}
-.code-block {
-    background: #1a1b26;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 24px 0;
-    position: relative;
-    z-index: 200; /* Paling depan */
-}
-.code-block pre {
-    margin: 0;
-    padding: 24px;
-    overflow-x: auto;
-    overflow-y: auto;
-    max-height: 400px; /* Batasi tinggi biar scroll */
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    line-height: 1.6;
-    -webkit-overflow-scrolling: touch;
-}
-.code-block code {
-    color: #c9d1d9;
-}
-.copy-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 210; /* Di atas code-block */
-}
-.copy-btn:hover {
-    background: var(--accent);
-    transform: scale(1.05);
-}
-.btn {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    color: white;
-    padding: 14px 28px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-.btn:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-}
-.btn:hover:before {
-    left: 100%;
-}
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(71, 118, 230, 0.3);
-}
-ul, ol {
-    margin: 16px 0;
-    padding-left: 24px;
-}
-li {
-    margin-bottom: 8px;
-    color: var(--text-gray);
-}
-a {
-    color: var(--accent);
-    transition: color 0.2s ease;
-}
-a:hover {
-    color: var(--primary);
-}
-code {
-    background: rgba(71, 118, 230, 0.1);
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: var(--accent);
-}
-strong {
-    color: var(--text-light);
-    font-weight: 600;
-}
-@media (min-width: 768px) {
-    #sidebar {
-        transform: translateX(0);
-        z-index: 100;
-    }
-    .main-content {
-        margin-left: 280px;
-    }
-    .mobile-nav-toggle, .overlay {
-        display: none;
-    }
-}
-@media (max-width: 767px) {
-    #sidebar {
-        width: 80vw;
-        max-height: 100vh;
-        overflow-y: auto;
-        z-index: 100;
-    }
-    .sidebar-content {
-        padding-bottom: 80px;
-        overflow-y: auto;
-    }
-    .nav-list {
-        margin-bottom: 20px;
-    }
-    .main-content {
-        z-index: 150;
-        padding-top: 100px;
-        padding-bottom: 80px; /* Ruang biar scroll nyaman */
-    }
-    .code-block {
-        z-index: 200;
-    }
-    .mobile-nav-toggle {
-        z-index: 300;
-    }
-    h1 {
-        font-size: 2.5rem;
-    }
-    h2 {
-        font-size: 2rem;
-    }
-    .card {
-        padding: 24px;
-    }
-    .code-block pre {
-        padding: 16px;
-        font-size: 13px;
-    }
-}
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: var(--bg-darker);
-}
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--primary), var(--accent));
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
-}
-.anchor-link {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-h3:hover .anchor-link {
-    opacity: 1;
-}
-.hero {
-    text-align: center;
-    padding: 80px 0;
-    position: relative;
-}
-.hero:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(71, 118, 230, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-}
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-.hero p {
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto 32px;
-}
     </style>
 </head>
 <body>
@@ -813,11 +574,19 @@ h3:hover .anchor-link {
     <button class="mobile-nav-toggle" id="nav-toggle" aria-label="Toggle Sidebar">
         <i class="fas fa-bars"></i>
     </button>
+    
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
+    
     <!-- Sidebar -->
-    <nav id="sidebar">
+    <nav id="sidebar" role="navigation" aria-label="Main Navigation">
         <div class="sidebar-content">
+            <!-- Back Button -->
+            <a href="https://thi-web6.github.io/resume/" class="back-btn" title="Kembali ke Portfolio">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Portfolio</span>
+            </a>
+            
             <h3 style="color: var(--primary); margin-bottom: 20px;">
                 <i class="bi bi-code-slash"></i> Rekayasa Balik
             </h3>
@@ -837,36 +606,52 @@ h3:hover .anchor-link {
             </ul>
         </div>
     </nav>
+    
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" role="main">
         <div class="container">
             <!-- Hero Section -->
-            <section class="hero" data-aos="fade-up">
+            <header class="hero" data-aos="fade-up">
                 <div class="hero-content">
                     <h1>Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar</h1>
-                    <p>Panduan teknis untuk menganalisis dan memodifikasi aplikasi SMK Taruna Bangsa Pelajar (v1.2.3) guna memahami mekanisme mode kios menggunakan teknik rekayasa balik di Fedora 42.</p>
-                    <a href="#pendahuluan" class="btn">Mulai Sekarang</a>
+                    <p>Panduan teknis komprehensif untuk menganalisis dan memodifikasi aplikasi SMK Taruna Bangsa Pelajar (v1.2.3) guna memahami mekanisme mode kios menggunakan teknik rekayasa balik di Fedora 42. Tutorial ethical hacking dan cybersecurity untuk tujuan pendidikan.</p>
+                    <a href="#pendahuluan" class="btn">Mulai Tutorial</a>
                 </div>
-            </section>
+            </header>
+            
             <!-- Pendahuluan -->
             <section id="pendahuluan" data-aos="fade-up">
-                <h2>Pendahuluan</h2>
+                <h2>Pendahuluan Rekayasa Balik Android</h2>
                 <div class="card">
-                    <p>Tutorial ini menyajikan panduan komprehensif untuk melakukan rekayasa balik terhadap aplikasi SMK Taruna Bangsa Pelajar (versi 1.2.3) dengan tujuan memahami dan memanipulasi fitur mode kios yang membatasi navigasi perangkat. Proses ini dilakukan di lingkungan Fedora 42 menggunakan alat seperti <code>apktool</code>, Java 21, dan <code>adb</code>.</p>
-                    <p>Fokus utama adalah memodifikasi logika mode kios agar selalu dianggap aktif, mencegah pengembalian ke halaman awal, serta menonaktifkan penguncian perangkat.</p>
-                    <p><strong>Tujuan:</strong></p>
+                    <p>Tutorial ini menyajikan panduan lengkap untuk melakukan <strong>reverse engineering</strong> terhadap aplikasi SMK Taruna Bangsa Pelajar (versi 1.2.3) dengan tujuan memahami dan memanipulasi fitur mode kios yang membatasi navigasi perangkat Android. Proses ini dilakukan di lingkungan <strong>Fedora 42</strong> menggunakan alat profesional seperti <code>APKTool</code>, <code>Java 21</code>, dan <code>ADB</code>.</p>
+                    
+                    <p>Fokus utama adalah memodifikasi logika mode kios agar selalu dianggap aktif, mencegah pengembalian ke halaman awal, serta menonaktifkan penguncian perangkat untuk keperluan <strong>penetration testing</strong> dan <strong>analisis keamanan mobile</strong>.</p>
+                    
+                    <p><strong>🎯 Tujuan Tutorial:</strong></p>
                     <ul>
-                        <li>Menonaktifkan <code>startLockTask()</code> untuk mencegah penguncian perangkat</li>
+                        <li>Menonaktifkan <code>startLockTask()</code> untuk mencegah penguncian perangkat Android</li>
                         <li>Memodifikasi <code>smali/j0/b.smali</code> agar mode kios selalu dianggap aktif (<code>TRUE</code>)</li>
-                        <li>Menghasilkan APK baru yang dapat diuji di perangkat Android</li>
+                        <li>Menghasilkan APK baru yang dapat diuji di perangkat Android untuk analisis keamanan</li>
+                        <li>Memahami struktur aplikasi Android dan teknik bypass keamanan</li>
                     </ul>
-                    <p><strong>⚠️ Peringatan Etis:</strong> Pastikan Anda memiliki izin resmi untuk memodifikasi aplikasi atau hanya bereksperimen di laboratorium keamanan siber. Penyalahgunaan dapat melanggar hukum dan etika profesional.</p>
+                    
+                    <p><strong>🛠️ Tools yang Digunakan:</strong></p>
+                    <ul>
+                        <li><strong>APKTool 2.11.1</strong> - Dekompilasi dan kompilasi APK</li>
+                        <li><strong>Java 21 OpenJDK</strong> - Runtime environment</li>
+                        <li><strong>Android Debug Bridge (ADB)</strong> - Komunikasi dengan perangkat</li>
+                        <li><strong>Keytool</strong> - Pembuatan dan pengelolaan keystore</li>
+                        <li><strong>APK Signer</strong> - Penandatanganan digital APK</li>
+                    </ul>
+    
+                    <p><strong>⚠️ Peringatan Etis dan Legal:</strong> Pastikan Anda memiliki izin resmi untuk memodifikasi aplikasi atau hanya bereksperimen di laboratorium keamanan siber yang terkontrol. Penyalahgunaan teknik ini dapat melanggar hukum, kebijakan institusi, dan etika profesional cybersecurity. Tutorial ini ditujukan untuk tujuan <strong>edukasi</strong>, <strong>penelitian keamanan</strong>, dan <strong>ethical hacking</strong> semata.</p>
                 </div>
             </section>
+            
             <!-- Langkah 0 -->
             <section id="langkah-0" data-aos="fade-up">
                 <div class="card">
-                    <h3>0. Instalasi Alat dan Penanganan Masalah <a href="#langkah-0" class="anchor-link">#</a></h3>
+                    <h3>0. Instalasi Tools Reverse Engineering <a href="#langkah-0" class="anchor-link">#</a>
                     <p><strong>Apa:</strong> Menginstal perangkat lunak yang diperlukan untuk rekayasa balik.</p>
                     <p><strong>Mengapa:</strong> Alat-alat ini membentuk lingkungan kerja untuk mendekompilasi, memodifikasi, menandatangani, dan menguji APK.</p>
                     <div class="code-block">
