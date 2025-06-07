@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-62W01R9KYP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-62W01R9KYP');
+
+      // Opsi Consent untuk EEA (opsional)
+      function gtagConsent() {
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied'
+        });
+        // Aktifkan kalau pengguna setuju
+        document.getElementById('consentBtn')?.addEventListener('click', function() {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'analytics_storage': 'granted'
+          });
+          alert('Tracking diaktifkan!');
+          document.getElementById('consentBtn')?.remove();
+          document.getElementById('consentNotice')?.remove();
+        });
+      }
+      gtagConsent();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios Android</title>
-    <meta name="title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios Android">
-    <meta name="description" content="Panduan lengkap rekayasa balik aplikasi SMK Taruna Bangsa Pelajar v1.2.3 untuk bypass mode kios menggunakan APKTool, Smali, dan ADB di Fedora 42. Tutorial cybersecurity ethical hacking.">
-    <meta name="keywords" content="rekayasa balik, reverse engineering, SMK Taruna Bangsa, APK modifikasi, bypass mode kios, Android security, APKTool, Smali, cybersecurity, ethical hacking, penetration testing, mobile security">
+    <title>Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar v1.2.3 | Bypass Mode Kios Android</title>
+    <meta name="title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar v1.2.3 | Bypass Mode Kios Android">
+    <meta name="description" content="Panduan lengkap rekayasa balik aplikasi SMK Taruna Bangsa Pelajar v1.2.3 untuk bypass mode kios menggunakan APKTool, Smali, dan ADB di Fedora 42. Tutorial cybersecurity ethical hacking dan cara dekompilasi apk dengan apktool.">
+    <meta name="keywords" content="rekayasa balik, reverse engineering, SMK Taruna Bangsa, bypass mode kios, Android security, APKTool, Smali, cybersecurity, ethical hacking, penetration testing, mobile security, cara dekompilasi apk, modifikasi apk smali fedora 42">
     <meta name="author" content="Thi-Web6">
     <meta name="robots" content="index, follow">
     <meta name="language" content="Indonesian">
@@ -22,7 +51,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://thi-web6.github.io/resume/dokumentasiapk.html">
-    <meta property="og:title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios">
+    <meta property="og:title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar v1.2.3 | Bypass Mode Kios">
     <meta property="og:description" content="Panduan teknis lengkap untuk melakukan reverse engineering aplikasi SMK Taruna Bangsa Pelajar v1.2.3. Pelajari cara bypass mode kios menggunakan APKTool dan Smali di Fedora 42.">
     <meta property="og:image" content="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +70,7 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://thi-web6.github.io/resume/dokumentasiapk.html">
-    <meta property="twitter:title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar | Bypass Mode Kios">
+    <meta property="twitter:title" content="Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar v1.2.3 | Bypass Mode Kios">
     <meta property="twitter:description" content="Panduan teknis lengkap untuk melakukan reverse engineering aplikasi SMK Taruna Bangsa Pelajar v1.2.3. Pelajari cara bypass mode kios menggunakan APKTool dan Smali.">
     <meta property="twitter:image" content="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
     <meta property="twitter:image:alt" content="Tutorial Rekayasa Balik SMK Taruna Bangsa">
@@ -85,7 +114,7 @@
             "@id": "https://thi-web6.github.io/resume/dokumentasiapk.html"
         },
         "articleSection": "Cybersecurity",
-        "keywords": "rekayasa balik, reverse engineering, SMK Taruna Bangsa, APK modifikasi, bypass mode kios, Android security",
+        "keywords": "rekayasa balik, reverse engineering, SMK Taruna Bangsa, bypass mode kios, Android security",
         "about": [
             {
                 "@type": "Thing",
@@ -567,9 +596,41 @@
             max-width: 800px;
             margin: 0 auto 32px;
         }
+        /* Tambahan Consent Notice */
+        #consentNotice {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--bg-darker);
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+        }
+        #consentBtn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        #consentBtn:hover {
+            background: var(--accent);
+        }
     </style>
 </head>
 <body>
+    <!-- Consent Notice (opsional untuk EEA) -->
+    <div id="consentNotice">
+        <p>Kami menggunakan cookie untuk analitik dan iklan. Klik "Izinkan" untuk menyetujui, atau tutup untuk menolak.</p>
+        <button id="consentBtn">Izinkan Tracking</button>
+    </div>
+
     <!-- Mobile Nav Toggle -->
     <button class="mobile-nav-toggle" id="nav-toggle" aria-label="Toggle Sidebar">
         <i class="fas fa-bars"></i>
@@ -847,7 +908,7 @@ nano manifest.json
   "icon": "icon.png",
   "split_apks": [
     {
-      "file": "modified.apk",
+      "file": "modified_app.apk",
       "id": "base"
     },
     {
@@ -870,7 +931,7 @@ nano manifest.json
 }
 </code></pre>
         </div>
-        <p><strong>Catatan:</strong> Pastikan <code>com.tb.view_spp.apk</code> adalah base APK yang telah dimodifikasi dan ditandatangani di Langkah 6. Nama file dalam <code>split_apks</code> harus sesuai dengan file yang ada di folder tadikan yang saya namakan modifed.apk apk modifikasi dari com.tb_view.apk maka base apknya harus disesuaikan kembali dengan nama aplikasi modifikasi terbarunya <code>~/apk_tb/</code>. Simpan file ini di <code>~/apk_tb/</code>.</p>
+        <p><strong>Catatan:</strong> Pastikan <code>com.tb.view_spp.apk</code> adalah base APK yang telah dimodifikasi dan ditandatangani di Langkah 6. Nama file dalam <code>split_apks</code> harus sesuai dengan file yang ada di folder <code>~/apk_tb/</code>. Simpan file ini di <code>~/apk_tb/</code>.</p>
     </div>
 </section>
 
@@ -1002,4 +1063,3 @@ cp ~/apk_tb/SMK_Taruna_Bangsa_Pelajar_1.2.3_modified.xapk /sdcard/Download/
     </script>
 </body>
 </html>
-
