@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokumentasi Pengaturan SSH pada Fedora</title>
+    <title>Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci</title>
+    <meta name="description" content="Panduan lengkap dan rinci untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, konfigurasi server, dan penanganan firewall serta SELinux.">
+    <meta name="keywords" content="cara mengatur SSH Fedora, autentikasi kunci SSH, SSH tanpa kata sandi, konfigurasi SSH Fedora, tutorial SSH Fedora, OpenSSH Fedora, firewall SELinux SSH">
+    <meta name="author" content="Tim Dokumentasi Teknologi">
+    <meta name="robots" content="index, follow">
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta property="og:description" content="Pelajari langkah-langkah mengatur SSH di Fedora untuk akses aman tanpa kata sandi menggunakan autentikasi kunci. Panduan ini mencakup instalasi, konfigurasi, dan pemecahan masalah.">
+    <meta property="og:image" content="https://thi-web6.github.io/resume/assets/img/dokumentasi.png">
+    <meta property="og:url" content="https://thi-web6.github.io/resume/knowledge/dokuementasi-pubkey_ssh.html">
+    <meta property="og:type" content="article">
+    <meta property="og:thi-web6" content="Dokumentasi Teknologi">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta name="twitter:description" content="Panduan lengkap untuk konfigurasi SSH di Fedora dengan autentikasi kunci, termasuk langkah instalasi dan pengaturan keamanan.">
+    <meta name="twitter:image" content="https://thi-web6.github.io/resume/assets/img/dokumentasi.png">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
-    <link rel="apple-touch-icon" href="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
+    <link rel="icon" type="image/png" href="https://thi-web6.github.io/resume/assets/img/profile-img.jpg">
+    <link rel="apple-touch-icon" href="https://thi-web6.github.io/resume/assets/img/profile-img.jpg">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -250,6 +266,12 @@
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
         .code-block {
             background: #1a1b26;
             border: 1px solid var(--border-color);
@@ -344,7 +366,7 @@
         }
         @media (max-width: 767px) {
             #sidebar {
-                width: 80vw;
+                width: 80vw Triad
             }
             .main-content {
                 padding-top: 100px;
@@ -388,6 +410,33 @@
             margin: 0 auto 32px;
         }
     </style>
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci",
+        "description": "Panduan lengkap untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, dan konfigurasi server.",
+        "image": "https://thi-web6.github.io/resume/assets/img/dokumentasi.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Tim Dokumentasi Teknologi"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Dokumentasi Teknologi",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png"
+            }
+        },
+        "datePublished": "2025-06-08",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://yourwebsite.com/ssh-fedora"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Sidebar -->
@@ -397,7 +446,7 @@
                 <i class="fas fa-lock"></i>
                 <span>Dokumentasi SSH</span>
             </div>
-            <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
+            <a href="/resume" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
             <ul class="nav-list">
                 <li><a href="#introduction" class="nav-link"><i class="fas fa-book"></i> Pendahuluan</a></li>
                 <li><a href="#install-ssh" class="nav-link"><i class="fas fa-server"></i> Instalasi SSH Server</a></li>
@@ -416,108 +465,115 @@
     <main class="main-content">
         <section class="hero" id="introduction">
             <div class="hero-content" data-aos="fade-up">
-                <h1>Pengaturan SSH pada Fedora dengan Autentikasi Berbasis Kunci</h1>
-                <p>Dokumentasi ini memberikan panduan langkah demi langkah untuk mengatur Secure Shell (SSH) pada sistem operasi Fedora, dengan fokus pada autentikasi berbasis kunci. Tujuannya adalah memungkinkan akses aman tanpa kata sandi untuk pengguna tertentu, sambil mewajibkan kunci publik untuk pengguna lain, sehingga meningkatkan keamanan sistem.</p>
+                <h1>Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci</h1>
+                <p>Dokumentasi ini menyediakan panduan komprehensif untuk mengatur layanan Secure Shell (SSH) pada sistem operasi Fedora, dengan fokus pada autentikasi berbasis kunci publik-privat. Tujuannya adalah memungkinkan akses jarak jauh yang aman tanpa ketergantungan pada kata sandi, sambil memastikan pengguna lain hanya dapat mengakses server dengan kunci publik yang valid.</p>
+                <img src="https://thi-web6.github.io/resume/assets/img/dokumentasi.png" alt="Ilustrasi pengaturan SSH pada Fedora" class="hero-image">
             </div>
         </section>
         <div class="container">
             <section id="install-ssh" data-aos="fade-up">
-                <h2>Instalasi dan Aktivasi Server SSH</h2>
+                <h2>Instalasi dan Aktivasi Layanan SSH</h2>
                 <div class="card">
-                    <p>Sebelum mengatur autentikasi SSH, pastikan layanan OpenSSH Server terpasang dan aktif pada sistem Fedora. OpenSSH menyediakan protokol aman untuk komunikasi jarak jauh.</p>
+                    <p>Langkah awal dalam pengaturan SSH adalah memastikan layanan OpenSSH Server terpasang dan aktif pada sistem Fedora. OpenSSH menyediakan protokol komunikasi jarak jauh yang aman dan andal.</p>
                     <h3>Langkah-langkah:</h3>
                     <ol>
-                        <li><strong>Periksa keberadaan paket OpenSSH Server:</strong>
-                            <p>Jalankan perintah berikut untuk memastikan <code>openssh-server</code> telah terpasang. Jika belum, perintah ini akan menginstalnya.</p>
+                        <li><strong>Memeriksa dan menginstal OpenSSH Server:</strong>
+                            <p>Jalankan perintah berikut untuk memverifikasi keberadaan paket <code>openssh-server</code>. Jika belum terpasang, perintah ini akan menginstalnya secara otomatis.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo dnf install openssh-server</code></pre>
                             </div>
-                            <p><strong>Catatan:</strong> Jika muncul pesan bahwa paket sudah terpasang, lanjutkan ke langkah berikutnya.</p>
+                            <p><strong>Catatan:</strong> Jika output menunjukkan bahwa paket sudah terpasang (misalnya, <code>openssh-server-9.9p1-11.fc42.x86_64</code>), lanjutkan ke langkah berikutnya.</p>
                         </li>
-                        <li><strong>Aktifkan dan jalankan layanan SSH:</strong>
-                            <p>Perintah berikut memastikan layanan <code>sshd</code> aktif saat booting dan berjalan saat ini.</p>
+                        <li><strong>Mengaktifkan dan menjalankan layanan SSH:</strong>
+                            <p>Perintah berikut memastikan layanan <code>sshd</code> aktif saat sistem dinyalakan dan berjalan saat ini.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo systemctl enable sshd
 sudo systemctl start sshd</code></pre>
                             </div>
                         </li>
-                        <li><strong>Verifikasi status layanan:</strong>
-                            <p>Periksa apakah layanan <code>sshd</code> berjalan dengan benar.</p>
+                        <li><strong>Memverifikasi status layanan:</strong>
+                            <p>Periksa apakah layanan <code>sshd</code> berjalan dengan benar menggunakan perintah berikut.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo systemctl status sshd</code></pre>
                             </div>
-                            <p><strong>Hasil yang diharapkan:</strong> Status <code>active (running)</code> menunjukkan layanan berjalan. Jika tidak, periksa log dengan <code>sudo journalctl -u sshd</code>.</p>
+                            <p><strong>Hasil yang diharapkan:</strong> Output harus menunjukkan status <code>active (running)</code>. Jika layanan tidak aktif, periksa log dengan <code>sudo journalctl -u sshd</code> untuk mendiagnosis masalah.</p>
                         </li>
                     </ol>
-                    <p><strong>Potensi masalah:</strong> Jika instalasi gagal, pastikan koneksi internet aktif dan repositori Fedora diatur dengan benar.</p>
+                    <p><strong>Potensi masalah:</strong> Jika instalasi gagal, pastikan koneksi internet stabil dan repositori Fedora diatur dengan benar. Gunakan <code>sudo dnf repolist</code> untuk memeriksa repositori aktif.</p>
                 </div>
             </section>
             <section id="generate-key" data-aos="fade-up">
                 <h2>Pembuatan Pasangan Kunci SSH</h2>
                 <div class="card">
-                    <p>Kunci SSH terdiri dari kunci publik dan privat, digunakan untuk autentikasi aman tanpa bergantung pada kata sandi. Proses ini dilakukan pada komputer klien (pengguna).</p>
+                    <p>Pasangan kunci SSH, yang terdiri dari kunci publik dan privat, memungkinkan autentikasi aman tanpa kata sandi. Proses ini dilakukan pada komputer klien yang akan mengakses server.</p>
                     <h3>Langkah-langkah:</h3>
                     <ol>
-                        <li><strong>Buat kunci SSH:</strong>
-                            <p>Jalankan perintah berikut untuk menghasilkan kunci RSA dengan panjang 4096-bit, yang menawarkan keamanan tinggi.</p>
+                        <li><strong>Menghasilkan kunci SSH:</strong>
+                            <p>Gunakan perintah berikut untuk membuat kunci RSA dengan panjang 4096-bit, yang memberikan tingkat keamanan tinggi.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">ssh-keygen -t rsa -b 4096</code></pre>
                             </div>
                         </li>
-                        <li><strong>Tentukan lokasi penyimpanan kunci:</strong>
-                            <p>Saat diminta lokasi berkas, tekan <code>Enter</code> untuk menggunakan lokasi default (<code>~/.ssh/id_rsa</code> untuk kunci privat dan <code>~/.ssh/id_rsa.pub</code> untuk kunci publik). Jika berkas sudah ada, konfirmasi untuk menimpa (<code>y</code>).</p>
+                        <li><strong>Menentukan lokasi penyimpanan kunci:</strong>
+                            <p>Ketika diminta lokasi berkas, tekan <code>Enter</code> untuk menggunakan lokasi default (<code>~/.ssh/id_rsa</code> untuk kunci privat dan <code>~/.ssh/id_rsa.pub</code> untuk kunci publik). Jika berkas sudah ada, ketik <code>y</code> untuk menimpa.</p>
                         </li>
-                        <li><strong>Atur passphrase (opsional):</strong>
-                            <p>Saat diminta passphrase, Anda memiliki dua pilihan:
+                        <li><strong>Mengatur passphrase:</strong>
+                            <p>Saat diminta passphrase, Anda memiliki dua opsi:
                                 <ul>
-                                    <li><strong>Kosongkan untuk login tanpa kata sandi:</strong> Tekan <code>Enter</code> dua kali (untuk passphrase dan konfirmasi). Ini memungkinkan login otomatis, tetapi kurang aman jika kunci privat dicuri.</li>
-                                    <li><strong>Isi untuk keamanan tambahan:</strong> Masukkan kata sandi yang kuat. Passphrase ini akan diminta setiap kali kunci digunakan, menambah lapisan perlindungan.</li>
+                                    <li><strong>Login tanpa kata sandi:</strong> Tekan <code>Enter</code> dua kali (untuk passphrase dan konfirmasi) untuk mengosongkan passphrase. Ini memungkinkan login otomatis, tetapi kurang aman jika kunci privat dicuri.</li>
+                                    <li><strong>Keamanan tambahan:</strong> Masukkan kata sandi yang kuat. Passphrase ini akan diminta setiap kali kunci digunakan, memberikan perlindungan ekstra terhadap penyalahgunaan kunci privat.</li>
                                 </ul>
                             </p>
                         </li>
-                        <li><strong>Verifikasi hasil:</strong>
-                            <p>Periksa berkas yang dihasilkan di direktori <code>~/.ssh</code> dengan <code>ls ~/.ssh</code>. Anda akan melihat <code>id_rsa</code> dan <code>id_rsa.pub</code>.</p>
+                        <li><strong>Memverifikasi hasil:</strong>
+                            <p>Periksa keberadaan berkas kunci dengan perintah berikut:</p>
+                            <div class="code-block">
+                                <button class="copy-btn">Salin</button>
+                                <pre><code class="language-bash">ls ~/.ssh</code></pre>
+                            </div>
+                            <p>Output harus menunjukkan <code>id_rsa</code> dan <code>id_rsa.pub</code>.</p>
                         </li>
                     </ol>
-                    <p><strong>Catatan penting:</strong> Simpan kunci privat (<code>id_rsa</code>) dengan aman dan jangan bagikan. Kunci publik (<code>id_rsa.pub</code>) dapat dibagikan ke server.</p>
+                    <p><strong>Catatan penting:</strong> Kunci privat (<code>id_rsa</code>) harus disimpan dengan aman dan tidak boleh dibagikan. Kunci publik (<code>id_rsa.pub</code>) dapat disalin ke server.</p>
+                    <p><strong>Potensi masalah:</strong> Jika perintah gagal, pastikan direktori <code>~/.ssh</code> memiliki izin yang benar (<code>chmod 700 ~/.ssh</code>).</p>
                 </div>
             </section>
             <section id="copy-key" data-aos="fade-up">
                 <h2>Penyalinan Kunci Publik ke Server</h2>
                 <div class="card">
-                    <p>Kunci publik harus disalin ke server untuk mengaktifkan autentikasi berbasis kunci. Proses ini biasanya dilakukan menggunakan <code>ssh-copy-id</code>.</p>
+                    <p>Kunci publik harus disalin ke server agar autentikasi berbasis kunci dapat berfungsi. Cara termudah adalah menggunakan perintah <code>ssh-copy-id</code>.</p>
                     <h3>Langkah-langkah:</h3>
                     <ol>
-                        <li><strong>Salin kunci publik:</strong>
-                            <p>Jalankan perintah berikut dari komputer klien untuk menyalin kunci publik ke server.</p>
+                        <li><strong>Menyalin kunci publik:</strong>
+                            <p>Dari komputer klien, jalankan perintah berikut untuk menyalin kunci publik ke server.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">ssh-copy-id your_username@server_ip</code></pre>
                             </div>
-                            <p>Ganti <code>your_username</code> dengan nama pengguna di server (misal, <code>indodax</code>) dan <code>server_ip</code> dengan alamat IP atau hostname server (misal, <code>localhost</code> atau <code>192.168.1.100</code>).</p>
+                            <p>Ganti <code>your_username</code> dengan nama pengguna di server (misalnya, <code>indodax</code>) dan <code>server_ip</code> dengan alamat IP atau hostname server (misalnya, <code>localhost</code> atau <code>192.168.1.100</code>).</p>
                         </li>
-                        <li><strong>Masukkan kata sandi server:</strong>
-                            <p>Saat diminta, masukkan kata sandi pengguna server. Ini diperlukan sekali sebelum autentikasi kunci aktif.</p>
+                        <li><strong>Memasukkan kata sandi:</strong>
+                            <p>Masukkan kata sandi pengguna server saat diminta. Ini diperlukan sekali sebelum autentikasi kunci aktif.</p>
                         </li>
-                        <li><strong>Verifikasi akses:</strong>
-                            <p>Coba login ke server untuk memastikan kunci berfungsi:</p>
+                        <li><strong>Memverifikasi akses:</strong>
+                            <p>Uji login ke server untuk memastikan kunci berfungsi:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">ssh your_username@server_ip</code></pre>
                             </div>
-                            <p>Jika berhasil, Anda akan masuk tanpa diminta kata sandi (jika passphrase dikosongkan) atau diminta passphrase (jika diatur).</p>
+                            <p>Jika passphrase dikosongkan, login akan otomatis. Jika passphrase diatur, Anda akan diminta memasukkannya.</p>
                         </li>
-                        <li><strong>Untuk pengguna lain:</strong>
-                            <p>Pengguna lain harus mengulangi langkah ini dari komputer mereka atau Anda dapat menambahkan kunci publik mereka secara manual ke <code>~/.ssh/authorized_keys</code> di server:</p>
+                        <li><strong>Menambahkan kunci untuk pengguna lain:</strong>
+                            <p>Pengguna lain harus mengulangi langkah ini dari komputer mereka. Alternatifnya, tambahkan kunci publik mereka secara manual ke <code>~/.ssh/authorized_keys</code> di server:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo nano ~other_user/.ssh/authorized_keys</code></pre>
                             </div>
-                            <p>Tambahkan kunci publik, simpan, lalu atur izin:</p>
+                            <p>Tambahkan isi <code>id_rsa.pub</code> pengguna lain, lalu atur izin:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo chown other_user:other_user ~other_user/.ssh -R
@@ -526,31 +582,31 @@ sudo chmod 600 ~other_user/.ssh/authorized_keys</code></pre>
                             </div>
                         </li>
                     </ol>
-                    <p><strong>Potensi masalah:</strong> Jika <code>ssh-copy-id</code> gagal, pastikan server mengizinkan login kata sandi sementara (<code>PasswordAuthentication yes</code> di <code>sshd_config</code>) atau salin kunci secara manual.</p>
+                    <p><strong>Potensi masalah:</strong> Jika <code>ssh-copy-id</code> gagal, pastikan login kata sandi masih diizinkan sementara di <code>sshd_config</code> (<code>PasswordAuthentication yes</code>) atau salin kunci secara manual.</p>
                 </div>
             </section>
             <section id="configure-ssh" data-aos="fade-up">
                 <h2>Konfigurasi Server SSH untuk Autentikasi Kunci</h2>
                 <div class="card">
-                    <p>Untuk meningkatkan keamanan, nonaktifkan login dengan kata sandi dan wajibkan autentikasi berbasis kunci dengan mengedit berkas <code>/etc/ssh/sshd_config</code>.</p>
+                    <p>Untuk meningkatkan keamanan, nonaktifkan login kata sandi dan wajibkan autentikasi berbasis kunci dengan mengedit berkas konfigurasi SSH.</p>
                     <h3>Langkah-langkah:</h3>
                     <ol>
-                        <li><strong>Buat cadangan berkas konfigurasi:</strong>
-                            <p>Sebelum mengedit, cadangkan berkas untuk mencegah kesalahan.</p>
+                        <li><strong>Mencadangkan berkas konfigurasi:</strong>
+                            <p>Sebelum mengedit, buat cadangan berkas <code>sshd_config</code> untuk mencegah kehilangan konfigurasi.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code></pre>
                             </div>
                         </li>
-                        <li><strong>Edit berkas konfigurasi:</strong>
-                            <p>Buka berkas menggunakan editor teks seperti <code>nano</code>.</p>
+                        <li><strong>Mengedit berkas konfigurasi:</strong>
+                            <p>Buka berkas <code>sshd_config</code> menggunakan editor teks seperti <code>nano</code>.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo nano /etc/ssh/sshd_config</code></pre>
                             </div>
                         </li>
-                        <li><strong>Tambahkan atau ubah pengaturan:</strong>
-                            <p>Tambahkan baris berikut di akhir berkas untuk mengaktifkan autentikasi kunci dan menonaktifkan login kata sandi.</p>
+                        <li><strong>Mengatur autentikasi kunci:</strong>
+                            <p>Tambahkan atau ubah baris berikut di akhir berkas:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">PubkeyAuthentication yes
@@ -560,107 +616,109 @@ AllowUsers your_username</code></pre>
                             </div>
                             <p><strong>Penjelasan:</strong>
                                 <ul>
-                                    <li><code>PubkeyAuthentication yes</code>: Mengizinkan autentikasi berbasis kunci.</li>
+                                    <li><code>PubkeyAuthentication yes</code>: Mengaktifkan autentikasi berbasis kunci.</li>
                                     <li><code>PasswordAuthentication no</code>: Menonaktifkan login dengan kata sandi.</li>
-                                    <li><code>ChallengeResponseAuthentication no</code>: Menonaktifkan metode autentikasi lain yang mungkin mem-bypass pengaturan.</li>
-                                    <li><code>AllowUsers your_username</code>: (Opsional) Batasi akses hanya untuk pengguna tertentu (ganti <code>your_username</code>).</li>
+                                    <li><code>ChallengeResponseAuthentication no</code>: Mencegah metode autentikasi alternatif.</li>
+                                    <li><code>AllowUsers your_username</code>: (Opsional) Membatasi akses hanya untuk pengguna tertentu.</li>
                                 </ul>
                             </p>
                         </li>
-                        <li><strong>Simpan dan mulai ulang layanan:</strong>
-                            <p>Simpan berkas (<code>Ctrl+O</code>, <code>Enter</code>, <code>Ctrl+X</code> di nano), lalu mulai ulang <code>sshd</code>.</p>
+                        <li><strong>Menyimpan dan memulai ulang layanan:</strong>
+                            <p>Simpan berkas (<code>Ctrl+O</code>, <code>Enter</code>, <code>Ctrl+X</code> di nano), lalu mulai ulang layanan SSH.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo systemctl restart sshd</code></pre>
                             </div>
                         </li>
-                        <li><strong>Verifikasi konfigurasi:</strong>
-                            <p>Coba login dari klien untuk memastikan hanya autentikasi kunci yang berfungsi:</p>
+                        <li><strong>Memverifikasi konfigurasi:</strong>
+                            <p>Uji login dengan kunci:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">ssh your_username@server_ip</code></pre>
                             </div>
-                            <p>Untuk menguji login kata sandi (harus gagal):</p>
+                            <p>Uji login dengan kata sandi untuk memastikan gagal:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">ssh -o PubkeyAuthentication=no your_username@server_ip</code></pre>
                             </div>
+                            <p><strong>Hasil yang diharapkan:</strong> Login dengan kata sandi akan menghasilkan <code>Permission denied</code>.</p>
                         </li>
                     </ol>
-                    <p><strong>Catatan penting:</strong> Jangan tutup sesi SSH saat ini sebelum menguji login di sesi baru untuk menghindari kehilangan akses jika konfigurasi salah.</p>
+                    <p><strong>Catatan penting:</strong> Jangan tutup sesi SSH aktif sebelum menguji login di sesi baru untuk menghindari kehilangan akses.</p>
                 </div>
             </section>
             <section id="firewall-selinux" data-aos="fade-up">
                 <h2>Pengaturan Firewall dan SELinux</h2>
                 <div class="card">
-                    <p>Fedora menggunakan <code>firewalld</code> untuk firewall dan SELinux untuk keamanan tambahan. Pastikan keduanya dikonfigurasi agar SSH berfungsi.</p>
+                    <p>Fedora menggunakan <code>firewalld</code> untuk pengelolaan firewall dan SELinux untuk kontrol keamanan tambahan. Pastikan keduanya dikonfigurasi dengan benar.</p>
                     <h3>Firewall</h3>
                     <ol>
-                        <li><strong>Buka port SSH:</strong>
+                        <li><strong>Membuka port SSH:</strong>
                             <p>Pastikan port 22 (default SSH) diizinkan oleh <code>firewalld</code>.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo firewall-cmd --permanent --add-service=ssh
 sudo firewall-cmd --reload</code></pre>
                             </div>
-                            <p><strong>Catatan:</strong> Perintah <code>--permanent</code> memastikan aturan bertahan setelah reboot.</p>
+                            <p><strong>Catatan:</strong> Opsi <code>--permanent</code> memastikan aturan tetap aktif setelah reboot.</p>
                         </li>
-                        <li><strong>Verifikasi aturan firewall:</strong>
-                            <p>Periksa apakah layanan SSH aktif:</p>
+                        <li><strong>Memverifikasi aturan firewall:</strong>
+                            <p>Periksa layanan aktif:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo firewall-cmd --list-services</code></pre>
                             </div>
+                            <p><strong>Hasil yang diharapkan:</strong> Output harus mencantumkan <code>ssh</code>.</p>
                         </li>
                     </ol>
                     <h3>SELinux</h3>
                     <ol>
-                        <li><strong>Uji mode permisif:</strong>
-                            <p>Jika login SSH gagal, SELinux mungkin memblokir. Uji dengan mode permisif sementara:</p>
+                        <li><strong>Menguji mode permisif:</strong>
+                            <p>Jika login gagal, SELinux mungkin memblokir akses. Uji dengan mode permisif:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo setenforce 0</code></pre>
                             </div>
-                            <p>Coba login lagi. Jika berhasil, SELinux perlu dikonfigurasi.</p>
+                            <p>Coba login kembali. Jika berhasil, SELinux perlu penyesuaian.</p>
                         </li>
-                        <li><strong>Atur mode permisif permanen (opsional):</strong>
-                            <p>Edit berkas SELinux untuk mengubah mode secara permanen:</p>
+                        <li><strong>Mengatur mode permisif permanen:</strong>
+                            <p>Edit berkas SELinux untuk perubahan permanen (opsional):</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config</code></pre>
                             </div>
-                            <p><strong>Alternatif:</strong> Untuk tetap menggunakan mode <code>enforcing</code>, konfigurasikan aturan SELinux khusus dengan <code>audit2allow</code> berdasarkan log SELinux.</p>
+                            <p><strong>Alternatif:</strong> Untuk mode <code>enforcing</code>, buat aturan SELinux khusus menggunakan <code>audit2allow</code> berdasarkan log (<code>sudo grep sshd /var/log/audit/audit.log</code>).</p>
                         </li>
                     </ol>
-                    <p><strong>Potensi masalah:</strong> Jika firewall memblokir, periksa zona aktif dengan <code>sudo firewall-cmd --get-active-zones</code> dan pastikan layanan SSH diizinkan di zona tersebut.</p>
+                    <p><strong>Potensi masalah:</strong> Jika firewall memblokir, periksa zona aktif dengan <code>sudo firewall-cmd --get-active-zones</code> dan pastikan <code>ssh</code> diizinkan.</p>
                 </div>
             </section>
             <section id="troubleshooting" data-aos="fade-up">
                 <h2>Pemecahan Masalah</h2>
                 <div class="card">
-                    <p>Jika terjadi masalah selama pengaturan atau login SSH, ikuti langkah berikut untuk mendiagnosis dan menyelesaikan.</p>
+                    <p>Jika terjadi masalah selama pengaturan atau login SSH, ikuti langkah-langkah berikut untuk mendiagnosis dan menyelesaikannya.</p>
                     <h3>Langkah-langkah:</h3>
                     <ol>
-                        <li><strong>Periksa log SSH:</strong>
-                            <p>Lihat log layanan SSH untuk mengetahui penyebab error.</p>
+                        <li><strong>Memeriksa log SSH:</strong>
+                            <p>Lihat log layanan untuk mengidentifikasi error.</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">sudo journalctl -u sshd</code></pre>
                             </div>
-                            <p><strong>Contoh error:</strong> <code>Authentication refused</code> mungkin menunjukkan kunci salah atau <code>PasswordAuthentication</code> dinonaktifkan.</p>
+                            <p><strong>Contoh error:</strong> <code>Authentication refused</code> menunjukkan kunci salah atau pengaturan autentikasi tidak sesuai.</p>
                         </li>
-                        <li><strong>Periksa izin berkas SSH:</strong>
-                            <p>Pastikan izin direktori dan berkas SSH benar.</p>
+                        <li><strong>Memeriksa izin berkas:</strong>
+                            <p>Pastikan izin direktori dan berkas SSH benar:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
                                 <pre><code class="language-bash">chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys</code></pre>
                             </div>
                         </li>
-                        <li><strong>Verifikasi kunci publik:</strong>
-                            <p>Bandingkan kunci di <code>~/.ssh/authorized_keys</code> server dengan <code>~/.ssh/id_rsa.pub</code> klien untuk memastikan kecocokan.</p>
+                        <li><strong>Memverifikasi kunci publik:</strong>
+                            <p>Bandingkan isi <code>~/.ssh/authorized_keys</code> di server dengan <code>~/.ssh/id_rsa.pub</code> di klien.</p>
                         </li>
-                        <li><strong>Uji koneksi:</strong>
+                        <li><strong>Menguji koneksi dengan mode verbose:</strong>
                             <p>Gunakan mode verbose untuk detail error:</p>
                             <div class="code-block">
                                 <button class="copy-btn">Salin</button>
@@ -668,7 +726,7 @@ chmod 600 ~/.ssh/authorized_keys</code></pre>
                             </div>
                         </li>
                     </ol>
-                    <p><strong>Catatan penting:</strong> Jika semua gagal, kembalikan <code>sshd_config</code> dari cadangan (<code>/etc/ssh/sshd_config.bak</code>) dan uji ulang.</p>
+                    <p><strong>Catatan penting:</strong> Jika semua langkah gagal, pulihkan <code>sshd_config</code> dari cadangan (<code>/etc/ssh/sshd_config.bak</code>) dan uji ulang.</p>
                 </div>
             </section>
         </div>
@@ -705,7 +763,7 @@ chmod 600 ~/.ssh/authorized_keys</code></pre>
                 e.preventDefault();
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
-                const targetId = link.getAttribute('href').substring 1);
+                const targetId = link.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 targetElement.scrollIntoView({ behavior: 'smooth' });
                 if (window.innerWidth < 768) {
