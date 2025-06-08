@@ -136,10 +136,10 @@
             border-right: 1px solid var(--border-color);
             z-index: 100;
             transform: translateX(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 135deg, 0, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            touch-action: auto;
+            touch-action: pan-y;
         }
         #sidebar.show {
             transform: translateX(0);
@@ -162,8 +162,8 @@
             font-weight: 600;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             position: relative;
-            overflow-y: hidden;
-            box-shadow: 0px4px 15px rgba(71, 255, 230, 0.3);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
         }
         .back-btn:before {
             content: '';
@@ -171,15 +171,16 @@
             top: 0;
             left: -100%;
             width: 100%;
-            height: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s ease;
         }
         .back-btn:hover:before {
-            left: linear-gradient(90deg, left 100%, rgba(255,255,255,0.2));
+            left: 100%;
         }
         .back-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(71, 118, 230, 0.4);
+            box-shadow: 0 8px 25px rgba(71, 118, 230, 0.4);
         }
         .back-btn i {
             margin-right: 12px;
@@ -776,20 +777,20 @@ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config</code>
             <section id="troubleshooting" data-aos="fade-up">
                 <h2>Pemecahan Masalah</h2>
                 <div class="card">
-                    <h3>1. Memeriksa Log <a href="#troubleshooting" class="anchor-link"></a></h3>
+                    <h3>1. Memeriksa Log <a href="#troubleshooting" class="anchor-link">#</a></h3>
                     <p><strong>Apa:</strong> Melihat log untuk error.</p>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode(this)">Salin</button>
                         <pre><code class="language-bash">sudo journalctl -u sshd</code></pre>
                     </div>
-                    <h3>2. Memeriksa Izin <a href="#troubleshooting" class="anchor-link"></a></h3>
+                    <h3>2. Memeriksa Izin <a href="#troubleshooting" class="anchor-link">#</a></h3>
                     <p><strong>Apa:</strong> Memastikan izin berkas benar.</p>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode(this)">Salin</button>
                         <pre><code class="language-bash">chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys</code></pre>
                     </div>
-                    <h3>3. Mode Verbose <a></a></h3>
+                    <h3>3. Mode Verbose <a href="#troubleshooting" class="anchor-link">#</a></h3>
                     <p><strong>Apa:</strong> Menguji koneksi dengan detail.</p>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode(this)">Salin</button>
@@ -804,7 +805,7 @@ chmod 600 ~/.ssh/authorized_keys</code></pre>
     <footer id="footer" style="background: var(--bg-darker); padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color);">
         <div class="container">
             <div class="copyright">
-                &copy; 2025 <strong><span>Thi-Web6 Portfolio</span></strong>. All Rights Reserved.
+                © 2025 <strong><span>Thi-Web6 Portfolio</span></strong>. All Rights Reserved.
             </div>
             <div class="credits">
                 Designed by <a href="https://github.com/thi-web6" style="color: var(--primary); text-decoration: none;">Thi-Web6</a>
@@ -812,11 +813,11 @@ chmod 600 ~/.ssh/authorized_keys</code></pre>
         </div>
     </footer>
     <!-- Vendor JS -->
-    <script src="text/javascript" src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.29.3/components/prism-bash.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <!-- Custom JS -->
-    <script>
+    <script defer>
         AOS.init({ duration: 800, once: false });
         const menuToggle = document.getElementById('nav-toggle');
         const sidebar = document.getElementById('sidebar');
@@ -842,7 +843,6 @@ chmod 600 ~/.ssh/authorized_keys</code></pre>
         });
         function copyCode(button) {
             const code = button.nextElementSibling.querySelector('code').innerText;
-            // Try modern clipboard API
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(code).then(() => {
                     button.innerText = '✅ Tersalin!';
@@ -857,7 +857,6 @@ chmod 600 ~/.ssh/authorized_keys</code></pre>
                     setTimeout(() => button.innerText = 'Salin', 2000);
                 });
             } else {
-                // Fallback for older browsers
                 const textarea = document.createElement('textarea');
                 textarea.value = code;
                 document.body.appendChild(textarea);
