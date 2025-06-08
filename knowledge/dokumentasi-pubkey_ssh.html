@@ -3,23 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
     <title>Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci</title>
-    <meta name="description" content="Panduan lengkap dan rinci untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, konfigurasi server, dan penanganan firewall serta SELinux.">
-    <meta name="keywords" content="cara mengatur SSH Fedora, autentikasi kunci SSH, SSH tanpa kata sandi, konfigurasi SSH Fedora, tutorial SSH Fedora, OpenSSH Fedora, firewall SELinux SSH">
-    <meta name="author" content="Tim Dokumentasi Teknologi">
+    <meta name="title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta name="description" content="Panduan lengkap untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, dan konfigurasi server.">
+    <meta name="keywords" content="cara mengatur SSH Fedora, autentikasi kunci SSH, SSH tanpa kata sandi, konfigurasi SSH Fedora, tutorial SSH Fedora, OpenSSH Fedora">
+    <meta name="author" content="Thi-Web6">
     <meta name="robots" content="index, follow">
-    <!-- OpenGraph Meta Tags -->
-    <meta property="og:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
-    <meta property="og:description" content="Pelajari langkah-langkah mengatur SSH di Fedora untuk akses aman tanpa kata sandi menggunakan autentikasi kunci. Panduan ini mencakup instalasi, konfigurasi, dan pemecahan masalah.">
-    <meta property="og:image" content="https://thi-web6.github.io/resume/assets/img/dokumentasi.png">
-    <meta property="og:url" content="https://thi-web6.github.io/resume/knowledge/dokuementasi-pubkey_ssh.html">
+    <meta name="language" content="Indonesian">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thi-web6.github.io/resume/knowledge/dokumentasi-pubkey_ssh.html">
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:thi-web6" content="Dokumentasi Teknologi">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
-    <meta name="twitter:description" content="Panduan lengkap untuk konfigurasi SSH di Fedora dengan autentikasi kunci, termasuk langkah instalasi dan pengaturan keamanan.">
-    <meta name="twitter:image" content="https://thi-web6.github.io/resume/assets/img/dokumentasi.png">
+    <meta property="og:url" content="https://thi-web6.github.io/resume/knowledge/dokumentasi-pubkey_ssh.html">
+    <meta property="og:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta property="og:description" content="Pelajari langkah-langkah mengatur SSH di Fedora untuk akses aman tanpa kata sandi menggunakan autentikasi kunci.">
+    <meta property="og:image" content="https://thi-web6.github.io/resume/assets/img/dokumentasihardening.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Ilustrasi pengaturan SSH pada Fedora">
+    <meta property="og:site_name" content="Thi-Web6 Knowledge">
+    <meta property="og:locale" content="id_ID">
+    <meta property="article:author" content="Thi-Web6">
+    <meta property="article:published_time" content="2025-06-08T00:00:00Z">
+    <meta property="article:modified_time" content="2025-06-08T00:00:00Z">
+    <meta property="article:section" content="System Administration">
+    <meta property="article:tag" content="SSH Configuration">
+    <meta property="article:tag" content="Fedora Security">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://thi-web6.github.io/resume/knowledge/dokumentasi-pubkey_ssh.html">
+    <meta property="twitter:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta property="twitter:description" content="Panduan lengkap untuk konfigurasi SSH di Fedora dengan autentikasi kunci.">
+    <meta property="twitter:image" content="https://thi-web6.github.io/resume/assets/img/dokumentasihardening.png">
+    <meta property="twitter:image:alt" content="Tutorial SSH Fedora">
+    <meta property="twitter:creator" content="@thi_web6">
+    <meta property="twitter:site" content="@thi_web6">
+    <!-- WhatsApp -->
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:secure_url" content="https://thi-web6.github.io/resume/assets/img/dokumentasihardening.png">
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#4776E6">
+    <meta name="msapplication-TileColor" content="#4776E6">
+    <meta name="application-name" content="Tutorial SSH Fedora">
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci",
+        "description": "Panduan lengkap untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, dan konfigurasi server.",
+        "image": "https://thi-web6.github.io/resume/assets/img/dokumentasihardening.png",
+        "author": {
+            "@type": "Person",
+            "name": "Thi-Web6",
+            "url": "https://github.com/thi-web6"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Thi-Web6",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://thi-web6.github.io/resume/assets/img/profile-image.jpeg"
+            }
+        },
+        "datePublished": "2025-06-08",
+        "dateModified": "2025-06-08",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://thi-web6.github.io/resume/knowledge/dokumentasi-pubkey_ssh.html"
+        },
+        "articleSection": "System Administration",
+        "keywords": "SSH Fedora, autentikasi kunci, OpenSSH, server security",
+        "about": [
+            {"@type": "Thing", "name": "SSH Configuration"},
+            {"@type": "Thing", "name": "Fedora Security"}
+        ]
+    }
+    </script>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://thi-web6.github.io/resume/assets/img/profile-img.jpg">
     <link rel="apple-touch-icon" href="https://thi-web6.github.io/resume/assets/img/profile-img.jpg">
@@ -32,7 +96,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Prism CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
-    <!-- CSS -->
     <style>
         :root {
             --primary: #4776E6;
@@ -49,9 +112,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-        html {
-            scroll-behavior: smooth;
-        }
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #1a1b2e 100%);
@@ -59,8 +119,6 @@
             line-height: 1.7;
             min-height: 100vh;
             overscroll-behavior: none;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
         }
         .container {
             max-width: 1200px;
@@ -71,78 +129,78 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 300px;
-            height: 100vh;
-            background: linear-gradient(180deg, var(--bg-darker), var(--bg-dark));
+            width: 280px;
+            max-height: 100vh;
+            background: rgba(4, 5, 16, 0.95);
+            backdrop-filter: blur(10px);
             border-right: 1px solid var(--border-color);
-            box-shadow: 0 10px 20px var(--shadow);
             z-index: 100;
             transform: translateX(-100%);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
         }
         #sidebar.show {
             transform: translateX(0);
         }
         .sidebar-content {
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .sidebar-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .sidebar-header i {
-            font-size: 24px;
-            color: var(--accent);
-        }
-        .sidebar-header span {
-            font-size: 1.5rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            padding: 30px 20px;
+            min-height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
         .back-btn {
             display: flex;
             align-items: center;
             color: var(--text-light);
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
             text-decoration: none;
             font-weight: 600;
             background: linear-gradient(135deg, var(--primary), var(--accent));
+            position: relative;
+            overflow: hidden;
             box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
-            transition: all 0.3s ease;
+        }
+        .back-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .back-btn:hover:before {
+            left: 100%;
         }
         .back-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(71, 118, 230, 0.4);
         }
         .back-btn i {
-            margin-right: 10px;
-            font-size: 16px;
+            margin-right: 12px;
+            font-size: 18px;
+            color: var(--text-light);
         }
         .nav-list {
             list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            margin-top: 20px;
         }
         .nav-link {
             display: flex;
             align-items: center;
             color: var(--text-gray);
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -155,21 +213,22 @@
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             transition: width 0.3s ease;
-            opacity: 0.2;
+            opacity: 0.1;
         }
-        .nav-link:hover:before,
-        .nav-link.active:before {
+        .nav-link:hover::before,
+        .nav-link.active::before {
             width: 100%;
         }
         .nav-link i {
             margin-right: 12px;
             font-size: 18px;
+            width: 20px;
             color: var(--accent);
         }
         .nav-link:hover,
         .nav-link.active {
             color: var(--text-light);
-            transform: translateX(5px);
+            transform: translateX(8px);
         }
         .nav-link:hover i,
         .nav-link.active i {
@@ -183,8 +242,8 @@
             background: rgba(71, 118, 230, 0.1);
             border: 1px solid var(--border-color);
             color: var(--text-light);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             cursor: pointer;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
@@ -198,7 +257,9 @@
             min-height: 100vh;
             padding: 80px 20px 40px;
             transition: margin-left 0.3s ease;
-            scroll-behavior: smooth;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            z-index: 150;
         }
         .overlay {
             position: fixed;
@@ -223,6 +284,7 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 24px;
             line-height: 1.2;
         }
@@ -261,15 +323,28 @@
             margin-bottom: 32px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
         .card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(71, 118, 230, 0.3);
         }
         .card img {
             max-width: 100%;
             height: auto;
             border-radius: 12px;
+            border: 2px solid var(--accent);
             margin-bottom: 16px;
         }
         .code-block {
@@ -279,11 +354,13 @@
             overflow: hidden;
             margin: 24px 0;
             position: relative;
+            z-index: 200;
         }
         .code-block pre {
             margin: 0;
             padding: 24px;
             overflow-x: auto;
+            overflow-y: auto;
             max-height: 400px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 14px;
@@ -305,6 +382,7 @@
             font-size: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
+            z-index: 210;
         }
         .copy-btn:hover {
             background: var(--accent);
@@ -321,6 +399,21 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn:hover:before {
+            left: 100%;
         }
         .btn:hover {
             transform: translateY(-2px);
@@ -331,7 +424,7 @@
             padding-left: 24px;
         }
         li {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             color: var(--text-gray);
         }
         a {
@@ -356,9 +449,10 @@
         @media (min-width: 768px) {
             #sidebar {
                 transform: translateX(0);
+                z-index: 100;
             }
             .main-content {
-                margin-left: 300px;
+                margin-left: 280px;
             }
             .mobile-nav-toggle, .overlay {
                 display: none;
@@ -366,16 +460,37 @@
         }
         @media (max-width: 767px) {
             #sidebar {
-                width: 80vw Triad
+                width: 80vw;
+                max-height: 100vh;
+                overflow-y: auto;
+                z-index: 100;
+            }
+            .sidebar-content {
+                padding-bottom: 80px;
+                overflow-y: auto;
+            }
+            .nav-list {
+                margin-bottom: 20px;
             }
             .main-content {
+                z-index: 150;
                 padding-top: 100px;
+                padding-bottom: 80px;
+            }
+            .code-block {
+                z-index: 200;
+            }
+            .mobile-nav-toggle {
+                z-index: 300;
             }
             h1 {
                 font-size: 2.5rem;
             }
             h2 {
                 font-size: 2rem;
+            }
+            .card {
+                padding: 24px;
             }
             .code-block pre {
                 padding: 16px;
@@ -395,10 +510,27 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent);
         }
+        .anchor-link {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        h3:hover .anchor-link {
+            opacity: 1;
+        }
         .hero {
             text-align: center;
             padding: 80px 0;
             position: relative;
+        }
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(71, 118, 230, 0.1) 0%, transparent 70%);
+            pointer-events: none;
         }
         .hero-content {
             position: relative;
@@ -410,368 +542,307 @@
             margin: 0 auto 32px;
         }
     </style>
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci",
-        "description": "Panduan lengkap untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, dan konfigurasi server.",
-        "image": "https://thi-web6.github.io/resume/assets/img/dokumentasi.png",
-        "author": {
-            "@type": "Organization",
-            "name": "Tim Dokumentasi Teknologi"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Dokumentasi Teknologi",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png"
-            }
-        },
-        "datePublished": "2025-06-08",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://yourwebsite.com/ssh-fedora"
-        }
-    }
-    </script>
 </head>
 <body>
+    <!-- Mobile Nav Toggle -->
+    <button class="mobile-nav-toggle" id="nav-toggle" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
     <!-- Sidebar -->
-    <nav id="sidebar">
+    <nav id="sidebar" role="navigation" aria-label="Main Navigation">
         <div class="sidebar-content">
-            <div class="sidebar-header">
-                <i class="fas fa-lock"></i>
-                <span>Dokumentasi SSH</span>
-            </div>
-            <a href="/resume" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
+            <a href="https://thi-web6.github.io/resume/knowledge" class="back-btn" title="Kembali ke Knowledge">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Knowledge</span>
+            </a>
+            <h3 style="color: var(--primary); margin-bottom: 20px;">
+                <i class="bi bi-lock"></i> Dokumentasi SSH
+            </h3>
             <ul class="nav-list">
-                <li><a href="#introduction" class="nav-link"><i class="fas fa-book"></i> Pendahuluan</a></li>
-                <li><a href="#install-ssh" class="nav-link"><i class="fas fa-server"></i> Instalasi SSH Server</a></li>
-                <li><a href="#generate-key" class="nav-link"><i class="fas fa-key"></i> Pembuatan Kunci SSH</a></li>
-                <li><a href="#copy-key" class="nav-link"><i class="fas fa-copy"></i> Penyalinan Kunci</a></li>
-                <li><a href="#configure-ssh" class="nav-link"><i class="fas fa-cog"></i> Konfigurasi SSH</a></li>
-                <li><a href="#firewall-selinux" class="nav-link"><i class="fas fa-shield-alt"></i> Firewall & SELinux</a></li>
-                <li><a href="#troubleshooting" class="nav-link"><i class="fas fa-tools"></i> Pemecahan Masalah</a></li>
+                <li><a href="#pendahuluan" class="nav-link"><i class="bi bi-info-circle"></i><span>Pendahuluan</span></a></li>
+                <li><a href="#install-ssh" class="nav-link"><i class="bi bi-server"></i><span>Instalasi SSH</span></a></li>
+                <li><a href="#generate-key" class="nav-link"><i class="bi bi-key"></i><span>Pembuatan Kunci</span></a></li>
+                <li><a href="#copy-key" class="nav-link"><i class="bi bi-copy"></i><span>Penyalinan Kunci</span></a></li>
+                <li><a href="#configure-ssh" class="nav-link"><i class="bi bi-gear"></i><span>Konfigurasi SSH</span></a></li>
+                <li><a href="#firewall-selinux" class="nav-link"><i class="bi bi-shield-lock"></i><span>Firewall & SELinux</span></a></li>
+                <li><a href="#troubleshooting" class="nav-link"><i class="bi bi-tools"></i><span>Pemecahan Masalah</span></a></li>
             </ul>
         </div>
     </nav>
-    <!-- Mobile Nav Toggle -->
-    <button class="mobile-nav-toggle"><i class="fas fa-bars"></i></button>
-    <div class="overlay"></div>
     <!-- Main Content -->
-    <main class="main-content">
-        <section class="hero" id="introduction">
-            <div class="hero-content" data-aos="fade-up">
-                <h1>Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci</h1>
-                <p>Dokumentasi ini menyediakan panduan komprehensif untuk mengatur layanan Secure Shell (SSH) pada sistem operasi Fedora, dengan fokus pada autentikasi berbasis kunci publik-privat. Tujuannya adalah memungkinkan akses jarak jauh yang aman tanpa ketergantungan pada kata sandi, sambil memastikan pengguna lain hanya dapat mengakses server dengan kunci publik yang valid.</p>
-                <img src="https://thi-web6.github.io/resume/assets/img/dokumentasi.png" alt="Ilustrasi pengaturan SSH pada Fedora" class="hero-image">
-            </div>
-        </section>
+    <main class="main-content" role="main">
         <div class="container">
+            <!-- Hero Section -->
+            <header class="hero" data-aos="fade-up">
+                <div class="hero-content">
+                    <h1>Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci</h1>
+                    <p>Panduan teknis komprehensif untuk mengatur layanan Secure Shell (SSH) pada sistem operasi Fedora, dengan fokus pada autentikasi berbasis kunci publik-privat untuk akses jarak jauh yang aman.</p>
+                    <a href="#pendahuluan" class="btn">Mulai Tutorial</a>
+                </div>
+            </header>
+            <!-- Pendahuluan -->
+            <section id="pendahuluan" data-aos="fade-up">
+                <h2>Pendahuluan</h2>
+                <div class="card">
+                    <p>Dokumentasi ini menyediakan panduan lengkap untuk mengatur layanan Secure Shell (SSH) pada sistem operasi Fedora, dengan fokus pada autentikasi berbasis kunci publik-privat. Tujuannya adalah memungkinkan akses jarak jauh yang aman tanpa ketergantungan pada kata sandi, sambil memastikan pengguna lain hanya dapat mengakses server dengan kunci publik yang valid.</p>
+                    <p><strong>🎯 Tujuan Tutorial:</strong></p>
+                    <ul>
+                        <li>Menginstal dan mengaktifkan OpenSSH Server di Fedora.</li>
+                        <li>Membuat pasangan kunci SSH untuk autentikasi aman.</li>
+                        <li>Menyalin kunci publik ke server untuk akses tanpa kata sandi.</li>
+                        <li>Mengkonfigurasi server SSH untuk hanya menerima autentikasi kunci.</li>
+                        <li>Mengatur firewall dan SELinux untuk mendukung SSH.</li>
+                        <li>Menyediakan langkah pemecahan masalah umum.</li>
+                    </ul>
+                    <p><strong>🛠️ Tools yang Digunakan:</strong></p>
+                    <ul>
+                        <li><strong>OpenSSH Server</strong> - Layanan SSH di Fedora.</li>
+                        <li><strong>ssh-keygen</strong> - Alat untuk membuat kunci SSH.</li>
+                        <li><strong>ssh-copy-id</strong> - Menyalin kunci publik ke server.</li>
+                        <li><strong>firewalld</strong> - Pengelolaan firewall di Fedora.</li>
+                        <li><strong>SELinux</strong> - Kontrol keamanan tambahan.</li>
+                    </ul>
+                    <p><strong>⚠️ Peringatan:</strong> Pastikan Anda memiliki izin administratif untuk mengkonfigurasi server. Salah konfigurasi dapat menyebabkan hilangnya akses jarak jauh. Selalu uji perubahan di sesi terpisah sebelum menutup koneksi aktif.</p>
+                </div>
+            </section>
+            <!-- Instalasi SSH -->
             <section id="install-ssh" data-aos="fade-up">
                 <h2>Instalasi dan Aktivasi Layanan SSH</h2>
                 <div class="card">
-                    <p>Langkah awal dalam pengaturan SSH adalah memastikan layanan OpenSSH Server terpasang dan aktif pada sistem Fedora. OpenSSH menyediakan protokol komunikasi jarak jauh yang aman dan andal.</p>
-                    <h3>Langkah-langkah:</h3>
-                    <ol>
-                        <li><strong>Memeriksa dan menginstal OpenSSH Server:</strong>
-                            <p>Jalankan perintah berikut untuk memverifikasi keberadaan paket <code>openssh-server</code>. Jika belum terpasang, perintah ini akan menginstalnya secara otomatis.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo dnf install openssh-server</code></pre>
-                            </div>
-                            <p><strong>Catatan:</strong> Jika output menunjukkan bahwa paket sudah terpasang (misalnya, <code>openssh-server-9.9p1-11.fc42.x86_64</code>), lanjutkan ke langkah berikutnya.</p>
-                        </li>
-                        <li><strong>Mengaktifkan dan menjalankan layanan SSH:</strong>
-                            <p>Perintah berikut memastikan layanan <code>sshd</code> aktif saat sistem dinyalakan dan berjalan saat ini.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo systemctl enable sshd
+                    <h3>1. Instalasi OpenSSH Server <a href="#install-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menginstal paket <code>openssh-server</code> di Fedora.</p>
+                    <p><strong>Mengapa:</strong> OpenSSH menyediakan protokol komunikasi jarak jauh yang aman.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo dnf install openssh-server</code></pre>
+                    </div>
+                    <p><strong>Catatan:</strong> Jika paket sudah terpasang, lanjutkan ke langkah berikutnya.</p>
+                    <h3>2. Mengaktifkan Layanan SSH <a href="#install-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengaktifkan <code>sshd</code> agar berjalan saat boot dan mulai layanan saat ini.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo systemctl enable sshd
 sudo systemctl start sshd</code></pre>
-                            </div>
-                        </li>
-                        <li><strong>Memverifikasi status layanan:</strong>
-                            <p>Periksa apakah layanan <code>sshd</code> berjalan dengan benar menggunakan perintah berikut.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo systemctl status sshd</code></pre>
-                            </div>
-                            <p><strong>Hasil yang diharapkan:</strong> Output harus menunjukkan status <code>active (running)</code>. Jika layanan tidak aktif, periksa log dengan <code>sudo journalctl -u sshd</code> untuk mendiagnosis masalah.</p>
-                        </li>
-                    </ol>
-                    <p><strong>Potensi masalah:</strong> Jika instalasi gagal, pastikan koneksi internet stabil dan repositori Fedora diatur dengan benar. Gunakan <code>sudo dnf repolist</code> untuk memeriksa repositori aktif.</p>
+                    </div>
+                    <h3>3. Memverifikasi Status <a href="#install-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memeriksa apakah layanan <code>sshd</code> berjalan.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo systemctl status sshd</code></pre>
+                    </div>
+                    <p><strong>Hasil yang diharapkan:</strong> Status <code>active (running)</code>. Jika gagal, periksa log dengan <code>sudo journalctl -u sshd</code>.</p>
+                    <p><strong>Potensi Error:</strong> Koneksi internet tidak stabil atau repositori Fedora salah. Gunakan <code>sudo dnf repolist</code> untuk memeriksa.</p>
                 </div>
             </section>
+            <!-- Pembuatan Kunci -->
             <section id="generate-key" data-aos="fade-up">
                 <h2>Pembuatan Pasangan Kunci SSH</h2>
                 <div class="card">
-                    <p>Pasangan kunci SSH, yang terdiri dari kunci publik dan privat, memungkinkan autentikasi aman tanpa kata sandi. Proses ini dilakukan pada komputer klien yang akan mengakses server.</p>
-                    <h3>Langkah-langkah:</h3>
-                    <ol>
-                        <li><strong>Menghasilkan kunci SSH:</strong>
-                            <p>Gunakan perintah berikut untuk membuat kunci RSA dengan panjang 4096-bit, yang memberikan tingkat keamanan tinggi.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">ssh-keygen -t rsa -b 4096</code></pre>
-                            </div>
-                        </li>
-                        <li><strong>Menentukan lokasi penyimpanan kunci:</strong>
-                            <p>Ketika diminta lokasi berkas, tekan <code>Enter</code> untuk menggunakan lokasi default (<code>~/.ssh/id_rsa</code> untuk kunci privat dan <code>~/.ssh/id_rsa.pub</code> untuk kunci publik). Jika berkas sudah ada, ketik <code>y</code> untuk menimpa.</p>
-                        </li>
-                        <li><strong>Mengatur passphrase:</strong>
-                            <p>Saat diminta passphrase, Anda memiliki dua opsi:
-                                <ul>
-                                    <li><strong>Login tanpa kata sandi:</strong> Tekan <code>Enter</code> dua kali (untuk passphrase dan konfirmasi) untuk mengosongkan passphrase. Ini memungkinkan login otomatis, tetapi kurang aman jika kunci privat dicuri.</li>
-                                    <li><strong>Keamanan tambahan:</strong> Masukkan kata sandi yang kuat. Passphrase ini akan diminta setiap kali kunci digunakan, memberikan perlindungan ekstra terhadap penyalahgunaan kunci privat.</li>
-                                </ul>
-                            </p>
-                        </li>
-                        <li><strong>Memverifikasi hasil:</strong>
-                            <p>Periksa keberadaan berkas kunci dengan perintah berikut:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">ls ~/.ssh</code></pre>
-                            </div>
-                            <p>Output harus menunjukkan <code>id_rsa</code> dan <code>id_rsa.pub</code>.</p>
-                        </li>
-                    </ol>
-                    <p><strong>Catatan penting:</strong> Kunci privat (<code>id_rsa</code>) harus disimpan dengan aman dan tidak boleh dibagikan. Kunci publik (<code>id_rsa.pub</code>) dapat disalin ke server.</p>
-                    <p><strong>Potensi masalah:</strong> Jika perintah gagal, pastikan direktori <code>~/.ssh</code> memiliki izin yang benar (<code>chmod 700 ~/.ssh</code>).</p>
+                    <h3>1. Menghasilkan Kunci <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Membuat kunci RSA 4096-bit di komputer klien.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">ssh-keygen -t rsa -b 4096</code></pre>
+                    </div>
+                    <h3>2. Menentukan Lokasi <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Gunakan lokasi default (<code>~/.ssh/id_rsa</code>) atau timpa jika sudah ada.</p>
+                    <h3>3. Mengatur Passphrase <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Pilih antara passphrase kosong (login otomatis) atau passphrase kuat (keamanan tambahan).</p>
+                    <p><strong>Opsi:</strong></p>
+                    <ul>
+                        <li><strong>Login Otomatis:</strong> Tekan <code>Enter</code> dua kali.</li>
+                        <li><strong>Keamanan Tambahan:</strong> Masukkan passphrase kuat.</li>
+                    </ul>
+                    <h3>4. Memverifikasi Kunci <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memeriksa berkas kunci yang dihasilkan.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">ls ~/.ssh</code></pre>
+                    </div>
+                    <p><strong>Hasil yang diharapkan:</strong> <code>id_rsa</code> (privat) dan <code>id_rsa.pub</code> (publik).</p>
+                    <p><strong>Catatan:</strong> Jaga <code>id_rsa</code> tetap aman. Bagikan hanya <code>id_rsa.pub</code>.</p>
+                    <p><strong>Potensi Error:</strong> Izin direktori salah. Gunakan <code>chmod 700 ~/.ssh</code>.</p>
                 </div>
             </section>
+            <!-- Penyalinan Kunci -->
             <section id="copy-key" data-aos="fade-up">
                 <h2>Penyalinan Kunci Publik ke Server</h2>
                 <div class="card">
-                    <p>Kunci publik harus disalin ke server agar autentikasi berbasis kunci dapat berfungsi. Cara termudah adalah menggunakan perintah <code>ssh-copy-id</code>.</p>
-                    <h3>Langkah-langkah:</h3>
-                    <ol>
-                        <li><strong>Menyalin kunci publik:</strong>
-                            <p>Dari komputer klien, jalankan perintah berikut untuk menyalin kunci publik ke server.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">ssh-copy-id your_username@server_ip</code></pre>
-                            </div>
-                            <p>Ganti <code>your_username</code> dengan nama pengguna di server (misalnya, <code>indodax</code>) dan <code>server_ip</code> dengan alamat IP atau hostname server (misalnya, <code>localhost</code> atau <code>192.168.1.100</code>).</p>
-                        </li>
-                        <li><strong>Memasukkan kata sandi:</strong>
-                            <p>Masukkan kata sandi pengguna server saat diminta. Ini diperlukan sekali sebelum autentikasi kunci aktif.</p>
-                        </li>
-                        <li><strong>Memverifikasi akses:</strong>
-                            <p>Uji login ke server untuk memastikan kunci berfungsi:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">ssh your_username@server_ip</code></pre>
-                            </div>
-                            <p>Jika passphrase dikosongkan, login akan otomatis. Jika passphrase diatur, Anda akan diminta memasukkannya.</p>
-                        </li>
-                        <li><strong>Menambahkan kunci untuk pengguna lain:</strong>
-                            <p>Pengguna lain harus mengulangi langkah ini dari komputer mereka. Alternatifnya, tambahkan kunci publik mereka secara manual ke <code>~/.ssh/authorized_keys</code> di server:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo nano ~other_user/.ssh/authorized_keys</code></pre>
-                            </div>
-                            <p>Tambahkan isi <code>id_rsa.pub</code> pengguna lain, lalu atur izin:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo chown other_user:other_user ~other_user/.ssh -R
+                    <h3>1. Menyalin Kunci <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menggunakan <code>ssh-copy-id</code> untuk menyalin kunci publik.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">ssh-copy-id your_username@server_ip</code></pre>
+                    </div>
+                    <p>Ganti <code>your_username</code> dan <code>server_ip</code> sesuai kebutuhan.</p>
+                    <h3>2. Memasukkan Kata Sandi <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Masukkan kata sandi server sekali.</p>
+                    <h3>3. Memverifikasi Akses <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menguji login dengan kunci.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">ssh your_username@server_ip</code></pre>
+                    </div>
+                    <h3>4. Kunci untuk Pengguna Lain <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menambahkan kunci publik pengguna lain secara manual.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo nano ~other_user/.ssh/authorized_keys
+sudo chown other_user:other_user ~other_user/.ssh -R
 sudo chmod 700 ~other_user/.ssh
 sudo chmod 600 ~other_user/.ssh/authorized_keys</code></pre>
-                            </div>
-                        </li>
-                    </ol>
-                    <p><strong>Potensi masalah:</strong> Jika <code>ssh-copy-id</code> gagal, pastikan login kata sandi masih diizinkan sementara di <code>sshd_config</code> (<code>PasswordAuthentication yes</code>) atau salin kunci secara manual.</p>
+                    </div>
+                    <p><strong>Potensi Error:</strong> Login kata sandi dinonaktifkan. Pastikan <code>PasswordAuthentication yes</code> sementara.</p>
                 </div>
             </section>
+            <!-- Konfigurasi SSH -->
             <section id="configure-ssh" data-aos="fade-up">
-                <h2>Konfigurasi Server SSH untuk Autentikasi Kunci</h2>
+                <h2>Konfigurasi Server SSH</h2>
                 <div class="card">
-                    <p>Untuk meningkatkan keamanan, nonaktifkan login kata sandi dan wajibkan autentikasi berbasis kunci dengan mengedit berkas konfigurasi SSH.</p>
-                    <h3>Langkah-langkah:</h3>
-                    <ol>
-                        <li><strong>Mencadangkan berkas konfigurasi:</strong>
-                            <p>Sebelum mengedit, buat cadangan berkas <code>sshd_config</code> untuk mencegah kehilangan konfigurasi.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code></pre>
-                            </div>
-                        </li>
-                        <li><strong>Mengedit berkas konfigurasi:</strong>
-                            <p>Buka berkas <code>sshd_config</code> menggunakan editor teks seperti <code>nano</code>.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo nano /etc/ssh/sshd_config</code></pre>
-                            </div>
-                        </li>
-                        <li><strong>Mengatur autentikasi kunci:</strong>
-                            <p>Tambahkan atau ubah baris berikut di akhir berkas:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">PubkeyAuthentication yes
+                    <h3>1. Mencadangkan Konfigurasi <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Membuat cadangan <code>sshd_config</code>.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code></pre>
+                    </div>
+                    <h3>2. Mengedit Konfigurasi <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengubah <code>sshd_config</code> untuk autentikasi kunci.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo nano /etc/ssh/sshd_config</code></pre>
+                    </div>
+                    <p>Tambahkan:</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">PubkeyAuthentication yes
 PasswordAuthentication no
 ChallengeResponseAuthentication no
 AllowUsers your_username</code></pre>
-                            </div>
-                            <p><strong>Penjelasan:</strong>
-                                <ul>
-                                    <li><code>PubkeyAuthentication yes</code>: Mengaktifkan autentikasi berbasis kunci.</li>
-                                    <li><code>PasswordAuthentication no</code>: Menonaktifkan login dengan kata sandi.</li>
-                                    <li><code>ChallengeResponseAuthentication no</code>: Mencegah metode autentikasi alternatif.</li>
-                                    <li><code>AllowUsers your_username</code>: (Opsional) Membatasi akses hanya untuk pengguna tertentu.</li>
-                                </ul>
-                            </p>
-                        </li>
-                        <li><strong>Menyimpan dan memulai ulang layanan:</strong>
-                            <p>Simpan berkas (<code>Ctrl+O</code>, <code>Enter</code>, <code>Ctrl+X</code> di nano), lalu mulai ulang layanan SSH.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo systemctl restart sshd</code></pre>
-                            </div>
-                        </li>
-                        <li><strong>Memverifikasi konfigurasi:</strong>
-                            <p>Uji login dengan kunci:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">ssh your_username@server_ip</code></pre>
-                            </div>
-                            <p>Uji login dengan kata sandi untuk memastikan gagal:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">ssh -o PubkeyAuthentication=no your_username@server_ip</code></pre>
-                            </div>
-                            <p><strong>Hasil yang diharapkan:</strong> Login dengan kata sandi akan menghasilkan <code>Permission denied</code>.</p>
-                        </li>
-                    </ol>
-                    <p><strong>Catatan penting:</strong> Jangan tutup sesi SSH aktif sebelum menguji login di sesi baru untuk menghindari kehilangan akses.</p>
+                    </div>
+                    <h3>3. Memulai Ulang Layanan <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menerapkan perubahan.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo systemctl restart sshd</code></pre>
+                    </div>
+                    <h3>4. Memverifikasi Konfigurasi <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menguji login kunci dan memastikan login kata sandi gagal.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">ssh your_username@server_ip
+ssh -o PubkeyAuthentication=no your_username@server_ip</code></pre>
+                    </div>
+                    <p><strong>Catatan:</strong> Uji di sesi baru untuk menghindari kehilangan akses.</p>
                 </div>
             </section>
+            <!-- Firewall dan SELinux -->
             <section id="firewall-selinux" data-aos="fade-up">
                 <h2>Pengaturan Firewall dan SELinux</h2>
                 <div class="card">
-                    <p>Fedora menggunakan <code>firewalld</code> untuk pengelolaan firewall dan SELinux untuk kontrol keamanan tambahan. Pastikan keduanya dikonfigurasi dengan benar.</p>
-                    <h3>Firewall</h3>
-                    <ol>
-                        <li><strong>Membuka port SSH:</strong>
-                            <p>Pastikan port 22 (default SSH) diizinkan oleh <code>firewalld</code>.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo firewall-cmd --permanent --add-service=ssh
+                    <h3>1. Membuka Port SSH <a href="#firewall-selinux" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengizinkan port 22 di <code>firewalld</code>.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo firewall-cmd --permanent --add-service=ssh
 sudo firewall-cmd --reload</code></pre>
-                            </div>
-                            <p><strong>Catatan:</strong> Opsi <code>--permanent</code> memastikan aturan tetap aktif setelah reboot.</p>
-                        </li>
-                        <li><strong>Memverifikasi aturan firewall:</strong>
-                            <p>Periksa layanan aktif:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo firewall-cmd --list-services</code></pre>
-                            </div>
-                            <p><strong>Hasil yang diharapkan:</strong> Output harus mencantumkan <code>ssh</code>.</p>
-                        </li>
-                    </ol>
-                    <h3>SELinux</h3>
-                    <ol>
-                        <li><strong>Menguji mode permisif:</strong>
-                            <p>Jika login gagal, SELinux mungkin memblokir akses. Uji dengan mode permisif:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo setenforce 0</code></pre>
-                            </div>
-                            <p>Coba login kembali. Jika berhasil, SELinux perlu penyesuaian.</p>
-                        </li>
-                        <li><strong>Mengatur mode permisif permanen:</strong>
-                            <p>Edit berkas SELinux untuk perubahan permanen (opsional):</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config</code></pre>
-                            </div>
-                            <p><strong>Alternatif:</strong> Untuk mode <code>enforcing</code>, buat aturan SELinux khusus menggunakan <code>audit2allow</code> berdasarkan log (<code>sudo grep sshd /var/log/audit/audit.log</code>).</p>
-                        </li>
-                    </ol>
-                    <p><strong>Potensi masalah:</strong> Jika firewall memblokir, periksa zona aktif dengan <code>sudo firewall-cmd --get-active-zones</code> dan pastikan <code>ssh</code> diizinkan.</p>
+                    </div>
+                    <h3>2. Memverifikasi Firewall <a href="#firewall-selinux" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memeriksa layanan aktif.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo firewall-cmd --list-services</code></pre>
+                    </div>
+                    <h3>3. Menguji SELinux <a href="#firewall-selinux" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengatur mode permisif jika login gagal.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo setenforce 0
+sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config</code></pre>
+                    </div>
+                    <p><strong>Potensi Error:</strong> Zona firewall salah. Periksa dengan <code>sudo firewall-cmd --get-active-zones</code>.</p>
                 </div>
             </section>
+            <!-- Pemecahan Masalah -->
             <section id="troubleshooting" data-aos="fade-up">
                 <h2>Pemecahan Masalah</h2>
                 <div class="card">
-                    <p>Jika terjadi masalah selama pengaturan atau login SSH, ikuti langkah-langkah berikut untuk mendiagnosis dan menyelesaikannya.</p>
-                    <h3>Langkah-langkah:</h3>
-                    <ol>
-                        <li><strong>Memeriksa log SSH:</strong>
-                            <p>Lihat log layanan untuk mengidentifikasi error.</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">sudo journalctl -u sshd</code></pre>
-                            </div>
-                            <p><strong>Contoh error:</strong> <code>Authentication refused</code> menunjukkan kunci salah atau pengaturan autentikasi tidak sesuai.</p>
-                        </li>
-                        <li><strong>Memeriksa izin berkas:</strong>
-                            <p>Pastikan izin direktori dan berkas SSH benar:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">chmod 700 ~/.ssh
+                    <h3>1. Memeriksa Log <a href="#troubleshooting" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Melihat log untuk error.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">sudo journalctl -u sshd</code></pre>
+                    </div>
+                    <h3>2. Memeriksa Izin <a href="#troubleshooting" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memastikan izin berkas benar.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys</code></pre>
-                            </div>
-                        </li>
-                        <li><strong>Memverifikasi kunci publik:</strong>
-                            <p>Bandingkan isi <code>~/.ssh/authorized_keys</code> di server dengan <code>~/.ssh/id_rsa.pub</code> di klien.</p>
-                        </li>
-                        <li><strong>Menguji koneksi dengan mode verbose:</strong>
-                            <p>Gunakan mode verbose untuk detail error:</p>
-                            <div class="code-block">
-                                <button class="copy-btn">Salin</button>
-                                <pre><code class="language-bash">ssh -v your_username@server_ip</code></pre>
-                            </div>
-                        </li>
-                    </ol>
-                    <p><strong>Catatan penting:</strong> Jika semua langkah gagal, pulihkan <code>sshd_config</code> dari cadangan (<code>/etc/ssh/sshd_config.bak</code>) dan uji ulang.</p>
+                    </div>
+                    <h3>3. Mode Verbose <a href="#troubleshooting" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menguji koneksi dengan detail.</p>
+                    <div class="code-block">
+                        <button class="copy-btn">Salin</button>
+                        <pre><code class="language-bash">ssh -v your_username@server_ip</code></pre>
+                    </div>
+                    <p><strong>Catatan:</strong> Pulihkan <code>sshd_config</code> dari cadangan jika gagal.</p>
                 </div>
             </section>
         </div>
     </main>
+    <!-- Footer -->
+    <footer id="footer" style="background: var(--bg-darker); padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color);">
+        <div class="container">
+            <div class="copyright">
+                © 2025 <strong><span>Thi-Web6 Portfolio</span></strong>. All Rights Reserved.
+            </div>
+            <div class="credits">
+                Designed by <a href="https://github.com/thi-web6" style="color: var(--primary); text-decoration: none;">Thi-Web6</a>
+            </div>
+        </div>
+    </footer>
     <!-- Vendor JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <!-- Custom JS -->
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 800, once: false });
+        const menuToggle = document.getElementById('nav-toggle');
         const sidebar = document.getElementById('sidebar');
-        const toggle = document.querySelector('.mobile-nav-toggle');
-        const overlay = document.querySelector('.overlay');
-        toggle.addEventListener('click', () => {
+        const overlay = document.getElementById('overlay');
+        menuToggle.addEventListener('click', () => {
+            const isOpen = sidebar.classList.contains('show');
             sidebar.classList.toggle('show');
             overlay.classList.toggle('active');
+            menuToggle.querySelector('i').className = isOpen ? 'fas fa-bars' : 'fas fa-times';
+        });
+        const sidebarLinks = sidebar.querySelectorAll('.nav-link');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('active');
+                menuToggle.querySelector('i').className = 'fas fa-bars';
+            });
         });
         overlay.addEventListener('click', () => {
             sidebar.classList.remove('show');
             overlay.classList.remove('active');
+            menuToggle.querySelector('i').className = 'fas fa-bars';
         });
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const code = btn.nextElementSibling.querySelector('code').textContent;
-                navigator.clipboard.writeText(code).then(() => {
-                    btn.textContent = 'Tersalin!';
-                    setTimeout(() => btn.textContent = 'Salin', 2000);
-                });
+        function copyCode(button) {
+            const code = button.nextElementSibling.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = 'Tersalin!';
+                button.style.background = 'var(--accent)';
+                setTimeout(() => {
+                    button.innerText = 'Salin';
+                    button.style.background = 'var(--primary)';
+                }, 2000);
             });
-        });
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                const targetId = link.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-                if (window.innerWidth < 768) {
-                    sidebar.classList.remove('show');
-                    overlay.classList.remove('active');
-                }
-            });
-        });
+        }
     </script>
 </body>
 </html>
