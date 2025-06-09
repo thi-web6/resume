@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci</title>
+    <meta name="title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta name="description" content="Panduan lengkap untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, dan konfigurasi server.">
+    <meta name="keywords" content="cara mengatur SSH Fedora, autentikasi kunci SSH, SSH tanpa kata sandi, konfigurasi SSH Fedora, tutorial SSH Fedora, OpenSSH Fedora">
+    <meta name="author" content="Thi-Web6">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Indonesian">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thi-web6.github.io/resume/knowledge/copyid.html">
+    
+    <!-- FIXED: Favicon dengan multiple formats dan ukuran -->
+    <link rel="icon" type="image/x-icon" href="https://thi-web6.github.io/resume/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://thi-web6.github.io/resume/assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://thi-web6.github.io/resume/assets/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://thi-web6.github.io/resume/assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="https://thi-web6.github.io/resume/site.webmanifest">
+    
+    <!-- FIXED: Open Graph / Facebook dengan path yang konsisten -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://thi-web6.github.io/resume/copyid.html">
+    <meta property="og:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta property="og:description" content="Pelajari langkah-langkah mengatur SSH di Fedora untuk akses aman tanpa kata sandi menggunakan autentikasi kunci.">
+    <!-- FIXED: Path gambar yang konsisten -->
+    <meta property="og:image" content="https://thi-web6.github.io/resume/assets/img/icondocs.png">
+    <meta property="og:image:secure_url" content="https://thi-web6.github.io/resume/assets/img/icondocs.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Tutorial SSH Fedora - Autentikasi Kunci">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:site_name" content="Thi-Web6 Knowledge">
+    <meta property="og:locale" content="id_ID">
+    <meta property="article:author" content="Thi-Web6">
+    <meta property="article:published_time" content="2025-06-08T00:00:00Z">
+    <meta property="article:modified_time" content="2025-06-08T00:00:00Z">
+    <meta property="article:section" content="System Administration">
+    <meta property="article:tag" content="SSH Configuration">
+    <meta property="article:tag" content="Fedora Security">
+    
+    <!-- FIXED: Twitter Card dengan gambar yang sama -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://thi-web6.github.io/resume/copyid.html">
+    <meta name="twitter:title" content="Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci">
+    <meta name="twitter:description" content="Panduan lengkap untuk konfigurasi SSH di Fedora dengan autentikasi kunci.">
+    <meta name="twitter:image" content="https://thi-web6.github.io/resume/assets/img/icondocs.png">
+    <meta name="twitter:image:alt" content="Tutorial SSH Fedora">
+    <meta name="twitter:creator" content="@thi_web6">
+    <meta name="twitter:site" content="@thi_web6">
+    
+    <!-- ADDITIONAL: WhatsApp specific tags -->
+    <meta property="og:image:url" content="https://thi-web6.github.io/resume/assets/img/icondocs.png">
+    <meta name="thumbnail" content="https://thi-web6.github.io/resume/assets/img/icondocs.png">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#4776E6">
+    <meta name="msapplication-TileColor" content="#4776E6">
+    <meta name="msapplication-TileImage" content="https://thi-web6.github.io/resume/assets/img/icondocs.png">
+    <meta name="application-name" content="Tutorial SSH Fedora">
+    
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci",
+        "description": "Panduan lengkap untuk mengatur SSH di Fedora dengan autentikasi berbasis kunci, termasuk instalasi OpenSSH, pembuatan kunci, dan konfigurasi server.",
+        "image": "https://thi-web6.github.io/resume/assets/img/icondocs.png",
+        "author": {
+            "@type": "Person",
+            "name": "Thi-Web6",
+            "url": "https://github.com/thi-web6"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Thi-Web6",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://thi-web6.github.io/resume/assets/img/profile-image.jpeg"
+            }
+        },
+        "datePublished": "2025-06-08",
+        "dateModified": "2025-06-08",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://thi-web6.github.io/resume/copyid.html"
+        },
+        "articleSection": "System Administration",
+        "keywords": "SSH Fedora, autentikasi kunci, OpenSSH, server security",
+        "about": [
+            {"@type": "Thing", "name": "SSH Configuration"},
+            {"@type": "Thing", "name": "Fedora Security"}
+        ]
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" integrity="sha256-GEd0l6oOHBuLnaF/U1nZ2KPxLMj1e3V3vCXzdl0N4bQ=" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.0/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha256-MQf6rtWmm0vQNjf/3H2i5Gx3bLhW/fB9KXzWjM5L6W4=" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous">
+    
+    <!-- Prism CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18wf8ZdDBcD1V6QJ4uS6ISo5GrJQ==" crossorigin="anonymous">
+    
+    <style>
+        :root {
+            --primary: #4776E6;
+            --accent: #8E54E9;
+            --bg-dark: #0a0b14;
+            --bg-darker: #040510;
+            --text-light: #f4f6fd;
+            --text-gray: #a8b2d1;
+            --border-color: rgba(71, 118, 230, 0.15);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #1a1b2e 100%);
+            color: var(--text-light);
+            line-height: 1.7;
+            min-height: 100vh;
+            overscroll-behavior: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(4, 5, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border-color);
+            z-index: 100;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        #sidebar.show {
+            transform: translateX(0);
+        }
+        
+        .sidebar-content {
+            padding: 30px 20px;
+            min-height: 100%;
+        }
+        
+        .back-btn {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
+        }
+        
+        .back-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .back-btn:hover:before {
+            left: 100%;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(71, 118, 230, 0.4);
+        }
+        
+        .back-btn i {
+            margin-right: 12px;
+            font-size: 18px;
+            color: var(--text-light);
+        }
+        
+        .nav-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            padding: 15px 20px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+            opacity: 0.1;
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+        
+        .nav-link i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 20px;
+            color: var(--accent);
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-light);
+            transform: translateX(8px);
+        }
+        
+        .nav-link:hover i,
+        .nav-link.active i {
+            color: var(--primary);
+        }
+        
+        .mobile-nav-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 300;
+            background: rgba(71, 118, 230, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-nav-toggle:hover {
+            background: rgba(71, 118, 230, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .main-content {
+            margin-left: 0;
+            min-height: 100vh;
+            padding: 80px 20px 40px;
+            transition: margin-left 0.3s ease;
+            z-index: 50;
+            display: block !important;
+            opacity: 1 !important;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        p {
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(71, 118, 230, 0.3);
+        }
+        
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid var(--accent);
+            margin-bottom: 16px;
+        }
+        
+        .code-block {
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 24px 0;
+            position: relative;
+            z-index: 200;
+            padding: 28px;
+            min-height: 120px;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            padding: 0;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 400px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .code-block code {
+            color: #c9d1d9;
+            display: block;
+            padding: 0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 210;
+            pointer-events: auto;
+        }
+        
+        .copy-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(71, 118, 230, 0.3);
+        }
+        
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: var(--text-gray);
+        }
+        
+        a {
+            color: var(--accent);
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--primary);
+        }
+        
+        code {
+            background: rgba(71, 118, 230, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent);
+        }
+        
+        strong {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        @media (min-width: 768px) {
+            #sidebar {
+                transform: translateX(0);
+                z-index: 100;
+            }
+            
+            .main-content {
+                margin-left: 280px;
+            }
+            
+            .mobile-nav-toggle, .overlay {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            #sidebar {
+                width: 80vw;
+                height: 100vh;
+                overflow-y: auto;
+                z-index: 100;
+            }
+            
+            .sidebar-content {
+                padding-bottom: 80px;
+            }
+            
+            .main-content {
+                padding-top: 100px;
+                padding-bottom: 80px;
+            }
+            
+            .code-block {
+                padding: 20px;
+            }
+            
+            .copy-btn {
+                top: 6px;
+                font-size: 12px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .code-block pre {
+                font-size: 13px;
+            }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+        
+        .anchor-link {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        h3:hover .anchor-link {
+            opacity: 1;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(71, 118, 230, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+        
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Nav Toggle -->
+    <button class="mobile-nav-toggle" id="nav-toggle" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Sidebar -->
+    <nav id="sidebar" role="navigation" aria-label="Main Navigation">
+        <div class="sidebar-content">
+            <a href="/resume/knowledge" class="back-btn" title="Kembali ke Knowledge">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Knowledge</span>
+            </a>
+            <h3 style="color: var(--primary); margin-bottom: 20px;">
+                <i class="bi bi-lock"></i> Dokumentasi SSH
+            </h3>
+            <ul class="nav-list">
+                <li><a href="#pendahuluan" class="nav-link"><i class="bi bi-info-circle"></i><span>Pendahuluan</span></a></li>
+                <li><a href="#install-ssh" class="nav-link"><i class="bi bi-server"></i><span>Instalasi SSH</span></a></li>
+                <li><a href="#generate-key" class="nav-link"><i class="bi bi-key"></i><span>Pembuatan Kunci</span></a></li>
+                <li><a href="#copy-key" class="nav-link"><i class="bi bi-copy"></i><span>Penyalinan Kunci</span></a></li>
+                <li><a href="#configure-ssh" class="nav-link"><i class="bi bi-gear"></i><span>Konfigurasi SSH</span></a></li>
+                <li><a href="#firewall-selinux" class="nav-link"><i class="bi bi-shield-lock"></i><span>Firewall & SELinux</span></a></li>
+                <li><a href="#troubleshooting" class="nav-link"><i class="bi bi-tools"></i><span>Pemecahan Masalah</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <header class="hero" data-aos="fade-up">
+                <div class="hero-content">
+                    <h1>Cara Mengatur SSH di Fedora dengan Autentikasi Berbasis Kunci</h1>
+                    <p>Panduan teknis komprehensif untuk mengatur layanan Secure Shell (SSH) pada sistem operasi Fedora, dengan fokus pada autentikasi berbasis kunci publik-privat untuk akses jarak jauh yang aman.</p>
+                    <a href="#pendahuluan" class="btn">Mulai Tutorial</a>
+                </div>
+            </header>
+            
+            <!-- Pendahuluan -->
+            <section id="pendahuluan" data-aos="fade-up">
+                <h2>Pendahuluan</h2>
+                <div class="card">
+                    <p>Dokumentasi ini menyediakan panduan lengkap untuk mengatur layanan Secure Shell (SSH) pada sistem operasi Fedora, dengan fokus pada autentikasi berbasis kunci publik-privat. Tujuannya adalah memungkinkan akses jarak jauh yang aman tanpa ketergantungan pada kata sandi, sambil memastikan pengguna lain hanya dapat mengakses server dengan kunci publik yang valid.</p>
+                    <p><strong>🎯 Tujuan Tutorial:</strong></p>
+                    <ul>
+                        <li>Menginstal dan mengaktifkan OpenSSH Server di Fedora.</li>
+                        <li>Membuat pasangan kunci SSH untuk autentikasi aman.</li>
+                        <li>Menyalin kunci publik ke server untuk akses tanpa kata sandi.</li>
+                        <li>Mengkonfigurasi server SSH untuk hanya menerima autentikasi kunci.</li>
+                        <li>Mengatur firewall dan SELinux untuk mendukung SSH.</li>
+                        <li>Menyediakan langkah pemecahan masalah umum.</li>
+                    </ul>
+                    <p><strong>🛠️ Tools yang Digunakan:</strong></p>
+                    <ul>
+                        <li><strong>OpenSSH Server</strong> - Layanan SSH di Fedora.</li>
+                        <li><strong>ssh-keygen</strong> - Alat untuk membuat kunci SSH.</li>
+                        <li><strong>ssh-copy-id</strong> - Menyalin kunci publik ke server.</li>
+                        <li><strong>firewalld</strong> - Pengelolaan firewall di Fedora.</li>
+                        <li><strong>SELinux</strong> - Kontrol keamanan tambahan.</li>
+                    </ul>
+                    <p><strong>⚠️ Peringatan:</strong> Pastikan Anda memiliki izin administratif untuk mengkonfigurasi server. Salah konfigurasi dapat menyebabkan hilangnya akses jarak jauh. Selalu uji perubahan di sesi terpisah sebelum menutup koneksi aktif.</p>
+                </div>
+            </section>
+            <!-- Instalasi SSH -->
+            <section id="install-ssh" data-aos="fade-up">
+                <h2>Instalasi dan Aktivasi Layanan SSH</h2>
+                <div class="card">
+                    <h3>1. Instalasi OpenSSH Server <a href="#install-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menginstal paket <code>openssh-server</code> di Fedora.</p>
+                    <p><strong>Mengapa:</strong> OpenSSH menyediakan protokol komunikasi jarak jauh yang aman.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo dnf install openssh-server</code></pre>
+                    </div>
+                    <p><strong>Catatan:</strong> Jika paket sudah terpasang, lanjutkan ke langkah berikutnya.</p>
+                    <h3>2. Mengaktifkan Layanan SSH <a href="#install-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengaktifkan <code>sshd</code> agar berjalan saat boot dan mulai layanan saat ini.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo systemctl enable sshd
+sudo systemctl start sshd</code></pre>
+                    </div>
+                    <h3>3. Memverifikasi Status <a href="#install-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memeriksa apakah layanan <code>sshd</code> berjalan.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo systemctl status sshd</code></pre>
+                    </div>
+                    <p><strong>Hasil yang diharapkan:</strong> Status <code>active (running)</code>. Jika gagal, periksa log dengan <code>sudo journalctl -u sshd</code>.</p>
+                    <p><strong>Potensi Error:</strong> Koneksi internet tidak stabil atau repositori Fedora salah. Gunakan <code>sudo dnf repolist</code> untuk memeriksa.</p>
+                </div>
+            </section>
+            <!-- Pembuatan Kunci -->
+            <section id="generate-key" data-aos="fade-up">
+                <h2>Pembuatan Pasangan Kunci SSH</h2>
+                <div class="card">
+                    <h3>1. Menghasilkan Kunci <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Membuat kunci RSA 4096-bit di komputer klien.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">ssh-keygen -t rsa -b 4096</code></pre>
+                    </div>
+                    <h3>2. Menentukan Lokasi <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Gunakan lokasi default (<code>~/.ssh/id_rsa</code>) atau timpa jika sudah ada.</p>
+                    <h3>3. Mengatur Passphrase <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Pilih antara passphrase kosong (login otomatis) atau passphrase kuat (keamanan tambahan).</p>
+                    <p><strong>Opsi:</strong></p>
+                    <ul>
+                        <li><strong>Login Otomatis:</strong> Tekan <code>Enter</code> dua kali.</li>
+                        <li><strong>Keamanan Tambahan:</strong> Masukkan passphrase kuat.</li>
+                    </ul>
+                    <h3>4. Memverifikasi Kunci <a href="#generate-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memeriksa berkas kunci yang dihasilkan.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">ls ~/.ssh</code></pre>
+                    </div>
+                    <p><strong>Hasil yang diharapkan:</strong> <code>id_rsa</code> (privat) dan <code>id_rsa.pub</code> (publik).</p>
+                    <p><strong>Catatan:</strong> Jaga <code>id_rsa</code> tetap aman. Bagikan hanya <code>id_rsa.pub</code>.</p>
+                    <p><strong>Potensi Error:</strong> Izin direktori salah. Gunakan <code>chmod 700 ~/.ssh</code>.</p>
+                </div>
+            </section>
+            <!-- Penyalinan Kunci -->
+            <section id="copy-key" data-aos="fade-up">
+                <h2>Penyalinan Kunci Publik ke Server</h2>
+                <div class="card">
+                    <h3>1. Menyalin Kunci <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menggunakan <code>ssh-copy-id</code> untuk menyalin kunci publik.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">ssh-copy-id your_username@server_ip</code></pre>
+                    </div>
+                    <p>Ganti <code>your_username</code> dan <code>server_ip</code> sesuai kebutuhan.</p>
+                    <h3>2. Memasukkan Kata Sandi <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Masukkan kata sandi server sekali.</p>
+                    <h3>3. Memverifikasi Akses <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menguji login dengan kunci.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">ssh your_username@server_ip</code></pre>
+                    </div>
+                    <h3>4. Kunci untuk Pengguna Lain <a href="#copy-key" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menambahkan kunci publik pengguna lain secara manual.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo nano ~other_user/.ssh/authorized_keys
+sudo chown other_user:other_user ~other_user/.ssh -R
+sudo chmod 700 ~other_user/.ssh
+sudo chmod 600 ~other_user/.ssh/authorized_keys</code></pre>
+                    </div>
+                    <p><strong>Potensi Error:</strong> Login kata sandi dinonaktifkan. Pastikan <code>PasswordAuthentication yes</code> sementara.</p>
+                </div>
+            </section>
+            <!-- Konfigurasi SSH -->
+            <section id="configure-ssh" data-aos="fade-up">
+                <h2>Konfigurasi Server SSH</h2>
+                <div class="card">
+                    <h3>1. Mencadangkan Konfigurasi <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Membuat cadangan <code>sshd_config</code>.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak</code></pre>
+                    </div>
+                    <h3>2. Mengedit Konfigurasi <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengubah <code>sshd_config</code> untuk autentikasi kunci.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo nano /etc/ssh/sshd_config</code></pre>
+                    </div>
+                    <p>Tambahkan:</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">PubkeyAuthentication yes
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+AllowUsers your_username</code></pre>
+                    </div>
+                    <h3>3. Memulai Ulang Layanan <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menerapkan perubahan.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo systemctl restart sshd</code></pre>
+                    </div>
+                    <h3>4. Memverifikasi Konfigurasi <a href="#configure-ssh" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menguji login kunci dan memastikan login kata sandi gagal.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">ssh your_username@server_ip
+ssh -o PubkeyAuthentication=no your_username@server_ip</code></pre>
+                    </div>
+                    <p><strong>Catatan:</strong> Uji di sesi baru untuk menghindari kehilangan akses.</p>
+                </div>
+            </section>
+            <!-- Firewall dan SELinux -->
+            <section id="firewall-selinux" data-aos="fade-up">
+                <h2>Pengaturan Firewall dan SELinux</h2>
+                <div class="card">
+                    <h3>1. Membuka Port SSH <a href="#firewall-selinux" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengizinkan port 22 di <code>firewalld</code>.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo firewall-cmd --permanent --add-service=ssh
+sudo firewall-cmd --reload</code></pre>
+                    </div>
+                    <h3>2. Memverifikasi Firewall <a href="#firewall-selinux" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memeriksa layanan aktif.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo firewall-cmd --list-services</code></pre>
+                    </div>
+                    <h3>3. Menguji SELinux <a href="#firewall-selinux" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Mengatur mode permisif jika login gagal.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo setenforce 0
+sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config</code></pre>
+                    </div>
+                    <p><strong>Potensi Error:</strong> Zona firewall salah. Periksa dengan <code>sudo firewall-cmd --get-active-zones</code>.</p>
+                </div>
+            </section>
+            <!-- Pemecahan Masalah -->
+            <section id="troubleshooting" data-aos="fade-up">
+                <h2>Pemecahan Masalah</h2>
+                <div class="card">
+                    <h3>1. Memeriksa Log <a href="#troubleshooting" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Melihat log untuk error.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">sudo journalctl -u sshd</code></pre>
+                    </div>
+                    <h3>2. Memeriksa Izin <a href="#troubleshooting" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Memastikan izin berkas benar.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys</code></pre>
+                    </div>
+                    <h3>3. Mode Verbose <a href="#troubleshooting" class="anchor-link">#</a></h3>
+                    <p><strong>Apa:</strong> Menguji koneksi dengan detail.</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code class="language-bash">ssh -v your_username@server_ip</code></pre>
+                    </div>
+                    <p><strong>Catatan:</strong> Pulihkan <code>sshd_config</code> dari cadangan jika gagal.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer id="footer" style="background: var(--bg-darker); padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color);">
+        <div class="container">
+            <div class="copyright">
+                © 2025 <strong><span>Thi-Web6 Portfolio</span></strong>. All Rights Reserved.
+            </div>
+            <div class="credits">
+                Designed by <a href="https://github.com/thi-web6" style="color: var(--primary); text-decoration: none;">Thi-Web6</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Vendor JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" integrity="sha256-GEd0l6oOHBuLnaF/U1nZ2KPxLMj1e3V3vCXzdl0N4bQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXgA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" integrity="sha512-OP39xIMcV2kX1Xhi2X0QFVxrg6aFF4Y7ZDB3hQJYG6Mt0s+0gRaUwc0S3QdoLmsD0xumtnkU3Pdq4kBqu7QDS+Q==" crossorigin="anonymous"></script>
+    <!-- Inline Fallback JS -->
+    <script>
+        window.onload = function() {
+            // Initialize AOS if available
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: false });
+            } else {
+                console.warn('AOS failed to load. Animations disabled.');
+            }
+            // Sidebar toggle
+            const menuToggle = document.getElementById('nav-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            if (menuToggle && sidebar && overlay) {
+                menuToggle.addEventListener('click', () => {
+                    const isOpen = sidebar.classList.contains('show');
+                    sidebar.classList.toggle('show');
+                    overlay.classList.toggle('active');
+                    menuToggle.querySelector('i').className = isOpen ? 'fas fa-bars' : 'fas fa-times';
+                });
+                const sidebarLinks = sidebar.querySelectorAll('.nav-link');
+                sidebarLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        sidebar.classList.remove('show');
+                        overlay.classList.remove('active');
+                        menuToggle.querySelector('i').className = 'fas fa-bars';
+                    });
+                });
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('show');
+                    overlay.classList.remove('active');
+                    menuToggle.querySelector('i').className = 'fas fa-bars';
+                });
+            }
+            // Copy code function
+            function copyCode(button) {
+                const code = button.nextElementSibling.querySelector('code').innerText;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(code).then(() => {
+                        button.innerText = '✅ Tersalin!';
+                        button.style.backgroundColor = 'var(--accent)';
+                        setTimeout(() => {
+                            button.innerText = 'Salin';
+                            button.style.backgroundColor = 'var(--primary)';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                        button.innerText = 'Gagal!';
+                        setTimeout(() => button.innerText = 'Salin', 2000);
+                    });
+                } else {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = code;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        button.innerText = '✅ Tersalin!';
+                        button.style.backgroundColor = 'var(--accent)';
+                        setTimeout(() => {
+                            button.innerText = 'Salin';
+                            button.style.backgroundColor = 'var(--primary)';
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Fallback copy failed:', err);
+                        button.innerText = 'Gagal!';
+                        setTimeout(() => button.innerText = 'Salin', 2000);
+                    }
+                    document.body.removeChild(textarea);
+                }
+            }
+            // Attach copyCode to buttons
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', () => copyCode(btn));
+            });
+        };
+    </script>
+</body>
+</html>
