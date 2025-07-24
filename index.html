@@ -744,21 +744,68 @@
       opacity: 1;
     }
 
-    /* Portfolio Section Fixes */
-    #portfolio {
-      overflow: visible;
-      min-height: 400px;
-    }
-    .portfolio-container {
-      min-height: 300px;
-    }
-    .portfolio-item img {
-      transition: opacity 0.3s ease;
-      opacity: 0;
-    }
-    .portfolio-item img[loading="lazy"] {
-      opacity: 1;
-    }
+   /* Portfolio Section Fixes - Tambahkan ini ke CSS yang sudah ada */
+#portfolio {
+  overflow: visible;
+  min-height: 600px;
+}
+
+.portfolio-container {
+  min-height: 400px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-container.loaded {
+  opacity: 1;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.portfolio-item.loaded {
+  opacity: 1;  
+  transform: translateY(0);
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-item img[loading="lazy"] {
+  min-height: 200px;
+  background: #f8f9fa;
+}
+
+.portfolio-loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.portfolio-loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #4776E6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
     /* Responsif */
     @media (max-width: 1199px) {
@@ -1072,10 +1119,10 @@
       <div class="container">
         <div class="section-title">
           <h2>About Me</h2>
-          <p>Nama saya Abdurrohman Al Fathi, seorang siswa yang sedang menempuh pendidikan di SMK Taruna Bangsa. Saya secara aktif terlibat dalam kompetisi Capture The Flag (CTF), yang tidak hanya mengasah kemampuan pemecahan masalah saya, tetapi juga memperdalam pengetahuan saya di bidang keamanan siber.
-Dalam lingkup organisasi sekolah, saya dipercaya untuk mengemban amanah sebagai Sekretaris OSIS, dengan tanggung jawab mengelola administrasi organisasi dan berperan penting dalam koordinasi berbagai program dan kegiatan sekolah. Pengalaman ini telah meningkatkan kemampuan manajerial dan komunikasi saya.
-Selain itu, sebagai anggota aktif Pramuka, saya telah mengembangkan keterampilan esensial seperti kepemimpinan, kerja sama tim, dan kedisiplinan yang sangat berharga dalam kehidupan sehari-hari. Komitmen saya terhadap pengembangan diri juga tercermin dalam keterlibatan saya sebagai anggota tim Tahfidz, di mana saya mendalami pendidikan agama melalui hafalan Al-Qur'an, serta partisipasi saya dalam tim Olimpiade Matematika yang menunjukkan dedikasi dan minat saya dalam bidang akademis.
-Kombinasi kegiatan ini telah membentuk karakter dan keterampilan yang komprehensif, mempersiapkan saya untuk menghadapi tantangan masa depan dengan bekal yang memadai.</p>
+          <p>Saya Abdurrohman Al Fathi, siswa SMK Taruna Bangsa yang aktif dalam dunia cybersecurity. Sebagai peserta kompetisi Capture The Flag (CTF), saya terus mengasah kemampuan problem solving dan memperdalam expertise di bidang keamanan siber.
+Di lingkungan sekolah, saya menjabat sebagai Sekretaris Inti/BPH OSIS, mengelola administrasi organisasi dan mengkoordinasikan berbagai program sekolah. Pengalaman ini mengembangkan kemampuan manajerial dan komunikasi saya secara signifikan.
+Saya juga menjabat sebagai Pangkuan Adat (Pangdat) di Dewan Ambalan Pramuka, yang membantu membangun leadership, teamwork, dan disiplin. Selain itu, keterlibatan saya sebagai anggota tim Tahfidz untuk menghafal Al-Qur'an dan tim Olimpiade Matematika menunjukkan komitmen terhadap pengembangan diri baik secara spiritual maupun akademis.
+Kombinasi aktivitas ini membentuk karakter yang komprehensif dan mempersiapkan saya menghadapi tantangan masa depan dengan optimal.</p>
         </div>
         <div class="row">
           <div class="col-lg-4" data-aos="fade-right">
@@ -1312,6 +1359,9 @@ Kombinasi kegiatan ini telah membentuk karakter dan keterampilan yang komprehens
             </ul>
           </div>
         </div>
+       <div class="portfolio-loading" id="portfolio-loading">
+        Loading portfolio items...
+       </div>
          <div class="col-lg-4 col-md-6 portfolio-item filter-event">
             <div class="portfolio-wrap">
               <img src="images/juri-lks.png" class="img-fluid" alt="Dokumentasi LKS ITNSA Jakarta Pusat 1" loading="lazy">
@@ -1414,40 +1464,275 @@ Kombinasi kegiatan ini telah membentuk karakter dan keterampilan yang komprehens
   <script src="assets/js/main.js" defer></script>
 
   <script defer>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Inisialisasi AOS
-      AOS.init({
-        duration: 1000,
-        once: true
+   // Complete JavaScript Solution - Replace your old script with this
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize AOS
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 50
+    });
+  }
+
+  // Initialize GLightbox for certificates
+  if (typeof GLightbox !== 'undefined') {
+    const lightbox = GLightbox({
+      selector: '.glightbox'
+    });
+  }
+
+  // Enhanced Portfolio Loading and Initialization
+  const portfolioContainer = document.querySelector('.portfolio-container');
+  const portfolioLoading = document.getElementById('portfolio-loading');
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  
+  if (portfolioContainer) {
+    
+    // Function to check if all images are loaded
+    function checkImagesLoaded() {
+      const images = portfolioContainer.querySelectorAll('img');
+      let loadedCount = 0;
+      let totalImages = images.length;
+
+      console.log(`Total portfolio images to load: ${totalImages}`);
+
+      if (totalImages === 0) {
+        console.log('No images found, initializing portfolio immediately');
+        initializePortfolio();
+        return;
+      }
+
+      images.forEach((img, index) => {
+        const imgSrc = img.src || img.getAttribute('data-src');
+        console.log(`Checking image ${index + 1}: ${imgSrc}`);
+        
+        if (img.complete && img.naturalHeight !== 0) {
+          loadedCount++;
+          console.log(`Image ${index + 1} already loaded`);
+        } else {
+          img.onload = function() {
+            loadedCount++;
+            console.log(`Image ${index + 1} loaded successfully (${loadedCount}/${totalImages})`);
+            if (loadedCount === totalImages) {
+              setTimeout(initializePortfolio, 150);
+            }
+          };
+          
+          img.onerror = function() {
+            loadedCount++;
+            console.warn(`Image ${index + 1} failed to load, but continuing (${loadedCount}/${totalImages})`);
+            if (loadedCount === totalImages) {
+              setTimeout(initializePortfolio, 150);
+            }
+          };
+          
+          // Force load for lazy images
+          if (img.loading === 'lazy') {
+            img.loading = 'eager';
+          }
+        }
       });
 
-      // Inisialisasi GLightbox
-      const lightbox = GLightbox({
-        selector: '.glightbox'
+      // If all images are already loaded
+      if (loadedCount === totalImages) {
+        console.log('All images already loaded, initializing portfolio');
+        setTimeout(initializePortfolio, 150);
+      }
+    }
+
+    // Initialize portfolio with Isotope
+    function initializePortfolio() {
+      console.log('Initializing portfolio...');
+      
+      // Hide loading indicator
+      if (portfolioLoading) {
+        portfolioLoading.style.display = 'none';
+      }
+
+      // Show portfolio container
+      portfolioContainer.classList.add('loaded');
+
+      // Show portfolio items with stagger effect
+      portfolioItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add('loaded');
+        }, index * 100);
       });
 
-      // Inisialisasi Isotope setelah gambar ke-load
-      const portfolioContainer = document.querySelector('.portfolio-container');
-      if (portfolioContainer) {
-        imagesLoaded(portfolioContainer, function() {
-          const iso = new Isotope(portfolioContainer, {
-            itemSelector: '.portfolio-item',
-            layoutMode: 'fitRows'
-          });
+      // Initialize Isotope after everything is loaded
+      setTimeout(() => {
+        console.log('Setting up Isotope...');
+        
+        // Check if Isotope is available
+        if (typeof Isotope === 'undefined') {
+          console.error('Isotope library not found! Make sure it\'s loaded.');
+          return;
+        }
 
-          // Filter isotope
-          const filters = document.querySelectorAll('#portfolio-flters li');
+        const iso = new Isotope(portfolioContainer, {
+          itemSelector: '.portfolio-item',
+          layoutMode: 'fitRows',
+          fitRows: {
+            gutter: 30
+          },
+          transitionDuration: '0.4s',
+          stagger: 30
+        });
+
+        console.log('Isotope initialized successfully');
+
+        // Portfolio filter functionality
+        const filters = document.querySelectorAll('#portfolio-flters li');
+        if (filters.length > 0) {
           filters.forEach(filter => {
             filter.addEventListener('click', function(e) {
               e.preventDefault();
+              
+              console.log(`Filter clicked: ${this.getAttribute('data-filter')}`);
+              
+              // Remove active class from all filters
               filters.forEach(li => li.classList.remove('filter-active'));
+              
+              // Add active class to clicked filter
               this.classList.add('filter-active');
-              iso.arrange({ filter: this.getAttribute('data-filter') });
+              
+              // Apply filter
+              const filterValue = this.getAttribute('data-filter');
+              iso.arrange({ 
+                filter: filterValue,
+                transitionDuration: '0.4s'
+              });
+
+              // Trigger AOS refresh after filter
+              setTimeout(() => {
+                if (typeof AOS !== 'undefined') {
+                  AOS.refresh();
+                }
+              }, 500);
             });
           });
-        });
+        }
+
+        // Initialize GLightbox for portfolio after Isotope
+        setTimeout(() => {
+          if (typeof GLightbox !== 'undefined') {
+            const portfolioLightbox = GLightbox({
+              selector: '.portfolio-lightbox',
+              touchNavigation: true,
+              loop: true,
+              autoplayVideos: false
+            });
+            console.log('Portfolio lightbox initialized');
+          }
+        }, 300);
+
+        // Trigger AOS refresh
+        if (typeof AOS !== 'undefined') {
+          AOS.refresh();
+        }
+
+        console.log('Portfolio initialization complete!');
+      }, 250);
+    }
+
+    // Start the loading check
+    console.log('Starting portfolio image loading check...');
+    checkImagesLoaded();
+
+    // Fallback: If images take too long to load (more than 8 seconds)
+    setTimeout(() => {
+      if (!portfolioContainer.classList.contains('loaded')) {
+        console.warn('Portfolio images taking too long to load, initializing anyway (fallback)');
+        initializePortfolio();
+      }
+    }, 8000);
+  }
+
+  // Handle window resize to recalculate layout
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      const portfolioContainer = document.querySelector('.portfolio-container');
+      if (portfolioContainer && portfolioContainer.classList.contains('loaded')) {
+        console.log('Window resized, recalculating Isotope layout');
+        
+        if (typeof Isotope !== 'undefined') {
+          // Reinitialize Isotope on resize
+          const iso = new Isotope(portfolioContainer, {
+            itemSelector: '.portfolio-item',
+            layoutMode: 'fitRows',
+            fitRows: {
+              gutter: 30
+            },
+            transitionDuration: '0.2s'
+          });
+          
+          // Refresh AOS
+          if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+          }
+        }
+      }
+    }, 300);
+  });
+
+  // Auto-hide scroll down indicator on mobile after 5 seconds
+  const scrollDown = document.querySelector('.scroll-down');
+  if (scrollDown && window.innerWidth <= 768) {
+    setTimeout(() => {
+      scrollDown.classList.add('auto-hide');
+    }, 5000);
+  }
+
+  // Smooth scroll for navigation links
+  const navLinks = document.querySelectorAll('.nav-link.scrollto');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId.startsWith('#')) {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
       }
     });
+  });
+
+  // Initialize Typed.js if available
+  if (typeof Typed !== 'undefined') {
+    const typedElement = document.querySelector('.typed');
+    if (typedElement) {
+      const typedStrings = typedElement.getAttribute('data-typed-items');
+      if (typedStrings) {
+        new Typed('.typed', {
+          strings: typedStrings.split(','),
+          typeSpeed: 100,
+          backSpeed: 50,
+          backDelay: 2000,
+          loop: true
+        });
+      }
+    }
+  }
+
+  // Performance monitoring
+  if (window.performance && window.performance.timing) {
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+        console.log(`Page load time: ${loadTime}ms`);
+      }, 0);
+    });
+  }
+
+  console.log('All scripts initialized successfully!');
+});
   </script>
 </body>
 </html>
