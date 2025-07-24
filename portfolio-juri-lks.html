@@ -619,9 +619,8 @@
 </head>
 
 <body>
-  <button class="mobile-nav-toggle d-xl-none" aria-label="Toggle navigation">
-    <i class="bi bi-list"></i>
-  </button>
+  <!-- Ganti tombol toggle sidebar agar sama persis dengan index.html -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
   <!-- Mobile Overlay -->
   <div class="mobile-nav-overlay"></div>
 
@@ -822,7 +821,7 @@
 
   <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile nav toggle functionality (disamakan dengan index.html)
+  // Mobile nav toggle functionality (identik dengan index.html)
   const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
   const header = document.querySelector('#header');
   const body = document.body;
@@ -833,12 +832,9 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       body.classList.toggle('mobile-nav-active');
       header.classList.toggle('mobile-nav-active');
+      this.classList.toggle('bi-list');
+      this.classList.toggle('bi-x');
       if (overlay) overlay.classList.toggle('show');
-      const icon = this.querySelector('i');
-      if (icon) {
-        icon.classList.toggle('bi-list');
-        icon.classList.toggle('bi-x');
-      }
     });
 
     // Tutup sidebar saat klik overlay
@@ -846,12 +842,9 @@ document.addEventListener('DOMContentLoaded', function() {
       overlay.addEventListener('click', function() {
         body.classList.remove('mobile-nav-active');
         header.classList.remove('mobile-nav-active');
+        mobileNavToggle.classList.add('bi-list');
+        mobileNavToggle.classList.remove('bi-x');
         overlay.classList.remove('show');
-        const icon = mobileNavToggle.querySelector('i');
-        if (icon) {
-          icon.classList.add('bi-list');
-          icon.classList.remove('bi-x');
-        }
       });
     }
 
@@ -862,12 +855,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth < 1200) {
           body.classList.remove('mobile-nav-active');
           header.classList.remove('mobile-nav-active');
+          mobileNavToggle.classList.add('bi-list');
+          mobileNavToggle.classList.remove('bi-x');
           if (overlay) overlay.classList.remove('show');
-          const icon = mobileNavToggle.querySelector('i');
-          if (icon) {
-            icon.classList.add('bi-list');
-            icon.classList.remove('bi-x');
-          }
         }
       });
     });
@@ -877,12 +867,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (window.innerWidth >= 1200) {
         body.classList.remove('mobile-nav-active');
         header.classList.remove('mobile-nav-active');
+        mobileNavToggle.classList.add('bi-list');
+        mobileNavToggle.classList.remove('bi-x');
         if (overlay) overlay.classList.remove('show');
-        const icon = mobileNavToggle.querySelector('i');
-        if (icon) {
-          icon.classList.add('bi-list');
-          icon.classList.remove('bi-x');
-        }
       }
     });
   }
