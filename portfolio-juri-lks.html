@@ -46,7 +46,6 @@
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
   <link rel="manifest" href="assets/img/site.webmanifest">
   <meta name="theme-color" content="#4776e6">
 
@@ -69,7 +68,6 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/font-awesome/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     /* Main Layout Adjustments */
@@ -615,10 +613,52 @@
       margin-bottom: 10px;
       line-height: 1.6;
     }
+
+    /* Overlay loading untuk galeri portfolio */
+    #gallery-loading-overlay {
+      position: fixed;
+      z-index: 99999;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(20, 20, 30, 0.85);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s;
+    }
+    .gallery-loading-spinner {
+      border: 6px solid #eee;
+      border-top: 6px solid #4776E6;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    .gallery-loading-text {
+      color: #fff;
+      font-size: 1.1rem;
+      text-align: center;
+      max-width: 90vw;
+    }
+    #gallery-loading-overlay.hide {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Overlay loading untuk galeri portfolio -->
+  <div id="gallery-loading-overlay">
+    <div class="gallery-loading-spinner"></div>
+    <div class="gallery-loading-text">Memuat dokumentasi... Mohon tunggu hingga semua foto tampil sempurna.</div>
+  </div>
   <!-- Ganti tombol toggle sidebar agar sama persis dengan index.html -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
   <!-- Mobile Overlay -->
@@ -937,6 +977,36 @@ document.addEventListener('DOMContentLoaded', function() {
       img.addEventListener('load', () => img.classList.add('loaded'));
     }
   });
+
+  // Gallery loading overlay logic
+  const overlayGallery = document.getElementById('gallery-loading-overlay');
+  const galleryImgs = document.querySelectorAll('.gallery-img');
+  let loadedCount = 0;
+  let totalImgs = galleryImgs.length;
+
+  function hideOverlay() {
+    if (overlayGallery) overlayGallery.classList.add('hide');
+  }
+
+  if (totalImgs === 0) {
+    hideOverlay();
+  } else {
+    galleryImgs.forEach(img => {
+      if (img.complete && img.naturalHeight !== 0) {
+        loadedCount++;
+        if (loadedCount === totalImgs) hideOverlay();
+      } else {
+        img.addEventListener('load', () => {
+          loadedCount++;
+          if (loadedCount === totalImgs) hideOverlay();
+        });
+        img.addEventListener('error', () => {
+          loadedCount++;
+          if (loadedCount === totalImgs) hideOverlay();
+        });
+      }
+    });
+  }
 });
 
 // Handle smooth scrolling untuk internal links
