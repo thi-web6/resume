@@ -1,356 +1,337 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Koleksi write-up cybersecurity profesional oleh Abdurrohman Al Fathi, mencakup LKS, eksploitasi sistem, dan kompetisi nasional.">
-    <meta name="keywords" content="cybersecurity, writeup, LKS, CTF, penetration testing, system exploitation, security, dokumentasi">
-    <meta name="author" content="Abdurrohman Al Fathi">
-    <meta name="robots" content="index, follow">
-    <title>Dokumentasi Cybersecurity - Abdurrohman Al Fathi</title>
-
-    <!-- Open Graph / Social Media Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thi-web6.github.io/resume/inner-page.html">
-    <meta property="og:title" content="Dokumentasi Cybersecurity - Abdurrohman Al Fathi">
-    <meta property="og:description" content="Jelajahi write-up cybersecurity dari kompetisi LKS dan eksploitasi sistem oleh Abdurrohman Al Fathi.">
-    <meta property="og:image" content="https://thi-web6.github.io/resume/assets/img/writeup1.png">
-    <meta property="og:image:width" content="1080">
-    <meta property="og:image:height" content="1080">
-    <meta property="og:image:alt" content="Dokumentasi write-up cybersecurity dengan desain teknologi keamanan">
-
-    <!-- Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Dokumentasi Cybersecurity - Abdurrohman Al Fathi">
-    <meta name="twitter:description" content="Jelajahi write-up cybersecurity dari kompetisi LKS dan eksploitasi sistem oleh Abdurrohman Al Fathi.">
-    <meta name="twitter:image" content="https://thi-web6.github.io/resume/assets/img/writeup1.png">
-
-    <!-- Favicons -->
-    <link rel="icon" href="assets/img/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-
-    <!-- Vendor CSS Files (Offline, sama seperti index.html) -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="assets/css/style.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-light: #e5e7eb;
-            --text-muted: #9ca3af;
-            --blue: #60a5fa;
-            --green: #34d399;
-            --purple: #a78bfa;
-            --shadow-sm: 0 10px 20px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background: linear-gradient(135deg, var(--bg-dark), #1e293b);
-            font-family: 'Inter', sans-serif;
-            color: var(--text-light);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: #1f2937;
-            padding: 3rem 1rem;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        header p {
-            font-size: 1.25rem;
-            color: var(--green);
-            margin-top: 0.75rem;
-        }
-
-        .navbar {
-            background: var(--bg-card);
-            box-shadow: var(--shadow-sm);
-            padding: 1rem 0;
-        }
-
-        .navbar-brand {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: #fff !important;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-brand:hover { color: var(--green) !important; }
-        .navbar-brand i { color: var(--blue); margin-right: 0.5rem; }
-
-        .navbar-nav .nav-link {
-            color: var(--blue) !important;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover { color: #93c5fd !important; }
-
-        .card-section { padding: 2rem 0; }
-
-        .card {
-            background: var(--bg-card);
-            border: none;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .card a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .card a:hover { transform: scale(1.05); }
-
-        .card-blue h3 { color: var(--blue); }
-        .card-blue a { background: linear-gradient(90deg, var(--blue), #3b82f6); }
-        .card-blue a:hover { background: linear-gradient(90deg, #3b82f6, var(--blue)); }
-
-        .card-green h3 { color: var(--green); }
-        .card-green a { background: linear-gradient(90deg, var(--green), #10b981); }
-        .card-green a:hover { background: linear-gradient(90deg, #10b981, var(--green)); }
-
-        .card-purple h3 { color: var(--purple); }
-        .card-purple a { background: linear-gradient(90deg, var(--purple), #8b5cf6); }
-        .card-purple a:hover { background: linear-gradient(90deg, #8b5cf6, var(--purple)); }
-
-        footer {
-            background: #1f2937;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.3);
-            margin-top: auto;
-        }
-
-        footer p { font-size: 1rem; color: #6b7280; }
-        footer span { color: var(--green); }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in { animation: fadeIn 1.2s ease-in-out; }
-
-        @media (max-width: 768px) {
-            header { padding: 2rem 0.75rem; }
-            header h1 { font-size: 2rem; }
-            header p { font-size: 1rem; }
-            .navbar-brand { font-size: 1.5rem; }
-            .nav-link { font-size: 0.875rem; }
-            .card { padding: 1.25rem; }
-            .card h3 { font-size: 1.25rem; }
-            .card p { font-size: 0.875rem; }
-            .card a { padding: 0.5rem 1rem; font-size: 0.875rem; }
-        }
-
-        @media (max-width: 480px) {
-            header { padding: 1.5rem 0.5rem; }
-            header h1 { font-size: 1.75rem; }
-            header p { font-size: 0.875rem; }
-            .navbar-brand { font-size: 1.25rem; }
-            .nav-link { font-size: 0.75rem; }
-            .card { padding: 1rem; }
-            .card h3 { font-size: 1.125rem; }
-            .card p { font-size: 0.75rem; }
-            .card a { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Koleksi write-up cybersecurity profesional oleh Abdurrohman Al Fathi, mencakup LKS, eksploitasi sistem, dan kompetisi nasional.">
+  <meta name="keywords" content="cybersecurity, writeup, LKS, CTF, penetration testing, system exploitation, security, dokumentasi">
+  <meta name="author" content="Abdurrohman Al Fathi">
+  <meta name="robots" content="index, follow">
+  <title>Write-Up Cybersecurity - Abdurrohman Al Fathi</title>
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <!-- Vendor CSS Offline -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4776E6;
+      --accent: #8E54E9;
+      --bg: #f8fafd;
+      --bg-dark: #181c2a;
+      --text: #222;
+      --text-light: #fff;
+      --card: #fff;
+      --shadow: 0 4px 24px rgba(71, 118, 230, 0.08);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .main-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--text-light);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+    }
+    .main-header .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .main-header .brand img {
+      width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--primary);
+    }
+    .main-header .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      color: var(--primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .main-header .nav {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .main-header .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .main-header .nav a:hover {
+      color: var(--accent);
+    }
+    /* Sidebar (desktop only) */
+    .sidebar {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      width: 220px;
+      min-height: 100vh;
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 1rem 1rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+    .sidebar .profile-img {
+      width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 1rem;
+    }
+    .sidebar .name {
+      font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;
+    }
+    .sidebar .social {
+      display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+    }
+    .sidebar .social a { color: var(--primary); font-size: 1.2rem; }
+    .sidebar nav {
+      width: 100%;
+    }
+    .sidebar nav a {
+      display: block;
+      color: var(--text-light);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.2rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    /* Drawer (mobile) */
+    .drawer {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 220px;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      z-index: 200;
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+      box-shadow: var(--shadow);
+      padding: 2rem 1rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .drawer.open { transform: translateX(0); }
+    .drawer .close-btn {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none; color: var(--primary); font-size: 2rem; cursor: pointer;
+    }
+    .drawer .profile-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 1rem; }
+    .drawer .name { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+    .drawer .social { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .drawer .social a { color: var(--primary); font-size: 1.1rem; }
+    .drawer nav { width: 100%; }
+    .drawer nav a { display: block; color: var(--text-light); padding: 0.6rem 1rem; border-radius: 8px; margin-bottom: 0.2rem; text-decoration: none; font-weight: 500; transition: background 0.2s, color 0.2s; }
+    .drawer nav a.active, .drawer nav a:hover { background: var(--primary); color: #fff; }
+    .drawer-backdrop {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 150;
+      display: none;
+    }
+    .drawer-backdrop.open { display: block; }
+    /* Main content */
+    .main-content {
+      flex: 1;
+      margin-left: 220px;
+      padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+      transition: margin 0.3s;
+    }
+    .card-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover { box-shadow: 0 8px 32px rgba(71, 118, 230, 0.13); transform: translateY(-4px); }
+    .card h3 { color: var(--primary); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.7rem; }
+    .card p { color: #444; margin-bottom: 1.1rem; }
+    .card a {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card a:hover { background: linear-gradient(90deg, var(--accent), var(--primary)); }
+    /* Footer */
+    footer {
+      background: var(--bg-dark);
+      color: #eee;
+      text-align: center;
+      padding: 1.2rem 0 0.7rem 0;
+      font-size: 1rem;
+      margin-top: auto;
+      box-shadow: 0 -2px 15px rgba(0,0,0,0.07);
+    }
+    /* Responsive */
+    @media (max-width: 991px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+    }
+    @media (max-width: 600px) {
+      .main-header { padding: 0.5rem 0.7rem; }
+      .main-content { padding: 1.2rem 0.5rem; }
+      .card-section { gap: 1.2rem; }
+      .card { padding: 1.2rem 0.7rem; }
+    }
+    @media (max-width: 991px) {
+      .main-header .menu-toggle { display: block; }
+      .main-header .nav { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Mobile nav toggle button -->
-    <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-    <!-- Mobile Overlay -->
-    <div class="mobile-nav-overlay"></div>
-
-    <!-- Sidebar (identik dengan index.html) -->
-    <header id="header">
-      <div class="d-flex flex-column sidebar-footer-container">
-        <div class="profile">
-          <img src="assets/img/profile-img.jpg" alt="Foto profil Abdurrohman Al Fathi" class="img-fluid rounded-circle">
-          <h1 class="text-light"><a href="index.html">Abdurrohman Al Fathi</a></h1>
-          <div class="social-links mt-3 text-center">
-            <a href="#" class="twitter" aria-label="Twitter Abdurrohman Al Fathi"><i class="bx bxl-twitter"></i></a>
-            <a href="https://www.instagram.com/man13.5791/" class="instagram" aria-label="Instagram Abdurrohman Al Fathi"><i class="bx bxl-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" class="linkedin" aria-label="LinkedIn Abdurrohman Al Fathi"><i class="bx bxl-linkedin"></i></a>
-            <a href="https://www.credly.com/users/abdurrohman-al-fathi" class="credly" aria-label="Credly Abdurrohman Al Fathi"><i class="fas fa-award"></i></a>
-          </div>
-        </div>
-        <nav id="navbar" class="nav-menu navbar">
-          <ul>
-            <li><a href="index.html#hero" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Home</span></a></li>
-            <li><a href="index.html#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-            <li><a href="index.html#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-            <li><a href="index.html#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
-            <li><a href="index.html#certificates" class="nav-link scrollto"><i class="bx bx-award"></i> <span>Certificates</span></a></li>
-            <li><a href="index.html#CTF" class="nav-link scrollto"><i class="bx bx-server"></i> <span>CTF</span></a></li>
-          </ul>
-        </nav>
-        <footer id="sidebar-footer">
-          <div class="copyright">
-            © TB <strong><span>Portfolio</span></strong>
-          </div>
-        </footer>
+  <!-- Drawer (mobile sidebar) -->
+  <div class="drawer" id="drawer">
+    <button class="close-btn" id="drawerClose"><i class="bi bi-x"></i></button>
+    <img src="assets/img/profile-img.jpg" alt="Foto profil Abdurrohman Al Fathi" class="profile-img">
+    <div class="name">Abdurrohman Al Fathi</div>
+    <div class="social">
+      <a href="#" aria-label="Twitter"><i class="bx bxl-twitter"></i></a>
+      <a href="https://www.instagram.com/man13.5791/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
+      <a href="https://www.credly.com/users/abdurrohman-al-fathi" aria-label="Credly"><i class="fas fa-award"></i></a>
+    </div>
+    <nav>
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resume">Resume</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#certificates">Certificates</a>
+      <a href="index.html#CTF">CTF</a>
+    </nav>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <!-- Header -->
+  <header class="main-header">
+    <a href="index.html" class="brand">
+      <img src="assets/img/profile-img.jpg" alt="Abdurrohman Al Fathi">
+      Abdurrohman Al Fathi
+    </a>
+    <nav class="nav d-none d-lg-flex">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resume">Resume</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#certificates">Certificates</a>
+      <a href="index.html#CTF">CTF</a>
+    </nav>
+    <button class="menu-toggle d-lg-none" id="menuToggle" aria-label="Buka menu"><i class="bi bi-list"></i></button>
+  </header>
+  <!-- Sidebar (desktop only) -->
+  <aside class="sidebar d-none d-lg-flex">
+    <img src="assets/img/profile-img.jpg" alt="Foto profil Abdurrohman Al Fathi" class="profile-img">
+    <div class="name">Abdurrohman Al Fathi</div>
+    <div class="social">
+      <a href="#" aria-label="Twitter"><i class="bx bxl-twitter"></i></a>
+      <a href="https://www.instagram.com/man13.5791/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
+      <a href="https://www.credly.com/users/abdurrohman-al-fathi" aria-label="Credly"><i class="fas fa-award"></i></a>
+    </div>
+    <nav>
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resume">Resume</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#certificates">Certificates</a>
+      <a href="index.html#CTF">CTF</a>
+    </nav>
+  </aside>
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1 style="font-size:2rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem;">Write-Up Cybersecurity</h1>
+    <section class="card-section">
+      <div class="card">
+        <h3>LKS Cybersecurity 2024</h3>
+        <p>Dokumentasi kompetisi keamanan siber tingkat kota.</p>
+        <a href="assets/img/portfolio/lks2024.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
       </div>
-    </header>
-
-    <!-- Main Content -->
-    <main id="main" style="margin-left:300px;">
-      <section class="card-section container mx-auto px-4">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          <div class="col">
-            <div class="card card-blue fade-in" data-aos="fade-up">
-              <div class="d-flex align-items-center mb-4">
-                <i class="fas fa-file-alt me-3"></i>
-                <h3>LKS Cybersecurity 2024</h3>
-              </div>
-              <p>Dokumentasi kompetisi keamanan siber tingkat kota.</p>
-              <a href="assets/img/portfolio/lks2024.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card card-green fade-in" data-aos="fade-up" data-aos-delay="100">
-              <div class="d-flex align-items-center mb-4">
-                <i class="fas fa-code me-3"></i>
-                <h3>System Exploitation</h3>
-              </div>
-              <p>Analisis teknik eksploitasi sistem dan mitigasinya.</p>
-              <a href="assets/img/portfolio/radarbiru.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card card-purple fade-in" data-aos="fade-up" data-aos-delay="200">
-              <div class="d-flex align-items-center mb-4">
-                <i class="fas fa-list me-3"></i>
-                <h3>Kisi-Kisi LKS</h3>
-              </div>
-              <p>Rangkuman materi dan soal kompetisi cybersecurity.</p>
-              <a href="assets/img/portfolio/Kisi Kisi Soal LKS Cybersecurity Kota Bekasi.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer id="sidebar-footer">
-      <div class="copyright">
-        © TB <strong><span>Portfolio</span></strong>
+      <div class="card">
+        <h3>System Exploitation</h3>
+        <p>Analisis teknik eksploitasi sistem dan mitigasinya.</p>
+        <a href="assets/img/portfolio/radarbiru.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
       </div>
-    </footer>
-
-    <!-- Vendor JS Files (Offline, sama seperti index.html) -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/typed.js/typed.umd.js"></script>
-    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/js/main.js"></script>
-
-    <!-- Script toggle sidebar identik dengan index.html -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-        const header = document.querySelector('#header');
-        const body = document.body;
-        const overlay = document.querySelector('.mobile-nav-overlay');
-        if (mobileNavToggle && header) {
-          mobileNavToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            body.classList.toggle('mobile-nav-active');
-            header.classList.toggle('mobile-nav-active');
-            this.classList.toggle('bi-list');
-            this.classList.toggle('bi-x');
-            if (overlay) overlay.classList.toggle('show');
-          });
-          if (overlay) {
-            overlay.addEventListener('click', function() {
-              body.classList.remove('mobile-nav-active');
-              header.classList.remove('mobile-nav-active');
-              mobileNavToggle.classList.add('bi-list');
-              mobileNavToggle.classList.remove('bi-x');
-              overlay.classList.remove('show');
-            });
-          }
-          const navLinks = document.querySelectorAll('#navbar a');
-          navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-              if (window.innerWidth < 1200) {
-                body.classList.remove('mobile-nav-active');
-                header.classList.remove('mobile-nav-active');
-                mobileNavToggle.classList.add('bi-list');
-                mobileNavToggle.classList.remove('bi-x');
-                if (overlay) overlay.classList.remove('show');
-              }
-            });
-          });
-          window.addEventListener('resize', function() {
-            if (window.innerWidth >= 1200) {
-              body.classList.remove('mobile-nav-active');
-              header.classList.remove('mobile-nav-active');
-              mobileNavToggle.classList.add('bi-list');
-              mobileNavToggle.classList.remove('bi-x');
-              if (overlay) overlay.classList.remove('show');
-            }
-          });
-        }
-      });
-    </script>
+      <div class="card">
+        <h3>Kisi-Kisi LKS</h3>
+        <p>Rangkuman materi dan soal kompetisi cybersecurity.</p>
+        <a href="assets/img/portfolio/Kisi Kisi Soal LKS Cybersecurity Kota Bekasi.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
+      </div>
+    </section>
+  </div>
+  <footer>
+    © 2025 Dokumentasi Cybersecurity oleh <strong>Abdurrohman Al Fathi</strong>
+  </footer>
+  <!-- Vendor JS Files Offline -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/bootstrap-icons/bootstrap-icons.js"></script>
+  <script src="assets/vendor/boxicons/js/boxicons.min.js"></script>
+  <!-- Sidebar/Drawer Toggle Script -->
+  <script>
+    // Drawer (mobile)
+    const menuToggle = document.getElementById('menuToggle');
+    const drawer = document.getElementById('drawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    const drawerClose = document.getElementById('drawerClose');
+    function openDrawer() {
+      drawer.classList.add('open');
+      drawerBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      drawerBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    if(menuToggle) menuToggle.onclick = openDrawer;
+    if(drawerClose) drawerClose.onclick = closeDrawer;
+    if(drawerBackdrop) drawerBackdrop.onclick = closeDrawer;
+    // Close drawer on nav click (mobile)
+    drawer.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+  </script>
 </body>
 </html>
