@@ -620,8 +620,8 @@
 
 <body>
   <button class="mobile-nav-toggle d-xl-none" aria-label="Toggle navigation">
-  <i class="bi bi-list"></i>
- </button>
+    <i class="bi bi-list"></i>
+  </button>
   <!-- Mobile Overlay -->
   <div class="mobile-nav-overlay"></div>
 
@@ -822,73 +822,36 @@
 
   <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile nav toggle functionality
+  // Mobile nav toggle functionality (disamakan dengan index.html)
   const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
   const header = document.querySelector('#header');
   const body = document.body;
   const overlay = document.querySelector('.mobile-nav-overlay');
 
   if (mobileNavToggle && header) {
-    // Fungsi untuk update ikon
-    function updateToggleIcon(isActive) {
-      const icon = mobileNavToggle.querySelector('i');
-      if (icon) {
-        // Hapus semua kelas ikon yang mungkin ada
-        icon.className = '';
-        // Tambahkan kelas yang sesuai
-        if (isActive) {
-          icon.classList.add('bi', 'bi-x');
-          console.log('Ikon diatur ke X');
-        } else {
-          icon.classList.add('bi', 'bi-list');
-          console.log('Ikon diatur ke list');
-        }
-        // Pastikan ikon terlihat
-        icon.style.display = 'block';
-        icon.style.opacity = '1';
-        icon.style.visibility = 'visible';
-      } else {
-        console.error('Elemen ikon tidak ditemukan di .mobile-nav-toggle');
-      }
-    }
-
-    // Fungsi untuk membuka sidebar
-    function openSidebar() {
-      header.classList.add('mobile-nav-active');
-      body.classList.add('mobile-nav-active');
-      if (overlay) overlay.classList.add('show');
-      updateToggleIcon(true);
-    }
-
-    // Fungsi untuk menutup sidebar
-    function closeSidebar() {
-      header.classList.remove('mobile-nav-active');
-      body.classList.remove('mobile-nav-active');
-      if (overlay) overlay.classList.remove('show');
-      updateToggleIcon(false);
-    }
-
-    // Toggle sidebar - hapus semua event listener yang ada terlebih dahulu
-    mobileNavToggle.replaceWith(mobileNavToggle.cloneNode(true));
-    const newMobileNavToggle = document.querySelector('.mobile-nav-toggle');
-    
-    newMobileNavToggle.addEventListener('click', function(e) {
+    mobileNavToggle.addEventListener('click', function(e) {
       e.preventDefault();
-      e.stopPropagation();
-      
-      const isActive = header.classList.contains('mobile-nav-active');
-      
-      if (isActive) {
-        closeSidebar();
-      } else {
-        openSidebar();
+      body.classList.toggle('mobile-nav-active');
+      header.classList.toggle('mobile-nav-active');
+      if (overlay) overlay.classList.toggle('show');
+      const icon = this.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('bi-list');
+        icon.classList.toggle('bi-x');
       }
     });
 
     // Tutup sidebar saat klik overlay
     if (overlay) {
       overlay.addEventListener('click', function() {
-        closeSidebar();
+        body.classList.remove('mobile-nav-active');
+        header.classList.remove('mobile-nav-active');
+        overlay.classList.remove('show');
+        const icon = mobileNavToggle.querySelector('i');
+        if (icon) {
+          icon.classList.add('bi-list');
+          icon.classList.remove('bi-x');
+        }
       });
     }
 
@@ -897,7 +860,14 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(link => {
       link.addEventListener('click', function() {
         if (window.innerWidth < 1200) {
-          closeSidebar();
+          body.classList.remove('mobile-nav-active');
+          header.classList.remove('mobile-nav-active');
+          if (overlay) overlay.classList.remove('show');
+          const icon = mobileNavToggle.querySelector('i');
+          if (icon) {
+            icon.classList.add('bi-list');
+            icon.classList.remove('bi-x');
+          }
         }
       });
     });
@@ -905,28 +875,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Tutup sidebar saat resize ke desktop
     window.addEventListener('resize', function() {
       if (window.innerWidth >= 1200) {
-        closeSidebar();
+        body.classList.remove('mobile-nav-active');
+        header.classList.remove('mobile-nav-active');
+        if (overlay) overlay.classList.remove('show');
+        const icon = mobileNavToggle.querySelector('i');
+        if (icon) {
+          icon.classList.add('bi-list');
+          icon.classList.remove('bi-x');
+        }
       }
     });
-
-    // Pastikan ikon dimulai dengan state yang benar
-    updateToggleIcon(false);
-
-    // Tambahan: Pastikan Bootstrap Icons dimuat
-    const checkIconLoad = setInterval(() => {
-      const icon = newMobileNavToggle.querySelector('i');
-      if (icon && (icon.classList.contains('bi-x') || icon.classList.contains('bi-list'))) {
-        clearInterval(checkIconLoad);
-      } else {
-        console.warn('Ikon belum dimuat, mencoba ulang...');
-        updateToggleIcon(false); // Coba ulang jika ikon gagal dimuat
-      }
-    }, 100);
-
-    // Clear interval setelah 5 detik untuk menghindari loop tak terbatas
-    setTimeout(() => {
-      clearInterval(checkIconLoad);
-    }, 5000);
   }
 
   // Inisialisasi GLightbox
@@ -947,10 +905,8 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTop.classList.remove('active');
       }
     };
-    
     window.addEventListener('load', toggleBackToTop);
     window.addEventListener('scroll', toggleBackToTop);
-    
     backToTop.addEventListener('click', function(e) {
       e.preventDefault();
       window.scrollTo({
@@ -977,8 +933,6 @@ document.addEventListener('DOMContentLoaded', function() {
       body.style.overflow = '';
     }
   };
-
-  // Observer untuk mobile nav state
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.attributeName === 'class') {
@@ -986,7 +940,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
   observer.observe(body, { attributes: true });
 
   // Anti blank putih & blur-up: tambahkan class 'loaded' saat gambar selesai load
