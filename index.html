@@ -61,15 +61,18 @@
   <!-- Favicon and Apple Touch Icon -->
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
   <link rel="manifest" href="assets/img/site.webmanifest">
   <meta name="theme-color" content="#4776e6">
 
   <!-- Preload Critical Assets -->
   <link rel="preload" href="assets/img/profile-image.jpeg" as="image" type="image/jpeg">
   <link rel="preload" href="assets/css/style.css" as="style">
+  <link rel="preload" href="assets/vendor/bootstrap/css/bootstrap.min.css" as="style">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+  <link rel="preload" href="assets/vendor/isotope-layout/isotope.pkgd.min.js" as="script">
+  <link rel="preload" href="assets/vendor/typed.js/typed.umd.js" as="script">
   
   <!-- DNS Prefetch and Preconnect -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -321,7 +324,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https:">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https:">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -341,6 +344,41 @@
   <meta name="last-modified" content="2025-07-22">
 
   <style>
+/* Critical CSS to prevent layout shift - MINIMAL APPROACH */
+.portfolio-container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 30px !important;
+  justify-content: center !important;
+}
+
+.portfolio-item {
+  flex: 0 0 calc(33.333% - 20px) !important;
+  max-width: calc(33.333% - 20px) !important;
+  margin-bottom: 30px !important;
+}
+
+@media (max-width: 768px) {
+  .portfolio-item {
+    flex: 0 0 calc(50% - 15px) !important;
+    max-width: calc(50% - 15px) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .portfolio-item {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Prevent layout shift during font loading */
+body {
+  font-display: swap;
+}
+
+
+
 /* CERTIFICATE SECTION - Enhanced with Modern Styling */
 .certificates .certificate-wrap {
   background: #fff;
@@ -1012,17 +1050,17 @@
 </head>
 
 <body>
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <!-- Critical CSS Files (Load First) -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  
+  <!-- Non-Critical CSS Files (Load After) -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
@@ -1334,6 +1372,7 @@ Kombinasi kegiatan ini telah membentuk karakter dan keterampilan yang komprehens
           </div>
         </div>
 
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-4 col-md-6 portfolio-item filter-event">
             <div class="portfolio-wrap">
               <img src="images/juri-lks.png" class="img-fluid" alt="Dokumentasi LKS ITNSA Jakarta Pusat 1" loading="lazy">
@@ -1420,27 +1459,55 @@ Kombinasi kegiatan ini telah membentuk karakter dan keterampilan yang komprehens
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
+  <!-- Critical JS Files (Load First) -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
+  
+  <!-- Template Main JS File (Load Last) -->
   <script src="assets/js/main.js"></script>
+  
   <script>
-    // Inisialisasi GLightbox
-    const lightbox = GLightbox({
-      selector: '.glightbox'
+    // Simple initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        // Initialize Isotope for portfolio filtering
+        if (typeof Isotope !== 'undefined') {
+          const portfolioContainer = document.querySelector('.portfolio-container');
+          if (portfolioContainer) {
+            new Isotope(portfolioContainer, {
+              itemSelector: '.portfolio-item',
+              layoutMode: 'fitRows'
+            });
+          }
+        }
+        
+        // Initialize GLightbox
+        if (typeof GLightbox !== 'undefined') {
+          const lightbox = GLightbox({
+            selector: '.glightbox'
+          });
+        }
+        
+        // Initialize AOS
+        if (typeof AOS !== 'undefined') {
+          AOS.init({
+            duration: 1000,
+            easing: "ease-in-out",
+            once: true,
+            mirror: false
+          });
+        }
+      }, 100);
     });
   </script>
 </body>
 </html>
-
 
 
