@@ -3,27 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
     <title>Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi</title>
     <meta name="title" content="Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi">
-    <meta name="description" content="Laporan mendalam penemuan kerentanan Insecure Direct Object Reference (IDOR) dan Privilege Escalation pada sistem profil karyawan WISE Al-Wildan Islamic School Bekasi oleh Abdurrohman Al Fathi. Termasuk analisis teknis, PoC, dampak, dan rekomendasi mitigasi. Ethical hacking, penetration testing, web security.">
-    <meta name="keywords" content="Abdurrohman Al Fathi, IDOR, privilege escalation, insecure direct object reference, web vulnerability, Al-Wildan Islamic School Bekasi, WISE system, cybersecurity, ethical hacking, penetration testing, web security, bug hunting, LKS Cybersecurity, CTF, Linux hardening, digital forensics, reverse engineering">
+    <meta name="description" content="Laporan mendalam oleh Abdurrohman Al Fathi tentang kerentanan IDOR dan Privilege Escalation di sistem WISE Al-Wildan Islamic School Bekasi. Sertakan analisis teknis, PoC, dampak, dan rekomendasi mitigasi untuk edukasi keamanan siber.">
+    <meta name="keywords" content="Abdurrohman Al Fathi, IDOR, Privilege Escalation, WISE, Al-Wildan Islamic School Bekasi, cybersecurity, ethical hacking, penetration testing, web security">
     <meta name="author" content="Abdurrohman Al Fathi">
     <meta name="robots" content="index, follow">
     <meta name="language" content="Indonesian">
     <meta name="revisit-after" content="7 days">
     <meta name="distribution" content="global">
     <meta name="rating" content="general">
-    
+
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://thi-web6.github.io/resume/vuln-report-alwildan.html">
-    
+    <link rel="canonical" href="https://thi-web6.github.io/resume/poc/vuln-report-alwildan.html">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://thi-web6.github.io/resume/vuln-report-alwildan.html">
+    <meta property="og:url" content="https://thi-web6.github.io/resume/poc/vuln-report-alwildan.html">
     <meta property="og:title" content="Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi">
-    <meta property="og:description" content="Analisis profesional oleh Abdurrohman Al Fathi mengenai kerentanan di sistem WISE Al-Wildan Islamic School Bekasi, termasuk PoC dan rekomendasi perbaikan.">
+    <meta property="og:description" content="Analisis profesional oleh Abdurrohman Al Fathi tentang kerentanan di sistem WISE Al-Wildan Islamic School Bekasi, termasuk PoC dan rekomendasi perbaikan.">
     <meta property="og:image" content="https://thi-web6.github.io/resume/images/alwildan-wise-logo.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -34,37 +32,34 @@
     <meta property="article:published_time" content="2025-09-28T00:00:00Z">
     <meta property="article:modified_time" content="2025-09-28T00:00:00Z">
     <meta property="article:section" content="Cybersecurity">
-    <meta property="article:tag" content="Web Vulnerability">
-    <meta property="article:tag" content="IDOR">
-    <meta property="article:tag" content="Privilege Escalation">
-    <meta property="article:tag" content="Abdurrohman Al Fathi">
-    
+    <meta property="article:tag" content="IDOR, Privilege Escalation, Web Vulnerability, Abdurrohman Al Fathi">
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thi-web6.github.io/resume/vuln-report-alwildan.html">
+    <meta property="twitter:url" content="https://thi-web6.github.io/resume/poc/vuln-report-alwildan.html">
     <meta property="twitter:title" content="Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi">
     <meta property="twitter:description" content="Analisis mendalam oleh Abdurrohman Al Fathi mengenai kerentanan di sistem WISE Al-Wildan Islamic School Bekasi, termasuk PoC dan rekomendasi.">
     <meta property="twitter:image" content="https://thi-web6.github.io/resume/images/alwildan-wise-logo.png">
     <meta property="twitter:image:alt" content="Laporan Kerentanan Al-Wildan Islamic School Bekasi oleh Abdurrohman Al Fathi">
     <meta property="twitter:creator" content="@thi_web6">
     <meta property="twitter:site" content="@thi_web6">
-    
+
     <!-- WhatsApp -->
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:secure_url" content="https://thi-web6.github.io/resume/images/alwildan-wise-logo.png">
-    
+
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#4776E6">
     <meta name="msapplication-TileColor" content="#4776E6">
-    <meta name="application-name" content="Laporan Kerentanan WISE Al-Wildan Islamic School Bekasi oleh Abdurrohman Al Fathi">
-    
+    <meta name="application-name" content="Laporan Kerentanan WISE Al-Wildan oleh Abdurrohman Al Fathi">
+
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi",
-        "description": "Laporan lengkap penemuan kerentanan oleh Abdurrohman Al Fathi, pentester berprestasi, pada sistem WISE Al-Wildan Islamic School Bekasi. Analisis, PoC, dan rekomendasi.",
+        "description": "Laporan lengkap penemuan kerentanan oleh Abdurrohman Al Fathi pada sistem WISE Al-Wildan Islamic School Bekasi, dengan analisis, PoC, dan rekomendasi mitigasi.",
         "image": "https://thi-web6.github.io/resume/images/alwildan-wise-logo.png",
         "author": {
             "@type": "Person",
@@ -83,29 +78,29 @@
         "dateModified": "2025-09-28",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https://thi-web6.github.io/resume/vuln-report-alwildan.html"
+            "@id": "https://thi-web6.github.io/resume/poc/vuln-report-alwildan.html"
         },
         "articleSection": "Cybersecurity",
-        "keywords": "Abdurrohman Al Fathi, IDOR, privilege escalation, Al-Wildan Islamic School Bekasi, WISE system, ethical hacking, penetration testing, web security, CTF, LKS Cybersecurity, Linux hardening, digital forensics"
+        "keywords": "Abdurrohman Al Fathi, IDOR, Privilege Escalation, Al-Wildan Islamic School Bekasi, WISE system, ethical hacking, penetration testing"
     }
     </script>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://thi-web6.github.io/resume/images/alwildan-logo.png">
     <link rel="apple-touch-icon" href="https://thi-web6.github.io/resume/images/alwildan-logo.png">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+
     <!-- Vendor CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    
+
     <!-- Prism CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary: #4776E6;
