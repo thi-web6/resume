@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi</title>
+    <meta name="title" content="Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi">
+    <meta name="description" content="Laporan mendalam penemuan kerentanan Insecure Direct Object Reference (IDOR) dan Privilege Escalation pada sistem profil karyawan WISE Al-Wildan Islamic School Bekasi oleh Abdurrohman Al Fathi. Termasuk analisis teknis, PoC, dampak, dan rekomendasi mitigasi. Ethical hacking, penetration testing, web security.">
+    <meta name="keywords" content="Abdurrohman Al Fathi, IDOR, privilege escalation, insecure direct object reference, web vulnerability, Al-Wildan Islamic School Bekasi, WISE system, cybersecurity, ethical hacking, penetration testing, web security, bug hunting, LKS Cybersecurity, CTF, Linux hardening, digital forensics, reverse engineering">
+    <meta name="author" content="Abdurrohman Al Fathi">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Indonesian">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thi-web6.github.io/resume/vuln-report-alwildan.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://thi-web6.github.io/resume/vuln-report-alwildan.html">
+    <meta property="og:title" content="Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi">
+    <meta property="og:description" content="Analisis profesional oleh Abdurrohman Al Fathi mengenai kerentanan di sistem WISE Al-Wildan Islamic School Bekasi, termasuk PoC dan rekomendasi perbaikan.">
+    <meta property="og:image" content="https://thi-web6.github.io/resume/images/alwildan-wise-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Logo Al-Wildan Islamic School Bekasi - Laporan Kerentanan oleh Abdurrohman Al Fathi">
+    <meta property="og:site_name" content="Abdurrohman Al Fathi Cybersecurity Portfolio">
+    <meta property="og:locale" content="id_ID">
+    <meta property="article:author" content="Abdurrohman Al Fathi">
+    <meta property="article:published_time" content="2025-09-28T00:00:00Z">
+    <meta property="article:modified_time" content="2025-09-28T00:00:00Z">
+    <meta property="article:section" content="Cybersecurity">
+    <meta property="article:tag" content="Web Vulnerability">
+    <meta property="article:tag" content="IDOR">
+    <meta property="article:tag" content="Privilege Escalation">
+    <meta property="article:tag" content="Abdurrohman Al Fathi">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://thi-web6.github.io/resume/vuln-report-alwildan.html">
+    <meta property="twitter:title" content="Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi">
+    <meta property="twitter:description" content="Analisis mendalam oleh Abdurrohman Al Fathi mengenai kerentanan di sistem WISE Al-Wildan Islamic School Bekasi, termasuk PoC dan rekomendasi.">
+    <meta property="twitter:image" content="https://thi-web6.github.io/resume/images/alwildan-wise-logo.png">
+    <meta property="twitter:image:alt" content="Laporan Kerentanan Al-Wildan Islamic School Bekasi oleh Abdurrohman Al Fathi">
+    <meta property="twitter:creator" content="@thi_web6">
+    <meta property="twitter:site" content="@thi_web6">
+    
+    <!-- WhatsApp -->
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:secure_url" content="https://thi-web6.github.io/resume/images/alwildan-wise-logo.png">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#4776E6">
+    <meta name="msapplication-TileColor" content="#4776E6">
+    <meta name="application-name" content="Laporan Kerentanan WISE Al-Wildan Islamic School Bekasi oleh Abdurrohman Al Fathi">
+    
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi",
+        "description": "Laporan lengkap penemuan kerentanan oleh Abdurrohman Al Fathi, pentester berprestasi, pada sistem WISE Al-Wildan Islamic School Bekasi. Analisis, PoC, dan rekomendasi.",
+        "image": "https://thi-web6.github.io/resume/images/alwildan-wise-logo.png",
+        "author": {
+            "@type": "Person",
+            "name": "Abdurrohman Al Fathi",
+            "url": "https://github.com/thi-web6"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Abdurrohman Al Fathi Portfolio",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://thi-web6.github.io/resume/images/alwildan-wise-logo.png"
+            }
+        },
+        "datePublished": "2025-09-28",
+        "dateModified": "2025-09-28",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://thi-web6.github.io/resume/vuln-report-alwildan.html"
+        },
+        "articleSection": "Cybersecurity",
+        "keywords": "Abdurrohman Al Fathi, IDOR, privilege escalation, Al-Wildan Islamic School Bekasi, WISE system, ethical hacking, penetration testing, web security, CTF, LKS Cybersecurity, Linux hardening, digital forensics"
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://thi-web6.github.io/resume/images/alwildan-logo.png">
+    <link rel="apple-touch-icon" href="https://thi-web6.github.io/resume/images/alwildan-logo.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Prism CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4776E6;
+            --accent: #8E54E9;
+            --bg-dark: #0a0b14;
+            --bg-darker: #040510;
+            --text-light: #f4f6fd;
+            --text-gray: #a8b2d1;
+            --border-color: rgba(71, 118, 230, 0.15);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #1a1b2e 100%);
+            color: var(--text-light);
+            line-height: 1.7;
+            min-height: 100vh;
+            overscroll-behavior: none;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Sidebar Styles */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            height: 100dvh; /* For mobile browsers */
+            background: rgba(4, 5, 16, 0.98);
+            backdrop-filter: blur(15px);
+            border-right: 1px solid var(--border-color);
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #sidebar.show {
+            transform: translateX(0);
+        }
+        
+        .sidebar-content {
+            padding: 30px 20px 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+        
+        /* Back Button Styling */
+        .back-btn {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            padding: 16px 20px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
+        }
+        
+        .back-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .back-btn:hover:before {
+            left: 100%;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(71, 118, 230, 0.4);
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .back-btn i {
+            margin-right: 12px;
+            font-size: 18px;
+            color: var(--text-light);
+        }
+        
+        .sidebar-content h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .nav-list {
+            list-style: none;
+            margin-top: 20px;
+            flex: 1;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            padding: 15px 20px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+            opacity: 0.1;
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+        
+        .nav-link i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-light);
+            transform: translateX(8px);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover i,
+        .nav-link.active i {
+            color: var(--primary);
+        }
+        
+        /* Mobile Nav Toggle */
+        .mobile-nav-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            background: rgba(71, 118, 230, 0.15);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mobile-nav-toggle:hover {
+            background: rgba(71, 118, 230, 0.25);
+            transform: scale(1.05);
+        }
+        
+        .mobile-nav-toggle i {
+            font-size: 18px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 0;
+            min-height: 100vh;
+            padding: 80px 20px 40px;
+            transition: margin-left 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        p {
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+        
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(71, 118, 230, 0.3);
+        }
+        
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid var(--accent);
+            margin-bottom: 16px;
+        }
+        
+        /* Code Block Styles */
+        .code-block {
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+            position: relative;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            padding: 24px;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 400px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .code-block code {
+            color: #c9d1d9;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+        
+        .copy-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(71, 118, 230, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* List Styles */
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: var(--text-gray);
+        }
+        
+        /* Link Styles */
+        a {
+            color: var(--accent);
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Code Inline */
+        code {
+            background: rgba(71, 118, 230, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent);
+        }
+        
+        strong {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(71, 118, 230, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        
+        .copyright {
+            margin-bottom: 8px;
+            color: var(--text-gray);
+        }
+        
+        .credits {
+            color: var(--text-gray);
+        }
+        
+        .credits a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            #sidebar {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 280px;
+            }
+            
+            .mobile-nav-toggle, 
+            .overlay {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            #sidebar {
+                width: min(85vw, 320px);
+            }
+            
+            .main-content {
+                padding-top: 100px;
+                padding-bottom: 80px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .copy-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                display: block;
+                width: 100%;
+                margin-bottom: 8px;
+                border-radius: 8px 8px 0 0;
+            }
+            
+            .code-block pre {
+                padding: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .main-content {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+        }
+        
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Focus styles for accessibility */
+        .nav-link:focus,
+        .back-btn:focus,
+        .mobile-nav-toggle:focus,
+        .btn:focus,
+        .copy-btn:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Nav Toggle -->
+    <button class="mobile-nav-toggle" id="nav-toggle" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Sidebar -->
+    <nav id="sidebar" role="navigation" aria-label="Main Navigation">
+        <div class="sidebar-content">
+            <!-- Back Button -->
+            <a href="https://thi-web6.github.io/resume/index.html#portfolio" class="back-btn" title="Kembali ke Portfolio">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Portfolio</span>
+            </a>
+            
+            <h3>
+                <i class="bi bi-shield-exclamation"></i> Laporan Kerentanan
+            </h3>
+            <ul class="nav-list">
+                <li><a href="#pendahuluan" class="nav-link"><i class="bi bi-info-circle"></i><span>Pendahuluan</span></a></li>
+                <li><a href="#metodologi" class="nav-link"><i class="bi bi-search"></i><span>Metodologi Penemuan</span></a></li>
+                <li><a href="#analisis" class="nav-link"><i class="bi bi-code-slash"></i><span>Analisis Kerentanan</span></a></li>
+                <li><a href="#poc" class="nav-link"><i class="bi bi-lightning-charge"></i><span>Proof of Concept (PoC)</span></a></li>
+                <li><a href="#dampak" class="nav-link"><i class="bi bi-exclamation-triangle"></i><span>Dampak dan Risiko</span></a></li>
+                <li><a href="#rekomendasi" class="nav-link"><i class="bi bi-shield-check"></i><span>Rekomendasi Mitigasi</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <header class="hero" data-aos="fade-up">
+                <div class="hero-content">
+                    <h1>Laporan Kerentanan: IDOR dan Privilege Escalation di Sistem WISE Al-Wildan Islamic School Bekasi</h1>
+                    <p>Analisis profesional oleh Abdurrohman Al Fathi mengenai kerentanan kritis di sistem manajemen karyawan WISE Al-Wildan Islamic School Bekasi pada halaman https://wise.alwildanbekasi.sch.id/login-employee/profile. Laporan ini mencakup metodologi penemuan, proof of concept, dampak, dan rekomendasi perbaikan untuk tujuan edukasi dan peningkatan keamanan siber.</p>
+                    <a href="#pendahuluan" class="btn">Mulai Baca Laporan</a>
+                </div>
+            </header>
+            
+            <!-- Pendahuluan -->
+            <section id="pendahuluan" data-aos="fade-up">
+                <h2>Pendahuluan</h2>
+                <div class="card">
+                    <p>Laporan ini menyajikan temuan kerentanan <strong>Insecure Direct Object Reference (IDOR)</strong> dan <strong>Privilege Escalation</strong> pada sistem WISE (AlWildan Integrated Smart Education) di Al-Wildan Islamic School Bekasi, khususnya pada halaman profil karyawan https://wise.alwildanbekasi.sch.id/login-employee/profile.</p>
+                    
+                    <p>Sistem WISE digunakan untuk manajemen profil karyawan, termasuk pengubahan data pribadi dan akun. Temuan ini menunjukkan bagaimana pengguna biasa dapat memanipulasi parameter untuk mengakses dan mengubah akun pengguna lain, termasuk role admin IT, yang berpotensi menyebabkan pengambilalihan akun dan akses tidak sah.</p>
+                    
+                    <p><strong>🎯 Tujuan Laporan:</strong></p>
+                    <ul>
+                        <li>Mendokumentasikan proses penemuan kerentanan secara profesional.</li>
+                        <li>Menjelaskan logika di balik kerentanan dengan pemikiran analitis.</li>
+                        <li>Menyediakan Proof of Concept (PoC) yang aman untuk verifikasi.</li>
+                        <li>Memberikan rekomendasi mitigasi untuk pengembang.</li>
+                    </ul>
+                    
+                    <p><strong>⚠️ Peringatan Etis dan Legal:</strong> Penemuan ini dilaporkan secara bertanggung jawab ke pihak sekolah. Tutorial ini untuk tujuan edukasi semata; jangan eksploitasi sistem produksi tanpa izin. Abdurrohman Al Fathi mematuhi prinsip ethical hacking.</p>
+                </div>
+            </section>
+            
+            <!-- Metodologi Penemuan -->
+            <section id="metodologi" data-aos="fade-up">
+                <h2>Metodologi Penemuan</h2>
+                <div class="card">
+                    <p><strong>Apa:</strong> Proses sistematis untuk mengidentifikasi kerentanan.</p>
+                    <p><strong>Mengapa:</strong> Memastikan penemuan berdasarkan analisis logic, bukan keberuntungan.</p>
+                    <p>Sebagai pentester dengan pengalaman CTF dan hardening, saya mulai dengan inspeksi sumber kode halaman profil. Fokus pada form data pribadi, di mana field NIP tampak 'disabled' tapi potensial untuk manipulasi.</p>
+                    <ol>
+                        <li><strong>Reconnaissance:</strong> Analisis HTML menggunakan dev tools. Identifikasi field NIP di div data pribadi.</li>
+                        <li><strong>Hipotesis:</strong> Jika server tidak validasi NIP terhadap session user, manipulasi bisa sebabkan IDOR.</li>
+                        <li><strong>Testing:</strong> Modifikasi klien-side untuk ubah NIP ke target (e.g., IT support).</li>
+                        <li><strong>Escalation:</strong> Gabung dengan ubah password untuk takeover.</li>
+                    </ol>
+                    <p>Proses ini tunjukkan pemahaman mendalam: Kontrol klien rapuh; security di server-side krusial.</p>
+                </div>
+            </section>
+            
+            <!-- Analisis Kerentanan -->
+            <section id="analisis" data-aos="fade-up">
+                <h2>Analisis Kerentanan</h2>
+                <div class="card">
+                    <p><strong>Nama Kerentanan:</strong> Insecure Direct Object Reference (IDOR) dengan Insufficient Authorization, sebab Privilege Escalation.</p>
+                    <p><strong>Penyebab:</strong> Field NIP 'disabled' di klien, tapi nilai dikirim ke server tanpa verifikasi ownership.</p>
+                    <p><strong>Potongan Kode Relevan:</strong> Berikut div form yang rentan:</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>&lt;div class="mb-3"&gt;
+    &lt;label class="form-label required"&gt;Nama&lt;/label&gt;
+    &lt;input type="text" class="form-control form-control-sm" name="nama" value="Fikriyyah Hanifah " required&gt;
+&lt;/div&gt;
+&lt;div class="mb-3"&gt;
+    &lt;label class="form-label required"&gt;NIP&lt;/label&gt;
+    &lt;input type="text" class="form-control form-control-sm" name="nip" value="020625146" disabled&gt;
+&lt;/div&gt;
+&lt;div class="mb-3"&gt;
+    &lt;label class="form-label required"&gt;Jabatan&lt;/label&gt;
+    &lt;input type="text" class="form-control form-control-sm" name="jabatan" value="Guru" disabled&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <p><strong>Penjelasan:</strong> Value NIP bisa diubah via dev tools (hapus 'disabled', ganti ke NIP target seperti IT support). Saat submit, server proses tanpa cek, izinkan ubah data/password. Ini IDOR karena referensi langsung (NIP) tanpa autorisasi.</p>
+                    <p>Backend PHP custom, vuln dari kurang validasi server-side.</p>
+                </div>
+            </section>
+            
+            <!-- Proof of Concept (PoC) -->
+            <section id="poc" data-aos="fade-up">
+                <h2>Proof of Concept (PoC)</h2>
+                <div class="card">
+                    <p><strong>Langkah-langkah PoC:</strong> (Dilakukan di test env; jangan coba produksi tanpa izin.)</p>
+                    <ol>
+                        <li>Login sebagai user biasa di https://wise.alwildanbekasi.sch.id/login-employee/.</li>
+                        <li>Buka https://wise.alwildanbekasi.sch.id/login-employee/profile, tab 'Data' atau 'Akun'.</li>
+                        <li>Dev tools: Di div NIP, hapus 'disabled', ubah value ke NIP IT support (dari recon).</li>
+                        <li>Ubah password di form, submit.</li>
+                        <li>Logout, login dengan NIP IT dan password baru. Akses admin berhasil.</li>
+                    </ol>
+                    <p><strong>Catatan:</strong> Ini sebab account takeover karena NIP=username untuk login.</p>
+                    <!-- Asumsi gambar PoC -->
+                    <img src="https://thi-web6.github.io/resume/images/poc-screenshot.png" alt="Screenshot PoC Manipulasi NIP dan Ganti Password" style="display: block; margin: 0 auto;">
+                    <p style="color: var(--text-gray); font-style: italic; text-align: center;">Contoh screenshot PoC: Ubah value NIP untuk takeover.</p>
+                </div>
+            </section>
+            
+            <!-- Dampak dan Risiko -->
+            <section id="dampak" data-aos="fade-up">
+                <h2>Dampak dan Risiko</h2>
+                <div class="card">
+                    <p><strong>Tingkat Keparahan:</strong> High (CVSS ~8.1: AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H).</p>
+                    <ul>
+                        <li><strong>Account Takeover:</strong> Akses role tinggi, ubah data sekolah.</li>
+                        <li><strong>Data Leak:</strong> Profil, dokumen, info siswa bocor.</li>
+                        <li><strong>Escalation:</strong> IT role punya akses luas, potensi sabotase.</li>
+                        <li><strong>Reputasi:</strong> Kebocoran data rusak kepercayaan sekolah.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Rekomendasi Mitigasi -->
+            <section id="rekomendasi" data-aos="fade-up">
+                <h2>Rekomendasi Mitigasi</h2>
+                <div class="card">
+                    <ul>
+                        <li><strong>Server Validation:</strong> Cek NIP submit == session NIP.</li>
+                        <li><strong>RBAC:</strong> Batasi edit ke user sendiri.</li>
+                        <li><strong>Tokens:</strong> Gunakan CSRF dan hash NIP hidden.</li>
+                        <li><strong>Logs:</strong> Catat perubahan untuk audit.</li>
+                        <li><strong>Audit:</strong> Pentest reguler oleh expert seperti Abdurrohman Al Fathi.</li>
+                    </ul>
+                    <p>Ikuti OWASP guidelines untuk web security.</p>
+                </div>
+            </section>
+            
+            <!-- Call to Action -->
+            <section data-aos="fade-up">
+                <div class="card" style="text-align: center;">
+                    <p>Ingin tahu lebih banyak mengenai Abdurrohman Al Fathi?</p>
+                    <a href="https://thi-web6.github.io/resume/index.html" class="btn">Kembali ke Halaman Utama</a>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                © 2025 <strong><span>Abdurrohman Al Fathi Portfolio</span></strong>. All Rights Reserved.
+            </div>
+            <div class="credits">
+                Designed by <a href="https://github.com/thi-web6">Abdurrohman Al Fathi</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Vendor JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS
+        AOS.init({ 
+            duration: 800, 
+            once: true,
+            offset: 50 
+        });
+        
+        // Mobile navigation
+        const menuToggle = document.getElementById('nav-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const body = document.body;
+        
+        function openSidebar() {
+            sidebar.classList.add('show');
+            overlay.classList.add('active');
+            menuToggle.querySelector('i').className = 'fas fa-times';
+            body.style.overflow = 'hidden';
+        }
+        
+        function closeSidebar() {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('active');
+            menuToggle.querySelector('i').className = 'fas fa-bars';
+            body.style.overflow = '';
+        }
+        
+        menuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen = sidebar.classList.contains('show');
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+        
+        // Close sidebar when clicking overlay
+        overlay.addEventListener('click', closeSidebar);
+        
+        // Close sidebar when clicking nav links (mobile)
+        const sidebarLinks = sidebar.querySelectorAll('.nav-link');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 767) {
+                    closeSidebar();
+                }
+            });
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767) {
+                closeSidebar();
+                body.style.overflow = '';
+            }
+        });
+        
+        // Copy code functionality
+        function copyCode(button) {
+            const code = button.nextElementSibling.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'Tersalin!';
+                button.style.background = 'var(--accent)';
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.style.background = 'var(--primary)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    button.innerText = 'Tersalin!';
+                    button.style.background = 'var(--accent)';
+                    setTimeout(() => {
+                        button.innerText = 'Salin';
+                        button.style.background = 'var(--primary)';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Fallback copy failed: ', err);
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+        
+        // Active navigation highlighting
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let currentSection = '';
+            
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            // If near bottom of page, highlight last section
+            if (scrollY + windowHeight >= document.documentElement.scrollHeight - 50) {
+                const lastSection = sections[sections.length - 1];
+                if (lastSection && lastSection.getAttribute('id') === 'rekomendasi') {
+                    currentSection = 'rekomendasi';
+                }
+            }
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href && href.substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Throttled scroll listener for performance
+        let scrollTimeout;
+        document.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(updateActiveNav, 10);
+        });
+        
+        // Initialize active nav on load
+        window.addEventListener('load', updateActiveNav);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 100;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Prevent body scroll when sidebar is open on mobile
+        function preventBodyScroll(e) {
+            if (sidebar.classList.contains('show') && window.innerWidth <= 767) {
+                if (!sidebar.contains(e.target)) {
+                    e.preventDefault();
+                }
+            }
+        }
+        
+        document.addEventListener('touchmove', preventBodyScroll, { passive: false });
+        document.addEventListener('wheel', preventBodyScroll, { passive: false });
+    </script>
+</body>
+</html>
