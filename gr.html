@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Setup Grafana + Loki + Promtail: Monitoring Log Windows 11 di Fedora Server</title>
+    <meta name="title" content="Setup Grafana + Loki + Promtail: Monitoring Log Windows 11 di Fedora Server">
+    <meta name="description" content="Panduan lengkap setup monitoring log real-time Windows 11 menggunakan Grafana 12.2.0, Loki 3.1.1, dan Promtail di Fedora Server 42 dengan VMware NAT.">
+    <meta name="keywords" content="Grafana, Loki, Promtail, Windows Event Viewer, Log Monitoring, Fedora Server, VMware NAT, Docker Compose, LogQL">
+    <meta name="author" content="Grok">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4776E6;
+            --accent: #8E54E9;
+            --bg-dark: #0a0b14;
+            --bg-darker: #040510;
+            --text-light: #f4f6fd;
+            --text-gray: #a8b2d1;
+            --border-color: rgba(71, 118, 230, 0.15);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #1a1b2e 100%);
+            color: var(--text-light);
+            line-height: 1.7;
+            min-height: 100vh;
+            overscroll-behavior: none;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            max-height: 100vh;
+            background: rgba(4, 5, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border-color);
+            z-index: 100;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+        }
+        #sidebar.show {
+            transform: translateX(0);
+        }
+        .sidebar-content {
+            padding: 30px 20px;
+            min-height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .back-btn {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
+        }
+        .back-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .back-btn:hover:before {
+            left: 100%;
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(71, 118, 230, 0.4);
+        }
+        .back-btn i {
+            margin-right: 12px;
+            font-size: 18px;
+            color: var(--text-light);
+        }
+        
+        .nav-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            padding: 15px 20px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+            opacity: 0.1;
+        }
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+        .nav-link i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 20px;
+            color: var(--accent);
+        }
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-light);
+            transform: translateX(8px);
+        }
+        .nav-link:hover i,
+        .nav-link.active i {
+            color: var(--primary);
+        }
+        .mobile-nav-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 300;
+            background: rgba(71, 118, 230, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .mobile-nav-toggle:hover {
+            background: rgba(71, 118, 230, 0.2);
+            transform: scale(1.05);
+        }
+        .main-content {
+            margin-left: 0;
+            min-height: 100vh;
+            padding: 80px 20px 40px;
+            transition: margin-left 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            z-index: 150;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 32px;
+            position: relative;
+        }
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        p {
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(71, 118, 230, 0.3);
+        }
+        .code-block {
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+            position: relative;
+            z-index: 200;
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 24px;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 400px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
+        }
+        .code-block code {
+            color: #c9d1d9;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 210;
+        }
+        .copy-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn:hover:before {
+            left: 100%;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(71, 118, 230, 0.3);
+        }
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        li {
+            margin-bottom: 8px;
+            color: var(--text-gray);
+        }
+        a {
+            color: var(--accent);
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: var(--primary);
+        }
+        code {
+            background: rgba(71, 118, 230, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent);
+        }
+        strong {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: rgba(71, 118, 230, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        @media (min-width: 768px) {
+            #sidebar {
+                transform: translateX(0);
+                z-index: 100;
+            }
+            .main-content {
+                margin-left: 280px;
+            }
+            .mobile-nav-toggle, .overlay {
+                display: none;
+            }
+        }
+        @media (max-width: 767px) {
+            #sidebar {
+                width: 80vw;
+                max-height: 100vh;
+                overflow-y: auto;
+                z-index: 100;
+            }
+            .sidebar-content {
+                padding-bottom: 80px;
+                overflow-y: auto;
+            }
+            .nav-list {
+                margin-bottom: 20px;
+            }
+            .main-content {
+                z-index: 150;
+                padding-top: 100px;
+                padding-bottom: 80px;
+            }
+            .code-block {
+                z-index: 200;
+            }
+            .copy-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                display: block;
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 24px;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+        }
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(71, 118, 230, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .badge-info {
+            background: rgba(71, 118, 230, 0.2);
+            color: var(--primary);
+        }
+        .badge-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        .badge-warning {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Nav Toggle -->
+    <button class="mobile-nav-toggle" id="nav-toggle" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Sidebar -->
+    <nav id="sidebar" role="navigation" aria-label="Main Navigation">
+        <div class="sidebar-content">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">
+                <i class="bi bi-bar-chart-line"></i> Monitoring Stack
+            </h3>
+            <ul class="nav-list">
+                <li><a href="#pendahuluan" class="nav-link"><i class="bi bi-info-circle"></i><span>Pendahuluan</span></a></li>
+                <li><a href="#arsitektur" class="nav-link"><i class="bi bi-diagram-3"></i><span>Arsitektur</span></a></li>
+                <li><a href="#environment" class="nav-link"><i class="bi bi-pc-display"></i><span>Environment Setup</span></a></li>
+                <li><a href="#fedora-setup" class="nav-link"><i class="bi bi-server"></i><span>Fedora Server</span></a></li>
+                <li><a href="#docker" class="nav-link"><i class="bi bi-boxes"></i><span>Docker & Compose</span></a></li>
+                <li><a href="#grafana" class="nav-link"><i class="bi bi-graph-up"></i><span>Install Grafana</span></a></li>
+                <li><a href="#loki" class="nav-link"><i class="bi bi-layers"></i><span>Setup Loki</span></a></li>
+                <li><a href="#windows" class="nav-link"><i class="bi bi-windows"></i><span>Windows Setup</span></a></li>
+                <li><a href="#promtail" class="nav-link"><i class="bi bi-send"></i><span>Install Promtail</span></a></li>
+                <li><a href="#integrasi" class="nav-link"><i class="bi bi-plug"></i><span>Integrasi</span></a></li>
+                <li><a href="#troubleshooting" class="nav-link"><i class="bi bi-tools"></i><span>Troubleshooting</span></a></li>
+                <li><a href="#optimasi" class="nav-link"><i class="bi bi-lightning"></i><span>Optimasi</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <header class="hero" data-aos="fade-up">
+                <div class="hero-content">
+                    <h1>Setup Grafana + Loki + Promtail</h1>
+                    <p>Monitoring Log Windows 11 di Fedora Server dengan VMware NAT</p>
+                    <div style="margin: 24px 0;">
+                        <span class="badge badge-info">Grafana 12.2.0</span>
+                        <span class="badge badge-info">Loki 3.1.1</span>
+                        <span class="badge badge-info">Promtail 3.1.1</span>
+                        <span class="badge badge-success">Fedora 42</span>
+                    </div>
+                    <a href="#pendahuluan" class="btn">Mulai Setup</a>
+                </div>
+            </header>
+            
+            <!-- Pendahuluan -->
+            <section id="pendahuluan" data-aos="fade-up">
+                <h2>Pendahuluan</h2>
+                <div class="card">
+                    <h3>Apa yang Akan Kita Bangun?</h3>
+                    <p>Setup monitoring log real-time untuk menarik log Event Viewer Windows 11 (Application & System) ke Grafana dashboard melalui Loki yang berjalan di Fedora Server VM.</p>
+                    
+                    <h3 style="margin-top: 32px;">Stack Teknologi</h3>
+                    <ul>
+                        <li><strong>Grafana 12.2.0</strong> - UI Dashboard & Visualisasi</li>
+                        <li><strong>Loki 3.1.1</strong> - Log Aggregation & Storage</li>
+                        <li><strong>Promtail 3.1.1</strong> - Log Shipper dari Windows</li>
+                        <li><strong>Fedora Server 42</strong> - Host untuk Grafana & Loki</li>
+                        <li><strong>Docker Compose</strong> - Container Orchestration</li>
+                        <li><strong>VMware NAT</strong> - Network Mode</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 32px;">Manfaat</h3>
+                    <ul>
+                        <li>Monitor log Windows dari server remote</li>
+                        <li>Query log dengan LogQL (filter error, warning, dll)</li>
+                        <li>Alert otomatis (contoh: >10 error/hari)</li>
+                        <li>Dashboard custom (table event, graph error rate)</li>
+                        <li>Centralized logging untuk multiple Windows hosts</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 32px;">Prerequisites</h3>
+                    <ul>
+                        <li>Akses sudo di Fedora Server</li>
+                        <li>Admin privileges di Windows 11</li>
+                        <li>Internet stabil (download ~500MB)</li>
+                        <li>Basic knowledge Linux CLI & PowerShell</li>
+                        <li>VMware Workstation/Player installed</li>
+                    </ul>
+                    
+                    <p style="margin-top: 24px;"><strong>Durasi Estimasi:</strong> 45-60 menit</p>
+                    <p><strong>Level Difficulty:</strong> Intermediate</p>
+                </div>
+            </section>
+            
+            <!-- Arsitektur -->
+            <section id="arsitektur" data-aos="fade-up">
+                <h2>Arsitektur & Konsep</h2>
+                <div class="card">
+                    <h3>Diagram Arsitektur</h3>
+                    <div class="code-block">
+                        <pre><code>┌─────────────────────────────────────────────────────┐
+│                  Windows 11 Host                     │
+│  ┌──────────────┐         ┌──────────────┐         │
+│  │ Event Viewer │────────▶│   Promtail   │         │
+│  │ (Application)│         │  (Port 9080) │         │
+│  │   (System)   │         └──────┬───────┘         │
+│  └──────────────┘                │                  │
+│         IP: 192.168.1.80         │ Push Logs        │
+└──────────────────────────────────┼──────────────────┘
+                                   │ HTTP POST
+                                   │ :3100/loki/api/v1/push
+                    ┌──────────────▼──────────────┐
+                    │      VMware NAT Bridge      │
+                    │   (VMnet8: 192.168.93.0/24) │
+                    └──────────────┬──────────────┘
+                                   │
+┌──────────────────────────────────▼──────────────────┐
+│              Fedora Server 42 VM                     │
+│  ┌────────────┐         ┌────────────┐             │
+│  │    Loki    │◀────────│  Grafana   │             │
+│  │ (Port 3100)│         │ (Port 3000)│             │
+│  │   Docker   │         │Native (RPM)│             │
+│  └────────────┘         └────────────┘             │
+│         IP: 192.168.93.128                          │
+└─────────────────────────────────────────────────────┘</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Flow Data</h3>
+                    <ol>
+                        <li><strong>Windows Event Viewer</strong> generate logs (Application/System)</li>
+                        <li><strong>Promtail</strong> scrape logs via Windows Events API</li>
+                        <li><strong>Promtail</strong> push logs ke <strong>Loki</strong> (HTTP POST)</li>
+                        <li><strong>Loki</strong> store logs & buat index</li>
+                        <li><strong>Grafana</strong> query logs dari Loki (LogQL)</li>
+                        <li>User lihat dashboard di browser</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- Environment Setup -->
+            <section id="environment" data-aos="fade-up">
+                <h2>Device & Environment Setup</h2>
+                <div class="card">
+                    <h3>Device Specifications</h3>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Windows 11 Host (Log Source)</h4>
+                    <table>
+                        <tr>
+                            <th>Component</th>
+                            <th>Specification</th>
+                        </tr>
+                        <tr>
+                            <td><strong>OS</strong></td>
+                            <td>Windows 11 Pro (Build 10.0.26100.6584)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CPU</strong></td>
+                            <td>Intel Core i7 8th Gen+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RAM</strong></td>
+                            <td>16GB+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Storage</strong></td>
+                            <td>SSD 512GB+ (5GB free)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Network</strong></td>
+                            <td>Wi-Fi (192.168.1.80/24)</td>
+                        </tr>
+                    </table>
+                    
+                    <h4 style="color: var(--accent); margin-top: 32px;">Fedora Server VM (Grafana + Loki)</h4>
+                    <table>
+                        <tr>
+                            <th>Component</th>
+                            <th>Specification</th>
+                        </tr>
+                        <tr>
+                            <td><strong>OS</strong></td>
+                            <td>Fedora Server 42 (Minimal)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>vCPU</strong></td>
+                            <td>2 cores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RAM</strong></td>
+                            <td>4GB</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Storage</strong></td>
+                            <td>50GB (Thin Provision, 10GB free)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Network</strong></td>
+                            <td>VMware NAT (192.168.93.128/24)</td>
+                        </tr>
+                    </table>
+                    
+                    <h3 style="margin-top: 32px;">Network Configuration (VMware NAT)</h3>
+                    <p><strong>Kenapa NAT?</strong></p>
+                    <ul>
+                        <li>VM akses internet via host</li>
+                        <li>Host akses VM via port forwarding</li>
+                        <li>Lebih simple dari Bridged mode</li>
+                        <li>Isolasi network lebih baik</li>
+                    </ul>
+                    
+                    <p style="margin-top: 24px;"><strong>Setup Port Forwarding:</strong></p>
+                    <ol>
+                        <li>Buka VMware Workstation/Player</li>
+                        <li><strong>Edit</strong> → <strong>Virtual Network Editor</strong></li>
+                        <li>Pilih <strong>VMnet8 (NAT)</strong></li>
+                        <li>Klik <strong>NAT Settings</strong></li>
+                        <li>Klik <strong>Add</strong> untuk forward port</li>
+                    </ol>
+                    
+                    <table style="margin-top: 16px;">
+                        <tr>
+                            <th>Host Port</th>
+                            <th>Guest IP</th>
+                            <th>Guest Port</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>3000</td>
+                            <td>192.168.93.128</td>
+                            <td>3000</td>
+                            <td>Grafana UI</td>
+                        </tr>
+                        <tr>
+                            <td>3100</td>
+                            <td>192.168.93.128</td>
+                            <td>3100</td>
+                            <td>Loki API</td>
+                        </tr>
+                    </table>
+                    
+                    <h3 style="margin-top: 32px;">Test Network Connectivity</h3>
+                    <p><strong>Di Fedora VM:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>ping -c 4 8.8.8.8          # Test internet
+ip addr show ens160        # Cek IP VM</code></pre>
+                    </div>
+                    
+                    <p><strong>Di Windows Host:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>ping 192.168.93.128        # Test koneksi ke VM
+Test-NetConnection -ComputerName 192.168.93.128 -Port 3000
+Test-NetConnection -ComputerName 192.168.93.128 -Port 3100</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Fedora Setup -->
+            <section id="fedora-setup" data-aos="fade-up">
+                <h2>Server Setup: Fedora VM</h2>
+                <div class="card">
+                    <h3>Basic System Preparation</h3>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Update System</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo dnf update -y
+sudo dnf autoremove -y
+sudo reboot</code></pre>
+                    </div>
+                    
+                    <p>Login kembali sebagai user <code>lab-stack</code> (atau user sudo lainnya).</p>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Install Essential Tools</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo dnf install -y wget nano curl vim git firewalld
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
+sudo systemctl status firewalld</code></pre>
+                    </div>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Configure Timezone (Optional)</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo timedatectl set-timezone Asia/Jakarta
+timedatectl  # Verify</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Docker -->
+            <section id="docker" data-aos="fade-up">
+                <h2>Install Docker & Docker Compose</h2>
+                <div class="card">
+                    <h3>Add Docker Repository</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Install Docker Engine</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Start & Enable Docker</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl status docker</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Add User to Docker Group</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo usermod -aG docker $USER
+newgrp docker  # Refresh group tanpa logout</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Verify Installation</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>docker --version          # Expected: Docker version 20.10+
+docker compose version    # Expected: Docker Compose v2.20+
+docker run hello-world    # Test run container</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">SELinux Configuration (Fedora Specific)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Allow Docker container manage cgroup
+sudo setsebool -P container_manage_cgroup true
+
+# Allow HTTP network connections
+sudo setsebool -P httpd_can_network_connect 1
+
+# Verify SELinux status
+sudo getsebool container_manage_cgroup
+sudo getsebool httpd_can_network_connect</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Grafana -->
+            <section id="grafana" data-aos="fade-up">
+                <h2>Install Grafana (Native RPM)</h2>
+                <div class="card">
+                    <h3>Add Grafana Repository</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo nano /etc/yum.repos.d/grafana.repo</code></pre>
+                    </div>
+                    
+                    <p><strong>Paste configuration:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>[grafana]
+name=grafana
+baseurl=https://rpm.grafana.com
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://rpm.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt</code></pre>
+                    </div>
+                    
+                    <p><strong>Save:</strong> <code>Ctrl+O</code> → <code>Enter</code> → <code>Ctrl+X</code></p>
+                    
+                    <h3 style="margin-top: 32px;">Import GPG Key</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo rpm --import https://rpm.grafana.com/gpg.key</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Install Grafana</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo dnf install grafana -y</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Start & Enable Grafana</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+sudo systemctl enable grafana-server
+sudo systemctl status grafana-server  # Must show "Active (running)"</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Configure Firewall</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo firewall-cmd --permanent --add-port=3000/tcp
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-ports  # Verify 3000/tcp listed</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Test Grafana Access</h3>
+                    <p><strong>Dari Windows Browser:</strong></p>
+                    <div class="code-block">
+                        <pre><code>http://192.168.93.128:3000</code></pre>
+                    </div>
+                    
+                    <p><strong>Default Login:</strong></p>
+                    <ul>
+                        <li>Username: <code>admin</code></li>
+                        <li>Password: <code>admin</code></li>
+                        <li>Ganti password saat first login</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Loki -->
+            <section id="loki" data-aos="fade-up">
+                <h2>Install & Configure Loki with Docker Compose</h2>
+                <div class="card">
+                    <h3>Create Project Directory</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>mkdir -p ~/loki-stack && cd ~/loki-stack</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Download Official Configuration Files</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Download Docker Compose file
+wget https://raw.githubusercontent.com/grafana/loki/main/production/docker-compose.yaml -O docker-compose.yaml
+
+# Download Loki configuration
+wget https://raw.githubusercontent.com/grafana/loki/main/cmd/loki/loki-local-config.yaml -O loki-local-config.yaml</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Edit Loki Configuration</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>nano loki-local-config.yaml</code></pre>
+                    </div>
+                    
+                    <p><strong>Configuration template:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  grpc_listen_port: 9096
+
+common:
+  instance_addr: 127.0.0.1
+  path_prefix: /loki
+  storage:
+    filesystem:
+      chunks_directory: /loki/chunks
+      rules_directory: /loki/rules
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+
+schema_config:
+  configs:
+    - from: 2025-10-03  # Ganti dengan tanggal hari ini
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+
+storage_config:
+  filesystem:
+    directory: /loki/chunks
+
+limits_config:
+  reject_old_samples: true
+  reject_old_samples_max_age: 168h  # 7 days
+  ingestion_rate_mb: 10
+  ingestion_burst_size_mb: 20</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Edit Docker Compose File</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>nano docker-compose.yaml</code></pre>
+                    </div>
+                    
+                    <p><strong>Modified configuration:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>services:
+  loki:
+    image: grafana/loki:3.1.1
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-local-config.yaml:/etc/loki/local-config.yaml:ro
+      - loki-storage:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    restart: unless-stopped
+    networks:
+      - loki-net
+
+networks:
+  loki-net:
+    driver: bridge
+
+volumes:
+  loki-storage:
+    driver: local</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Fix SELinux Context</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo chcon -Rt svirt_sandbox_file_t ~/loki-stack/</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Start Loki Stack</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>docker compose up -d</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Verify Loki Running</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Check container status
+docker compose ps
+
+# Check logs
+docker compose logs loki
+
+# Expected output:
+# "Server listening on :3100"
+# "Loki started"</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Configure Firewall for Loki</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sudo firewall-cmd --permanent --add-port=3100/tcp
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-ports  # Verify 3100/tcp listed</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Test Loki Endpoint</h3>
+                    <p><strong>Dari Fedora VM:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>curl http://localhost:3100/ready
+# Expected: "ready"
+
+curl http://localhost:3100/metrics
+# Expected: Prometheus metrics output</code></pre>
+                    </div>
+                    
+                    <p><strong>Dari Windows Host:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>Invoke-WebRequest -Uri http://192.168.93.128:3100/ready
+# Expected: StatusCode 200</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Windows -->
+            <section id="windows" data-aos="fade-up">
+                <h2>Target Setup: Windows 11</h2>
+                <div class="card">
+                    <h3>Prepare Windows Environment</h3>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Create Promtail Directory</h4>
+                    <p><strong>Via PowerShell:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>New-Item -Path "C:\promtail" -ItemType Directory -Force</code></pre>
+                    </div>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Verify PowerShell Version</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>$PSVersionTable.PSVersion
+# Expected: 5.1 or higher</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Promtail -->
+            <section id="promtail" data-aos="fade-up">
+                <h2>Install & Configure Promtail</h2>
+                <div class="card">
+                    <h3>Download Promtail Binary</h3>
+                    <p>Download dari <a href="https://github.com/grafana/loki/releases/tag/v3.1.1" target="_blank">GitHub Releases</a>: <strong>promtail-windows-amd64.exe.zip</strong></p>
+                    
+                    <p><strong>Via PowerShell (Alternative):</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>cd C:\promtail
+$url = "https://github.com/grafana/loki/releases/download/v3.1.1/promtail-windows-amd64.exe.zip"
+Invoke-WebRequest -Uri $url -OutFile "promtail.zip"
+Expand-Archive -Path "promtail.zip" -DestinationPath "." -Force
+Remove-Item "promtail.zip"</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Create Configuration File</h3>
+                    <p>Buka Notepad dan paste configuration berikut:</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: C:\\promtail\\positions.yaml
+
+clients:
+  - url: http://192.168.93.128:3100/loki/api/v1/push
+    batchwait: 5s
+    batchsize: 102400
+
+scrape_configs:
+  - job_name: windows-application
+    windows_events:
+      locale: 1033
+      use_incoming_timestamp: true
+      exclude_event_data: false
+      exclude_user_data: false
+      bookmark_path: "C:\\promtail\\bookmark-application.xml"
+      eventlog_name: "Application"
+      xpath_query: '*'
+      labels:
+        logsource: windows-eventlog
+        job: windows-application
+        host: windows-11-main
+
+  - job_name: windows-system
+    windows_events:
+      locale: 1033
+      use_incoming_timestamp: true
+      exclude_event_data: false
+      exclude_user_data: false
+      bookmark_path: "C:\\promtail\\bookmark-system.xml"
+      eventlog_name: "System"
+      xpath_query: '*'
+      labels:
+        logsource: windows-eventlog
+        job: windows-system
+        host: windows-11-main</code></pre>
+                    </div>
+                    
+                    <p style="margin-top: 24px;"><strong>CRITICAL NOTES:</strong></p>
+                    <ul>
+                        <li><strong>IP Address:</strong> Ganti <code>192.168.93.128</code> dengan IP Fedora VM Anda</li>
+                        <li><strong>Path Escaping:</strong> Windows path MUST use <code>\\</code> (double backslash)</li>
+                        <li><strong>Encoding:</strong> Save as <strong>UTF-8</strong></li>
+                        <li><strong>Filename:</strong> <code>promtail-config.yaml</code> (di <code>C:\promtail</code>)</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 32px;">Test Promtail Configuration</h3>
+                    <p><strong>PowerShell as Administrator:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>cd C:\promtail
+.\promtail-windows-amd64.exe -config.file=promtail-config.yaml --dry-run</code></pre>
+                    </div>
+                    
+                    <p><strong>Expected Output:</strong></p>
+                    <div class="code-block">
+                        <pre><code>level=info msg="Clients configured"
+level=info msg="Reloading configuration file" file=promtail-config.yaml</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Run Promtail Manual Test</h3>
+                    <p><strong>Command Prompt as Administrator:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>cd C:\promtail
+promtail-windows-amd64.exe -config.file=promtail-config.yaml --log.level=debug</code></pre>
+                    </div>
+                    
+                    <p><strong>Expected Output:</strong></p>
+                    <div class="code-block">
+                        <pre><code>level=info msg="Starting Promtail"
+level=info msg="Subscribed with handle id" handle_id=2
+level=info msg="server listening on :9080"</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Setup Promtail Auto-Start</h3>
+                    <p><strong>Via Task Scheduler:</strong></p>
+                    <ol>
+                        <li><strong>Win + R</strong> → <code>taskschd.msc</code> → Enter</li>
+                        <li>Right-click → <strong>Create Basic Task</strong></li>
+                        <li><strong>Name:</strong> <code>Promtail Auto Start</code></li>
+                        <li><strong>Trigger:</strong> <strong>At startup</strong></li>
+                        <li><strong>Action:</strong> <strong>Start a program</strong></li>
+                        <li><strong>Program:</strong> <code>C:\promtail\promtail-windows-amd64.exe</code></li>
+                        <li><strong>Arguments:</strong> <code>-config.file=C:\promtail\promtail-config.yaml</code></li>
+                        <li><strong>Start in:</strong> <code>C:\promtail</code></li>
+                        <li>Check: <strong>Run with highest privileges</strong></li>
+                        <li><strong>Finish</strong></li>
+                    </ol>
+                    
+                    <h3 style="margin-top: 32px;">Test Scheduled Task</h3>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Run task manually
+schtasks /run /tn "Promtail Auto Start"
+
+# Check if running
+Get-Process promtail* -ErrorAction SilentlyContinue</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Integrasi -->
+            <section id="integrasi" data-aos="fade-up">
+                <h2>Integrasi & Testing</h2>
+                <div class="card">
+                    <h3>Add Loki Data Source to Grafana</h3>
+                    <ol>
+                        <li>Buka browser: <code>http://192.168.93.128:3000</code></li>
+                        <li>Login (admin/admin)</li>
+                        <li><strong>Menu</strong> → <strong>Connections</strong> → <strong>Data sources</strong></li>
+                        <li><strong>Add new data source</strong></li>
+                        <li>Search: <code>Loki</code> → Select</li>
+                    </ol>
+                    
+                    <p style="margin-top: 24px;"><strong>Settings:</strong></p>
+                    <ul>
+                        <li><strong>Name:</strong> <code>Loki-Windows</code></li>
+                        <li><strong>URL:</strong> <code>http://localhost:3100</code></li>
+                        <li><strong>Access:</strong> <code>Server (default)</code></li>
+                        <li><strong>Timeout:</strong> <code>60s</code></li>
+                    </ul>
+                    
+                    <p><strong>Save & test</strong> button - Expected: ✅ <strong>"Data source is working"</strong></p>
+                    
+                    <h3 style="margin-top: 32px;">Explore & Query Logs</h3>
+                    <p><strong>Open Explore Interface:</strong></p>
+                    <ol>
+                        <li><strong>Menu</strong> → <strong>Explore</strong></li>
+                        <li><strong>Data source:</strong> Select <code>Loki-Windows</code></li>
+                    </ol>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Basic LogQL Queries</h4>
+                    
+                    <p><strong>Query 1: All Windows System Logs</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>{job="windows-system"}</code></pre>
+                    </div>
+                    
+                    <p><strong>Query 2: Filter Errors Only</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>{job="windows-system"} |= "error"</code></pre>
+                    </div>
+                    
+                    <p><strong>Query 3: Count Errors per Minute</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sum(count_over_time({job="windows-system"} |= "error" [1m]))</code></pre>
+                    </div>
+                    
+                    <p><strong>Query 4: Multiple Jobs</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>{logsource="windows-eventlog"}</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Create Basic Dashboard</h3>
+                    <ol>
+                        <li><strong>Menu</strong> → <strong>Dashboards</strong> → <strong>New Dashboard</strong></li>
+                        <li><strong>Add visualization</strong></li>
+                        <li><strong>Data source:</strong> <code>Loki-Windows</code></li>
+                    </ol>
+                    
+                    <p style="margin-top: 24px;"><strong>Panel 1: Recent Logs Table</strong></p>
+                    <ul>
+                        <li><strong>Query:</strong> <code>{logsource="windows-eventlog"}</code></li>
+                        <li><strong>Visualization:</strong> Logs</li>
+                        <li><strong>Panel title:</strong> Recent Windows Events</li>
+                    </ul>
+                    
+                    <p><strong>Panel 2: Error Rate Graph</strong></p>
+                    <ul>
+                        <li><strong>Query:</strong> <code>sum(rate({job=~"windows-.*"} |= "error" [5m]))</code></li>
+                        <li><strong>Visualization:</strong> Time series</li>
+                        <li><strong>Panel title:</strong> Error Rate (per 5 min)</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 32px;">End-to-End Testing</h3>
+                    <p><strong>Generate System Event (Windows PowerShell):</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Generate network event
+ping 192.168.93.128 -n 10
+
+# Wait 30 seconds
+Start-Sleep -Seconds 30</code></pre>
+                    </div>
+                    
+                    <p><strong>Check in Grafana Explore:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>{job="windows-system"} |= "ping"</code></pre>
+                    </div>
+                    
+                    <p>Expected: Lihat log ping events</p>
+                </div>
+            </section>
+            
+            <!-- Troubleshooting -->
+            <section id="troubleshooting" data-aos="fade-up">
+                <h2>Troubleshooting</h2>
+                <div class="card">
+                    <h3>Problem 1: Grafana - No Logs Appearing</h3>
+                    <p><strong>Symptoms:</strong> Query returns 0 results, "No logs found" message</p>
+                    
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Check Time Range:</strong> Set to "Last 5 minutes" atau "Last 15 minutes"</li>
+                        <li><strong>Verify Data Source:</strong> Connections → Data sources → Loki-Windows → Test</li>
+                        <li><strong>Check Loki Receiving Data:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code># Di Fedora VM
+curl http://localhost:3100/loki/api/v1/label
+# Expected: List of labels</code></pre>
+                            </div>
+                        </li>
+                        <li><strong>Generate New Events:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code>ping 192.168.93.128 -n 20
+ipconfig /release
+ipconfig /renew</code></pre>
+                            </div>
+                        </li>
+                    </ol>
+                    
+                    <h3 style="margin-top: 32px;">Problem 2: Promtail - YAML Syntax Error</h3>
+                    <p><strong>Symptoms:</strong> "yaml: line X: mapping values are not allowed"</p>
+                    
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Check Indentation:</strong> Use spaces, NOT tabs (2 spaces per level)</li>
+                        <li><strong>Verify Path Escaping:</strong>
+                            <div class="code-block">
+                                <pre><code># ✅ Correct
+filename: C:\\promtail\\positions.yaml
+
+# ❌ Wrong
+filename: C:\promtail\positions.yaml</code></pre>
+                            </div>
+                        </li>
+                        <li><strong>Test Config:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code>promtail-windows-amd64.exe -config.file=promtail-config.yaml --dry-run</code></pre>
+                            </div>
+                        </li>
+                        <li><strong>Re-create Config:</strong> Save as UTF-8 encoding</li>
+                    </ol>
+                    
+                    <h3 style="margin-top: 32px;">Problem 3: Loki - Container Mount Error (SELinux)</h3>
+                    <p><strong>Symptoms:</strong> "Permission denied" saat docker compose up</p>
+                    
+                    <p><strong>Solutions:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Fix SELinux Context
+sudo chcon -Rt svirt_sandbox_file_t ~/loki-stack/
+
+# Set SELinux Booleans
+sudo setsebool -P container_manage_cgroup true
+sudo setsebool -P httpd_can_network_connect 1
+
+# Check SELinux Status
+getenforce  # Should be "Enforcing"</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">Problem 4: Connection Refused (Windows → Loki)</h3>
+                    <p><strong>Symptoms:</strong> Promtail error: "connection refused"</p>
+                    
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Verify Loki Running:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code># Di Fedora VM
+docker compose ps
+docker compose logs loki | grep "listening"</code></pre>
+                            </div>
+                        </li>
+                        <li><strong>Check Firewall:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code>sudo firewall-cmd --list-ports  # Must include 3100/tcp
+sudo firewall-cmd --permanent --add-port=3100/tcp
+sudo firewall-cmd --reload</code></pre>
+                            </div>
+                        </li>
+                        <li><strong>Test with PowerShell:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code>Test-NetConnection -ComputerName 192.168.93.128 -Port 3100</code></pre>
+                            </div>
+                        </li>
+                    </ol>
+                    
+                    <h3 style="margin-top: 32px;">Problem 5: Promtail - No Events Scraped</h3>
+                    <p><strong>Symptoms:</strong> Promtail running, tapi "scraped 0 events"</p>
+                    
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li><strong>Delete Bookmark Files:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code>cd C:\promtail
+del bookmark-*.xml
+del positions.yaml</code></pre>
+                            </div>
+                        </li>
+                        <li><strong>Run as Administrator:</strong> Right-click Command Prompt → Run as Administrator</li>
+                        <li><strong>Check Event Viewer Access:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code>Get-EventLog -LogName System -Newest 5
+Get-EventLog -LogName Application -Newest 5</code></pre>
+                            </div>
+                        </li>
+                        <li><strong>Generate Test Events:</strong>
+                            <div class="code-block">
+                                <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                                <pre><code>ping localhost -n 50
+ipconfig /all</code></pre>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- Optimasi -->
+            <section id="optimasi" data-aos="fade-up">
+                <h2>Tips Optimasi</h2>
+                <div class="card">
+                    <h3>1. Performance Tuning</h3>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Loki Configuration</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># loki-local-config.yaml - Optimized
+limits_config:
+  split_queries_by_interval: 15m
+  max_query_parallelism: 32
+  max_entries_limit_per_query: 5000
+  max_cache_freshness_per_query: 10m
+
+query_scheduler:
+  max_outstanding_requests_per_tenant: 256
+
+frontend:
+  max_outstanding_per_tenant: 256
+  compress_responses: true</code></pre>
+                    </div>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Promtail Batch Settings</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># promtail-config.yaml - Optimized
+clients:
+  - url: http://192.168.93.128:3100/loki/api/v1/push
+    batchwait: 3s      # Faster push
+    batchsize: 204800  # 200KB batch
+    timeout: 30s
+    backoff_config:
+      min_period: 500ms
+      max_period: 5m
+      max_retries: 10</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">2. Advanced LogQL Queries</h3>
+                    
+                    <p><strong>Query 1: Top 10 Error Sources</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>topk(10, 
+  sum by (source) (
+    count_over_time({job="windows-system"} |= "error" [1h])
+  )
+)</code></pre>
+                    </div>
+                    
+                    <p><strong>Query 2: Event Rate per Event ID</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>sum by (event_id) (
+  rate({job="windows-system"} | json [5m])
+)</code></pre>
+                    </div>
+                    
+                    <p><strong>Query 3: Pattern Detection</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>{job="windows-system"} 
+  | pattern `<_> <level> <_> <source>: <message>`
+  | level =~ "Error|Critical"</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">3. Alerting Setup</h3>
+                    <p><strong>Create Alert Rule in Grafana:</strong></p>
+                    <ol>
+                        <li><strong>Menu</strong> → <strong>Alerting</strong> → <strong>Alert rules</strong></li>
+                        <li><strong>New alert rule</strong></li>
+                    </ol>
+                    
+                    <p style="margin-top: 24px;"><strong>Alert Configuration:</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>Name: High Error Rate Windows
+
+Query:
+  sum(rate({job=~"windows-.*"} |= "error" [5m])) > 10
+
+Conditions:
+  - WHEN avg() OF query(A, 5m, now) IS ABOVE 10
+
+Evaluate every: 1m
+For: 5m
+
+Labels:
+  severity: warning
+  team: infrastructure
+
+Annotations:
+  summary: High error rate detected on Windows
+  description: Error rate is {{ $value }} errors/sec</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">4. Security Hardening</h3>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Enable Grafana HTTPS</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Generate self-signed cert
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/grafana/grafana.key \
+  -out /etc/grafana/grafana.crt
+
+# Edit Grafana config
+sudo nano /etc/grafana/grafana.ini</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code>[server]
+protocol = https
+http_port = 3000
+cert_file = /etc/grafana/grafana.crt
+cert_key = /etc/grafana/grafana.key</code></pre>
+                    </div>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Firewall Restrictions</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Allow only Windows IP
+sudo firewall-cmd --permanent --add-rich-rule='
+  rule family="ipv4"
+  source address="192.168.1.80"
+  port port="3100" protocol="tcp" accept'
+sudo firewall-cmd --reload</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">5. Backup & Recovery</h3>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Backup Loki Data</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Stop Loki
+docker compose stop loki
+
+# Backup volume
+sudo tar -czf ~/loki-backup-$(date +%Y%m%d).tar.gz \
+  ~/loki-stack/loki-local-config.yaml \
+  /var/lib/docker/volumes/loki-stack_loki-storage
+
+# Restart Loki
+docker compose start loki</code></pre>
+                    </div>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Restore Procedure</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Restore Loki data
+sudo tar -xzf ~/loki-backup-20251003.tar.gz -C /
+
+# Restart services
+docker compose restart loki
+sudo systemctl restart grafana-server</code></pre>
+                    </div>
+                    
+                    <h3 style="margin-top: 32px;">6. Monitoring the Monitor</h3>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Check Loki Metrics</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Ingestion rate
+curl http://localhost:3100/metrics | grep loki_distributor_bytes_received_total
+
+# Query performance
+curl http://localhost:3100/metrics | grep loki_query_duration_seconds</code></pre>
+                    </div>
+                    
+                    <h4 style="color: var(--accent); margin-top: 24px;">Check Promtail Health</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Salin</button>
+                        <pre><code># Windows - Check Promtail targets
+Invoke-WebRequest -Uri http://localhost:9080/targets</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Kesimpulan -->
+            <section id="kesimpulan" data-aos="fade-up">
+                <h2>Kesimpulan</h2>
+                <div class="card">
+                    <p>Setup ini memberikan solusi monitoring log Windows yang:</p>
+                    <ul>
+                        <li><strong>Scalable</strong> - Bisa handle multiple Windows hosts</li>
+                        <li><strong>Real-time</strong> - Log muncul dalam 10 detik di Grafana</li>
+                        <li><strong>Flexible</strong> - Query dengan LogQL yang powerful</li>
+                        <li><strong>Cost-effective</strong> - Semua tools open-source</li>
+                        <li><strong>Production-ready</strong> - Include backup, alert, security</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 32px;">Next Steps</h3>
+                    <ul>
+                        <li>Add more Windows hosts</li>
+                        <li>Setup email alerting</li>
+                        <li>Create custom dashboards per team</li>
+                        <li>Implement log retention policy</li>
+                        <li>Enable HTTPS for Grafana</li>
+                        <li>Setup log aggregation dari aplikasi custom</li>
+                        <li>Integrate dengan Prometheus untuk metrics</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin-top: 48px;">
+                        <a href="#pendahuluan" class="btn">Kembali ke Atas</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer style="background: var(--bg-darker); padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
+        <div class="container">
+            <div style="margin-bottom: 16px;">
+                <span class="badge badge-info">Grafana 12.2.0</span>
+                <span class="badge badge-info">Loki 3.1.1</span>
+                <span class="badge badge-info">Promtail 3.1.1</span>
+            </div>
+            <div style="color: var(--text-gray); margin-bottom: 8px;">
+                © 2025 <strong><span style="color: var(--primary);">Monitoring Stack Documentation</span></strong>
+            </div>
+            <div style="color: var(--text-gray); font-size: 14px;">
+                Created with ❤️ by Grok | Last updated: October 3, 2025
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Vendor JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 800, once: false });
+        
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('nav-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            const isOpen = sidebar.classList.contains('show');
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('active');
+            menuToggle.querySelector('i').className = isOpen ? 'fas fa-bars' : 'fas fa-times';
+        });
+        
+        // Close sidebar when clicking nav links
+        const sidebarLinks = sidebar.querySelectorAll('.nav-link');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('active');
+                menuToggle.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+        
+        // Close sidebar when clicking overlay
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('active');
+            menuToggle.querySelector('i').className = 'fas fa-bars';
+        });
+        
+        // Copy code function
+        function copyCode(button) {
+            const code = button.nextElementSibling.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = 'Tersalin!';
+                button.style.background = 'var(--accent)';
+                setTimeout(() => {
+                    button.innerText = 'Salin';
+                    button.style.background = 'var(--primary)';
+                }, 2000);
+            });
+        }
+        
+        // Active navigation highlight on scroll
+        document.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
