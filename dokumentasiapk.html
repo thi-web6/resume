@@ -133,6 +133,225 @@
     }
     </script>
     
+    <!-- HowTo Schema for Rich Results -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Cara Rekayasa Balik dan Bypass Mode Kios Aplikasi Android",
+        "description": "Panduan step-by-step untuk melakukan reverse engineering aplikasi SMK Taruna Bangsa Pelajar, bypass mode kios, dan menonaktifkan proteksi screenshot menggunakan APKTool dan Smali di Fedora 42",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png",
+            "width": 1200,
+            "height": 630
+        },
+        "author": {
+            "@type": "Person",
+            "@id": "https://thi-web6.github.io/resume/index.html#person",
+            "name": "Abdurrohman Al Fathi"
+        },
+        "datePublished": "2025-06-06",
+        "dateModified": "2025-12-29",
+        "totalTime": "PT2H30M",
+        "estimatedCost": {
+            "@type": "MonetaryAmount",
+            "currency": "IDR",
+            "value": "0"
+        },
+        "tool": [
+            {
+                "@type": "HowToTool",
+                "name": "APKTool 2.11.1"
+            },
+            {
+                "@type": "HowToTool",
+                "name": "Java JDK 21"
+            },
+            {
+                "@type": "HowToTool",
+                "name": "ADB (Android Debug Bridge)"
+            },
+            {
+                "@type": "HowToTool",
+                "name": "APK Editor"
+            },
+            {
+                "@type": "HowToTool",
+                "name": "Split APKs Installer (SAI)"
+            }
+        ],
+        "supply": [
+            {
+                "@type": "HowToSupply",
+                "name": "Fedora 42 Linux atau sistem operasi berbasis Linux"
+            },
+            {
+                "@type": "HowToSupply",
+                "name": "Android device dengan USB debugging enabled"
+            },
+            {
+                "@type": "HowToSupply",
+                "name": "APK file aplikasi SMK Taruna Bangsa Pelajar v1.2.3"
+            }
+        ],
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Instalasi Tools dan Dependencies",
+                "text": "Install Java 21 JDK, APKTool 2.11.1, APK Editor, SAI, dan tools lainnya yang diperlukan untuk reverse engineering. Verifikasi instalasi dengan menjalankan apktool --version.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-0"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Download dan Extract APK",
+                "text": "Download aplikasi SMK Taruna Bangsa Pelajar v1.2.3 dari Google Play Store menggunakan APK downloader. Extract file XAPK untuk mendapatkan base APK dan split APKs.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-1"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Decompile APK dengan APKTool",
+                "text": "Gunakan APKTool untuk decompile base APK menjadi kode Smali yang dapat dibaca dan dimodifikasi. Jalankan command: apktool d com.tb.view_spp.apk -o apk_decompiled",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-2"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Analisis dan Identifikasi Kode Kios",
+                "text": "Cari file Smali yang mengatur mode kios dengan mencari pattern seperti 'startLockTask', 'stopLockTask', atau konfigurasi kios mode. Identifikasi logika yang mengaktifkan lock screen.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-3"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Modifikasi Kode Smali untuk Bypass Kios",
+                "text": "Edit file smali/F0/Y.smali dan ubah return value dari true menjadi false untuk menonaktifkan kios mode. Ganti const/4 v0, 0x1 menjadi const/4 v0, 0x0 pada method yang mengontrol kios mode.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-4"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Bypass Proteksi Screenshot",
+                "text": "Modifikasi kode Smali untuk menonaktifkan FLAG_SECURE dan screenshot protection. Edit method h() untuk selalu return false, method k() untuk return true, dan method onCreate untuk clear FLAG_SECURE.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-4-5"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 7,
+                "name": "Rebuild APK dengan APKTool",
+                "text": "Recompile kode Smali yang sudah dimodifikasi kembali menjadi APK menggunakan APKTool. Jalankan command: apktool b apk_decompiled -o com.tb.view_spp_modified.apk",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-5"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 8,
+                "name": "Sign APK dengan Uber APK Signer",
+                "text": "Sign APK yang sudah dimodifikasi menggunakan Uber APK Signer agar dapat diinstall di Android device. Gunakan debug key atau buat keystore sendiri.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-6"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 9,
+                "name": "Bersihkan File Signature Lama",
+                "text": "Hapus file signature lama dari split APKs (META-INF folder) untuk menghindari konflik signature saat instalasi. Gunakan unzip dan zip command untuk membersihkan signature.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-7"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 10,
+                "name": "Buat XAPK Bundle",
+                "text": "Buat file manifest.json dan gabungkan base APK yang sudah dimodifikasi dengan split APKs menjadi XAPK bundle. Zip semua file menjadi format XAPK.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-8"
+            },
+            {
+                "@type": "HowToStep",
+                "position": 11,
+                "name": "Install dan Test APK Modified",
+                "text": "Install XAPK yang sudah dimodifikasi ke Android device menggunakan ADB atau Split APKs Installer (SAI). Test apakah kios mode sudah berhasil di-bypass dan screenshot protection sudah dinonaktifkan.",
+                "url": "https://thi-web6.github.io/resume/dokumentasiapk.html#langkah-9"
+            }
+        ],
+        "inLanguage": "id-ID"
+    }
+    </script>
+    
+    <!-- FAQPage Schema for Rich Results -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Apakah reverse engineering aplikasi Android legal?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Reverse engineering untuk tujuan penelitian, pembelajaran, dan security testing umumnya legal, terutama dalam konteks pendidikan cybersecurity dan ethical hacking. Namun, sangat penting untuk: 1) Hanya dilakukan pada aplikasi yang Anda miliki atau dengan izin tertulis, 2) Tidak digunakan untuk tujuan komersial atau merugikan pihak lain, 3) Mematuhi terms of service dan EULA aplikasi, 4) Memahami hukum lokal terkait modifikasi software. Tutorial ini ditujukan untuk edukasi cybersecurity dan ethical hacking research."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Tools apa saja yang dibutuhkan untuk reverse engineering APK?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Tools yang diperlukan untuk reverse engineering APK meliputi: APKTool 2.11.1 untuk decompile dan recompile APK, Java JDK 21 sebagai runtime environment, ADB (Android Debug Bridge) untuk instalasi dan debugging, APK Editor untuk modifikasi visual, Split APKs Installer (SAI) untuk install XAPK, Uber APK Signer untuk signing APK, dan text editor untuk edit kode Smali. Semua tools ini gratis dan open source."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Berapa lama waktu yang dibutuhkan untuk menyelesaikan tutorial ini?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Waktu yang dibutuhkan bervariasi tergantung pengalaman: Untuk pemula dengan basic Linux knowledge: 3-4 jam termasuk instalasi tools dan troubleshooting. Untuk intermediate dengan pengalaman Android development: 1.5-2 jam. Untuk advanced dengan pengalaman reverse engineering: 45-60 menit. Estimasi ini termasuk waktu untuk instalasi tools, decompile, modifikasi kode, recompile, dan testing."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Apa itu Smali code dan bagaimana cara membacanya?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Smali adalah representasi human-readable dari bytecode Dalvik (Android). Smali code merupakan assembly language untuk Android Virtual Machine (AVM). Cara membaca Smali: const/4 v0, 0x1 berarti set register v0 dengan value 1, return v0 berarti return nilai di register v0, invoke-virtual memanggil method dari object, if-eqz adalah conditional jump jika value equal zero. Smali menggunakan register-based architecture dengan register v0, v1, v2, dst. Untuk belajar Smali lebih dalam, pelajari Dalvik bytecode format dan Android DEX file structure."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Bagaimana cara mengatasi error saat recompile APK dengan APKTool?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Error umum saat recompile APK dan solusinya: 1) Error 'resources.arsc': Pastikan tidak mengubah file resources yang protected. Gunakan flag --use-aapt2 saat rebuild. 2) Error 'brut.androlib.AndrolibException': Periksa syntax Smali yang dimodifikasi, pastikan tidak ada typo atau missing bracket. 3) Error 'Out of memory': Tambahkan heap size Java dengan export JAVA_OPTS='-Xmx2048m'. 4) Error 'Invalid APK file': Pastikan menggunakan APKTool versi terbaru (2.11.1+) dan base APK bukan split APK. Selalu backup APK original sebelum modifikasi."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Apakah modified APK aman untuk digunakan?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Modified APK yang Anda buat sendiri melalui proses reverse engineering yang transparan umumnya aman karena Anda tahu persis apa yang dimodifikasi. Namun perlu diperhatikan: 1) Modified APK tidak akan mendapat update otomatis dari Play Store, 2) Beberapa fitur yang memerlukan verifikasi signature mungkin tidak bekerja, 3) Jangan install modified APK dari sumber tidak terpercaya, 4) Untuk aplikasi production, selalu gunakan versi official dari Play Store. Modified APK sebaiknya hanya untuk testing, research, dan educational purposes di controlled environment."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Bagaimana cara bypass kios mode pada aplikasi Android?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bypass kios mode (kiosk mode / screen pinning) pada aplikasi Android dilakukan dengan: 1) Identifikasi method yang memanggil startLockTask() atau setLockTaskPackages(), 2) Decompile APK dengan APKTool untuk mendapatkan kode Smali, 3) Cari pattern 'startLockTask' atau 'stopLockTask' dalam kode Smali, 4) Modifikasi return value method yang mengontrol kios mode dari true ke false (ubah const/4 v0, 0x1 menjadi const/4 v0, 0x0), 5) Atau comment out baris yang memanggil startLockTask(), 6) Recompile dan sign APK. Pastikan untuk memahami logika aplikasi sebelum modifikasi untuk menghindari crash atau behavior tidak diinginkan."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Apa perbedaan APK, Split APK, dan XAPK?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Perbedaan format aplikasi Android: APK (Android Package) adalah single file yang berisi semua resources aplikasi, ukuran besar, mudah di-install. Split APK adalah APK yang dipecah menjadi base APK + configuration APKs (untuk different screen densities, architectures, languages), ukuran download lebih kecil, memerlukan installer khusus. XAPK adalah container format berisi base APK + split APKs + OBB files (jika ada) dalam satu file ZIP, memerlukan XAPK installer seperti SAI. Google Play Store menggunakan App Bundle yang men-generate split APKs secara dinamis berdasarkan device configuration untuk optimasi ukuran download."
+                }
+            }
+        ]
+    }
+    </script>
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
     <link rel="apple-touch-icon" href="https://thi-web6.github.io/resume/images/tarunabangsaicon.png">
