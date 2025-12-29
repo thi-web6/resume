@@ -52,14 +52,17 @@ I'm **Abdurrohman Al Fathi**, a cybersecurity enthusiast from Bekasi, Indonesia.
 - **Medali Emas Olimpiade Bahasa Arab, Matematika, Biologi** - Fosnas Event, 9 Januari 2024
 
 ## 💼 Pengalaman
-- **Technical Developer - Maintenance Aplikasi Perbankan**  
+- **IT Staff Intern - System Administrator & Grafana Researcher**  
   *PT. Nesyer Lintas Teknologi, Jakarta Barat*  
   **Client:** Bank Kalimantan Tengah (Palangka Raya)  
-  18-21 Juni 2025  
-  - Melakukan maintenance aplikasi perbankan client (RTGS, SKN, BI Fast, dan Middleware) untuk memastikan stabilitas dan keamanan sistem.
-  - Menggunakan Sysmon dan Grafana untuk memantau performa sistem serta mendeteksi anomali, dengan dashboard terintegrasi via iframe menggunakan ZKoss webapp.
-  - Mengelola workflow otomatisasi dengan Apache Airflow untuk jadwal maintenance dan backup data.
-  - Berkolaborasi dengan tim untuk troubleshooting, verifikasi konfigurasi, dan pelaporan hasil maintenance.
+  20 Mei 2025 - 20 November 2025 (6 bulan)
+  - Melakukan remote maintenance dan monitoring infrastruktur IT untuk aplikasi perbankan critical client (RTGS, SKN, BI Fast, Middleware), memastikan sistem aman dan tidak ada broken atau downtime.
+  - Research dan development Grafana dashboard untuk real-time monitoring performa sistem, deteksi anomali, dan security logging dengan remote access dari Jakarta.
+  - Mengintegrasikan sistem monitoring dengan Sysmon untuk performance tracking, alerting, dan incident response secara remote.
+  - Mengelola workflow otomatisasi dengan Apache Airflow untuk maintenance scheduling, backup automation, dan health checks.
+  - **On-site Trip 1 (18-21 Juni):** Kunjungan ke Palangka Raya untuk maintenance aplikasi perbankan dan implementasi monitoring dashboard langsung di lokasi client.
+  - **On-site Trip 2 (16-18 Oktober):** Kunjungan ke Palangka Raya untuk maintenance sistem monitoring dan integrasi log management infrastructure di lokasi client.
+  - Berkolaborasi dengan tim untuk remote troubleshooting, sistem dokumentasi, dan stakeholder reporting.
 
 - **Juri LKS IT Network System Administration**  
   *Lomba Kompetensi Siswa, Jakarta Pusat 1*  
