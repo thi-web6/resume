@@ -9,8 +9,48 @@
     <meta name="title" content="Setup Grafana + Loki + Promtail: Monitoring Log Windows 11 di Fedora Server">
     <meta name="description" content="Panduan lengkap setup monitoring log real-time Windows 11 menggunakan Grafana 12.2.0, Loki 3.1.1, dan Promtail di Fedora Server 42 dengan VMware NAT.">
     <meta name="keywords" content="Grafana, Loki, Promtail, Windows Event Viewer, Log Monitoring, Fedora Server, VMware NAT, Docker Compose, LogQL">
-    <meta name="author" content="Grok">
+    <meta name="author" content="Abdurrohman Al Fathi">
     <meta name="robots" content="index, follow">
+    <meta name="last-modified" content="2025-12-29T19:42:00+07:00">
+    <meta name="language" content="Indonesian">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thi-web6.github.io/resume/gr.html">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://thi-web6.github.io/resume/gr.html">
+    <meta property="og:title" content="Setup Grafana + Loki + Promtail: Monitoring Log Windows 11 di Fedora Server">
+    <meta property="og:description" content="Panduan teknis lengkap setup monitoring log real-time menggunakan Grafana 12.2.0, Loki 3.1.1, dan Promtail untuk Windows 11 Event Viewer di Fedora Server 42.">
+    <meta property="og:image" content="https://thi-web6.github.io/resume/images/grafana-logo.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Grafana Loki Monitoring Setup Tutorial">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="Abdurrohman Al Fathi Portfolio">
+    <meta property="article:author" content="Abdurrohman Al Fathi">
+    <meta property="article:published_time" content="2025-12-29T00:00:00+07:00">
+    <meta property="article:modified_time" content="2025-12-29T19:42:00+07:00">
+    <meta property="article:section" content="Technology">
+    <meta property="article:tag" content="Grafana">
+    <meta property="article:tag" content="Loki">
+    <meta property="article:tag" content="Monitoring">
+    <meta property="article:tag" content="DevOps">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Setup Grafana + Loki + Promtail: Monitoring Log Windows 11">
+    <meta name="twitter:description" content="Tutorial lengkap implementasi log monitoring dengan Grafana, Loki, dan Promtail di Fedora Server untuk Windows Event Viewer.">
+    <meta name="twitter:image" content="https://thi-web6.github.io/resume/images/grafana-logo.svg">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#149ddd">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -494,6 +534,196 @@
             color: #fbbf24;
         }
     </style>
+
+    <!-- Schema.org JSON-LD - TechArticle -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Setup Grafana + Loki + Promtail: Monitoring Log Windows 11 di Fedora Server",
+      "description": "Panduan teknis lengkap implementasi monitoring log real-time menggunakan Grafana 12.2.0, Loki 3.1.1, dan Promtail untuk Windows 11 Event Viewer di Fedora Server 42 dengan VMware NAT.",
+      "image": "https://thi-web6.github.io/resume/images/grafana-logo.svg",
+      "datePublished": "2025-12-29T00:00:00+07:00",
+      "dateModified": "2025-12-29T19:42:00+07:00",
+      "author": {
+        "@type": "Person",
+        "@id": "https://thi-web6.github.io/resume/#person",
+        "name": "Abdurrohman Al Fathi",
+        "url": "https://thi-web6.github.io/resume/",
+        "jobTitle": "Cybersecurity Specialist",
+        "alumniOf": {
+          "@type": "Organization",
+          "name": "SMKS Taruna Bangsa"
+        }
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Abdurrohman Al Fathi",
+        "url": "https://thi-web6.github.io/resume/"
+      },
+      "inLanguage": "id-ID",
+      "articleSection": "Technology",
+      "keywords": [
+        "Grafana",
+        "Loki",
+        "Promtail",
+        "Log Monitoring",
+        "Windows Event Viewer",
+        "Fedora Server",
+        "VMware NAT",
+        "Docker Compose",
+        "LogQL",
+        "DevOps",
+        "System Administration"
+      ],
+      "about": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Grafana",
+          "applicationCategory": "Monitoring Tool",
+          "operatingSystem": "Linux"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Loki",
+          "applicationCategory": "Log Aggregation",
+          "operatingSystem": "Linux"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Promtail",
+          "applicationCategory": "Log Shipper",
+          "operatingSystem": "Windows, Linux"
+        }
+      ],
+      "teaches": [
+        "How to install and configure Grafana 12.2.0",
+        "How to setup Loki 3.1.1 for log aggregation",
+        "How to configure Promtail for Windows Event Viewer",
+        "How to use LogQL for log queries",
+        "How to setup monitoring dashboard in Grafana"
+      ]
+    }
+    </script>
+
+    <!-- HowTo Schema for Tutorial Steps -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Cara Setup Grafana + Loki + Promtail untuk Monitoring Log",
+      "description": "Langkah-langkah lengkap setup monitoring log Windows 11 menggunakan stack Grafana, Loki, dan Promtail di Fedora Server.",
+      "image": "https://thi-web6.github.io/resume/images/grafana-logo.svg",
+      "totalTime": "PT2H",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "IDR",
+        "value": "0"
+      },
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Grafana 12.2.0"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Loki 3.1.1"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Promtail"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Docker & Docker Compose"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Fedora Server 42"
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "VMware Workstation"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Windows 11"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Internet connection"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Persiapan Environment",
+          "text": "Setup Fedora Server 42 di VMware dengan konfigurasi NAT networking"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Install Docker & Docker Compose",
+          "text": "Install Docker dan Docker Compose di Fedora Server"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Setup Grafana",
+          "text": "Deploy Grafana 12.2.0 menggunakan Docker Compose"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Setup Loki",
+          "text": "Deploy Loki 3.1.1 untuk log aggregation"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Install Promtail",
+          "text": "Install Promtail di Windows 11 untuk Windows Event Viewer"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Konfigurasi Dashboard",
+          "text": "Setup dashboard Grafana dengan LogQL queries"
+        }
+      ]
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://thi-web6.github.io/resume/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Portfolio",
+          "item": "https://thi-web6.github.io/resume/index.html#portfolio"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Grafana Loki Setup",
+          "item": "https://thi-web6.github.io/resume/gr.html"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Mobile Nav Toggle -->
