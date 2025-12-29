@@ -58,34 +58,42 @@
     <meta name="application-name" content="Tutorial Rekayasa Balik SMK Taruna Bangsa">
     
     <!-- Structured Data JSON-LD -->
+    <!-- Enhanced TechArticle Schema with Author Reference -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "Tutorial Rekayasa Balik Aplikasi SMK Taruna Bangsa Pelajar",
         "description": "Panduan lengkap rekayasa balik aplikasi SMK Taruna Bangsa Pelajar v1.2.3 untuk bypass mode kios dan proteksi screenshot menggunakan APKTool, Smali, dan ADB di Fedora 42",
-        "image": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png",
+            "width": 1200,
+            "height": 630
+        },
         "author": {
             "@type": "Person",
-            "name": "Thi-Web6",
-            "url": "https://github.com/thi-web6"
+            "@id": "https://thi-web6.github.io/resume/index.html#person",
+            "name": "Abdurrohman Al Fathi",
+            "url": "https://thi-web6.github.io/resume/",
+            "sameAs": [
+                "https://github.com/thi-web6"
+            ]
         },
         "publisher": {
-            "@type": "Organization",
-            "name": "Thi-Web6",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://thi-web6.github.io/resume/images/tarunabangsaicon.png"
-            }
+            "@type": "Person",
+            "@id": "https://thi-web6.github.io/resume/index.html#person",
+            "name": "Abdurrohman Al Fathi",
+            "url": "https://thi-web6.github.io/resume/"
         },
         "datePublished": "2025-06-06",
-        "dateModified": "2025-06-06",
+        "dateModified": "2025-12-29",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://thi-web6.github.io/resume/dokumentasiapk.html"
         },
         "articleSection": "Cybersecurity",
-        "keywords": "rekayasa balik, reverse engineering, SMK Taruna Bangsa, APK modifikasi, bypass mode kios, bypass screenshot, Android security",
+        "keywords": "rekayasa balik, reverse engineering, SMK Taruna Bangsa, APK modifikasi, bypass mode kios, bypass screenshot, Android security, APKTool, Smali, ethical hacking",
         "about": [
             {
                 "@type": "Thing",
@@ -98,8 +106,30 @@
             {
                 "@type": "Thing",
                 "name": "APK Modification"
+            },
+            {
+                "@type": "Thing",
+                "name": "Mobile Security"
             }
-        ]
+        ],
+        "proficiencyLevel": "Advanced",
+        "dependencies": "APKTool, Smali, ADB (Android Debug Bridge), Fedora 42 Linux, Java JDK, APK Editor, Split APKs Installer (SAI)",
+        "educationalLevel": "Intermediate to Advanced",
+        "learningResourceType": "Tutorial",
+        "inLanguage": "id-ID",
+        "isFamilyFriendly": true,
+        "teaches": [
+            "Android APK reverse engineering",
+            "Smali code modification",
+            "Bypassing kiosk mode restrictions",
+            "Mobile application security testing",
+            "APK decompilation and recompilation"
+        ],
+        "audience": {
+            "@type": "Audience",
+            "audienceType": "Cybersecurity students, Ethical hackers, Mobile security researchers"
+        },
+        "assesses": "Ability to reverse engineer Android applications and modify Smali bytecode"
     }
     </script>
     
