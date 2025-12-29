@@ -57,12 +57,14 @@ I'm **Abdurrohman Al Fathi**, a cybersecurity enthusiast from Bekasi, Indonesia.
   **Client:** Bank Kalimantan Tengah (Palangka Raya)  
   20 Mei 2025 - 20 November 2025 (6 bulan)
   - Melakukan remote maintenance dan monitoring infrastruktur IT untuk aplikasi perbankan critical client (RTGS, SKN, BI Fast, Middleware), memastikan sistem aman dan tidak ada broken atau downtime.
-  - Research dan development Grafana dashboard untuk real-time monitoring performa sistem, deteksi anomali, dan security logging dengan remote access dari Jakarta.
-  - Mengintegrasikan sistem monitoring dengan Sysmon untuk performance tracking, alerting, dan incident response secara remote.
+  - Melakukan maintenance dan konfigurasi sistem Linux untuk aplikasi web berbasis Apache Tomcat melalui akses remote menggunakan VPN khusus yang disediakan client.
+  - Research dan development Grafana dashboard untuk real-time monitoring performa sistem, deteksi anomali, dan security logging, mengintegrasikan Prometheus untuk koneksi ke server monitoring dengan penyesuaian target sesuai kebutuhan client.
+  - Mengintegrasikan sistem monitoring dengan Sysmon untuk performance tracking, alerting, incident response, dan analisis log untuk mendeteksi potensi masalah keamanan dan performa secara remote.
   - Mengelola workflow otomatisasi dengan Apache Airflow untuk maintenance scheduling, backup automation, dan health checks.
+  - Memberikan technical support untuk konfigurasi sistem Linux dan troubleshooting melalui VPN, serta berkontribusi dalam optimalisasi proses kerja tim dengan merekomendasikan solusi berbasis data dari hasil pemantauan sistem.
+  - Menyusun laporan performa sistem dan rekomendasi perbaikan berdasarkan hasil maintenance remote dan kunjungan on-site.
   - **On-site Trip 1 (18-21 Juni):** Kunjungan ke Palangka Raya untuk maintenance aplikasi perbankan dan implementasi monitoring dashboard langsung di lokasi client.
   - **On-site Trip 2 (16-18 Oktober):** Kunjungan ke Palangka Raya untuk maintenance sistem monitoring dan integrasi log management infrastructure di lokasi client.
-  - Berkolaborasi dengan tim untuk remote troubleshooting, sistem dokumentasi, dan stakeholder reporting.
 
 - **Juri LKS IT Network System Administration**  
   *Lomba Kompetensi Siswa, Jakarta Pusat 1*  
