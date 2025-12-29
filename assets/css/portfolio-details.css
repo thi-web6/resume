@@ -1,0 +1,744 @@
+/**
+* Portfolio Details - Red Hat Enterprise Design System
+* Based on PatternFly design principles
+*/
+
+/* ========================================
+   DESIGN TOKENS (Red Hat Style)
+======================================== */
+:root {
+  /* Colors - Sidebar Dark Theme */
+  --primary-color: #149ddd;
+  --primary-dark: #0d7dbb;
+  --rh-dark: #040b14;
+  --rh-dark-light: #212431;
+  --rh-gray-dark: #3C3F42;
+  --rh-gray: #6A6E73;
+  --rh-gray-light: #a8a9b4;
+  --rh-gray-lighter: #FAFAFA;
+  --rh-white: #FFFFFF;
+  
+  /* Typography */
+  --font-family: 'Red Hat Display', 'Overpass', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-sm: 14px;
+  --line-height-base: 1.5;
+  
+  /* Spacing - 8px grid */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-2xl: 64px;
+  
+  /* Layout */
+  --border-radius: 3px;
+  --border-width: 1px;
+  --border-color: var(--rh-gray-light);
+  --box-shadow: 0 2px 4px 0 rgba(3, 3, 3, 0.12);
+}
+
+/* ========================================
+   BASE STYLES
+======================================== */
+.pd-page {
+  font-family: var(--font-family);
+  background-color: var(--rh-gray-lighter);
+  color: var(--rh-dark);
+  line-height: var(--line-height-base);
+  font-size: var(--font-size-base);
+}
+
+/* ========================================
+   SIDEBAR
+======================================== */
+.pd-sidebar {
+  width: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: var(--rh-dark);
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 997;
+  padding: 0 var(--spacing-md);
+  scrollbar-width: none;
+}
+
+.pd-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.pd-sidebar-toggle {
+  position: fixed;
+  right: var(--spacing-md);
+  top: var(--spacing-md);
+  z-index: 998;
+  border: 0;
+  background: var(--primary-color);
+  color: var(--rh-white);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.pd-profile-image {
+  margin: var(--spacing-lg) auto var(--spacing-md);
+  display: block;
+  width: 120px;
+  height: 120px;
+}
+
+.pd-profile-image img {
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--rh-gray-dark);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pd-site-title {
+  font-size: 24px;
+  margin: 0 0 var(--spacing-xs);
+  padding: 0;
+  font-weight: 600;
+  color: var(--rh-white);
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.pd-site-title:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.pd-tagline {
+  text-align: center;
+  color: var(--rh-gray);
+  font-size: var(--font-size-sm);
+  margin: 0 0 var(--spacing-md);
+}
+
+.pd-social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+}
+
+.pd-social-links a {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rh-gray-dark);
+  color: var(--rh-white);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius);
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.pd-social-links a:hover {
+  background: var(--primary-color);
+}
+
+.pd-nav {
+  padding: var(--spacing-lg) 0;
+}
+
+.pd-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pd-nav ul li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.pd-nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+  color: var(--rh-gray-light);
+  transition: all 0.2s ease;
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+}
+
+.pd-nav ul li a i {
+  font-size: 20px;
+  margin-right: var(--spacing-sm);
+  color: var(--rh-gray);
+}
+
+.pd-nav ul li a:hover,
+.pd-nav ul li a.pd-nav-active {
+  color: var(--rh-white);
+  background: var(--rh-gray-dark);
+}
+
+.pd-nav ul li a:hover i,
+.pd-nav ul li a.pd-nav-active i {
+  color: var(--primary-color);
+}
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+.pd-main-content {
+  margin-left: 300px;
+  transition: margin-left 0.3s ease;
+}
+
+/* ========================================
+   PARTICLES BACKGROUND
+======================================== */
+.pd-particles-bg {
+  position: fixed;
+  top: 0;
+  left: 300px;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+@media (max-width: 1199px) {
+  .pd-particles-bg {
+    left: 0;
+  }
+}
+
+/* ========================================
+   SECTIONS
+======================================== */
+.pd-section {
+  padding: 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pd-section-light {
+  background: var(--rh-white);
+}
+
+.pd-section-gray {
+  background: var(--rh-gray-lighter);
+}
+
+.pd-section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.pd-section-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  background: var(--primary-color);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pd-section-icon i {
+  width: 24px;
+  height: 24px;
+  color: var(--rh-white);
+  stroke-width: 2;
+}
+
+.pd-section-title h2 {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--rh-dark);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.8px;
+}
+
+.pd-section-subtitle {
+  font-size: 15px;
+  color: #888;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* ========================================
+   CREDENTIALS SECTION - Clean Modern Layout
+======================================== */
+.pd-content-box {
+  background: var(--rh-white);
+  padding: 16px 0;
+  border: var(--border-width) solid #E5E5E5;
+  border-radius: 8px;
+  max-width: 980px;
+  margin: 0 auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.pd-credentials-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pd-credentials-list li {
+  padding: 20px 40px;
+  border-bottom: var(--border-width) solid #F0F0F0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.15s ease;
+}
+
+.pd-credentials-list li:hover {
+  background: #FAFAFA;
+}
+
+.pd-credentials-list li:last-child {
+  border-bottom: none;
+}
+
+.pd-credentials-list li strong {
+  color: var(--rh-dark);
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: -0.3px;
+  line-height: 1.5;
+  flex: 0 0 auto;
+}
+
+.pd-credential-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  text-align: right;
+}
+
+.pd-credential-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  transition: color 0.15s ease;
+}
+
+.pd-credential-info a:hover {
+  color: var(--primary-dark);
+}
+
+.pd-issuer {
+  color: #999;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ========================================
+   LEARNING JOURNEY - Modern Quote Cards with Icons
+======================================== */
+.pd-quotes-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pd-quote-item {
+  background: var(--rh-white);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 4px 12px 0 rgba(3, 3, 3, 0.08);
+  border-radius: 8px;
+  border: var(--border-width) solid var(--border-color);
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+.pd-quote-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 20px 0 rgba(20, 157, 221, 0.15);
+  transform: translateX(8px);
+}
+
+.pd-quote-item:last-child {
+  margin-bottom: 0;
+}
+
+.pd-quote-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  background: var(--primary-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(20, 157, 221, 0.2);
+  transition: all 0.2s ease;
+}
+
+.pd-quote-item:hover .pd-quote-icon {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 157, 221, 0.3);
+}
+
+.pd-quote-icon i {
+  width: 28px;
+  height: 28px;
+  color: var(--rh-white);
+  stroke-width: 2.5;
+}
+
+.pd-quote-item::before {
+  content: """;
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  font-size: 120px;
+  font-family: Georgia, serif;
+  color: var(--primary-color);
+  opacity: 0.05;
+  font-weight: bold;
+  line-height: 0.8;
+  z-index: 0;
+}
+
+.pd-quote-item p {
+  font-style: normal;
+  color: var(--rh-dark);
+  margin: 0;
+  line-height: 1.8;
+  font-size: 17px;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+/* ========================================
+   SKILLS SECTION - Modern Flat Card Grid
+======================================== */
+.pd-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pd-skill-card {
+  background: var(--rh-white);
+  padding: var(--spacing-xl);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.pd-skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.pd-skill-card:hover::before {
+  transform: scaleX(1);
+}
+
+.pd-skill-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 16px rgba(20, 157, 221, 0.12);
+  transform: translateY(-4px);
+}
+
+.pd-skill-icon {
+  font-size: 40px;
+  margin-bottom: var(--spacing-md);
+  display: inline-block;
+}
+
+.pd-skill-icon.icon-primary { color: var(--primary-color); }
+.pd-skill-icon.icon-success { color: #3E8635; }
+.pd-skill-icon.icon-info { color: #0066CC; }
+.pd-skill-icon.icon-warning { color: #F0AB00; }
+
+.pd-skill-card h4 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--rh-dark);
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: -0.3px;
+}
+
+.pd-skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.pd-skill-list li {
+  padding: 10px 0;
+  color: var(--rh-gray-dark);
+  position: relative;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  transition: all 0.2s ease;
+}
+
+.pd-skill-list li:hover {
+  color: var(--rh-dark);
+  padding-left: 24px;
+}
+
+.pd-skill-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.pd-skill-list li:hover::before {
+  transform: translateX(2px);
+}
+
+/* ========================================
+   FOOTER - Compact & Minimal
+======================================== */
+.pd-footer {
+  background: var(--rh-dark);
+  color: var(--rh-gray-light);
+  padding: 24px 0 16px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pd-footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-footer-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--rh-white);
+}
+
+.pd-footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pd-footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--rh-white);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.pd-footer-social a:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.pd-footer-copyright {
+  color: var(--rh-gray);
+  font-size: 13px;
+  margin: 0;
+}
+
+.pd-footer-copyright strong {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* ========================================
+   SCROLL TO TOP
+======================================== */
+.pd-scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: var(--spacing-md);
+  bottom: var(--spacing-md);
+  z-index: 996;
+  background: var(--primary-color);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: var(--box-shadow);
+}
+
+.pd-scroll-top i {
+  font-size: 24px;
+  color: var(--rh-white);
+}
+
+.pd-scroll-top:hover {
+  background: var(--rh-dark);
+}
+
+.pd-scroll-top.pd-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ========================================
+   PRELOADER
+======================================== */
+.pd-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: var(--rh-white);
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pd-preloader::before {
+  content: "";
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--rh-gray-light);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: pd-spin 1s linear infinite;
+}
+
+@keyframes pd-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+   OVERLAY & MOBILE
+======================================== */
+.pd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 996;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.pd-overlay.pd-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 1199px) {
+  .pd-sidebar {
+    left: -300px;
+  }
+
+  .pd-sidebar.pd-sidebar-open {
+    left: 0;
+  }
+
+  .pd-sidebar-toggle {
+    display: flex;
+  }
+
+  .pd-main-content {
+    margin-left: 0;
+  }
+
+  .pd-skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pd-section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .pd-section-title h2 {
+    font-size: 28px;
+  }
+
+  .pd-content-box {
+    padding: var(--spacing-md);
+  }
+
+  .pd-credentials-list li {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+  }
+
+  .pd-skills-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .pd-skill-card {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 576px) {
+  .pd-section-title h2 {
+    font-size: 24px;
+  }
+
+  .pd-sidebar {
+    width: 280px;
+    left: -280px;
+  }
+}

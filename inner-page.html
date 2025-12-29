@@ -1,337 +1,413 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Write-Up Cybersecurity - Abdurrohman Al Fathi</title>
   <meta name="description" content="Koleksi write-up cybersecurity profesional oleh Abdurrohman Al Fathi, mencakup LKS, eksploitasi sistem, dan kompetisi nasional.">
   <meta name="keywords" content="cybersecurity, writeup, LKS, CTF, penetration testing, system exploitation, security, dokumentasi">
   <meta name="author" content="Abdurrohman Al Fathi">
   <meta name="robots" content="index, follow">
-  <title>Write-Up Cybersecurity - Abdurrohman Al Fathi</title>
-  <link rel="icon" href="assets/img/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <!-- Vendor CSS Offline -->
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!-- Portfolio Details Custom CSS (reuse same styling) -->
+  <link href="assets/css/portfolio-details.css" rel="stylesheet">
+
   <style>
-    :root {
-      --primary: #4776E6;
-      --accent: #8E54E9;
-      --bg: #f8fafd;
-      --bg-dark: #181c2a;
-      --text: #222;
-      --text-light: #fff;
-      --card: #fff;
-      --shadow: 0 4px 24px rgba(71, 118, 230, 0.08);
-    }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .main-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--text-light);
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1.5rem;
-    }
-    .main-header .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--primary);
-      text-decoration: none;
-    }
-    .main-header .brand img {
-      width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--primary);
-    }
-    .main-header .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      color: var(--primary);
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-    .main-header .nav {
-      display: flex;
-      gap: 1.2rem;
-      align-items: center;
-    }
-    .main-header .nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .main-header .nav a:hover {
-      color: var(--accent);
-    }
-    /* Sidebar (desktop only) */
-    .sidebar {
-      background: var(--bg-dark);
-      color: var(--text-light);
-      width: 220px;
-      min-height: 100vh;
-      position: fixed;
-      top: 0; left: 0;
-      z-index: 90;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem 1rem 1rem;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s;
-    }
-    .sidebar .profile-img {
-      width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 1rem;
-    }
-    .sidebar .name {
-      font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;
-    }
-    .sidebar .social {
-      display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
-    }
-    .sidebar .social a { color: var(--primary); font-size: 1.2rem; }
-    .sidebar nav {
-      width: 100%;
-    }
-    .sidebar nav a {
-      display: block;
-      color: var(--text-light);
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      margin-bottom: 0.2rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.2s, color 0.2s;
-    }
-    .sidebar nav a.active, .sidebar nav a:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-    /* Drawer (mobile) */
-    .drawer {
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
-      width: 220px;
-      background: var(--bg-dark);
-      color: var(--text-light);
-      z-index: 200;
-      transform: translateX(-100%);
-      transition: transform 0.3s;
-      box-shadow: var(--shadow);
-      padding: 2rem 1rem 1rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .drawer.open { transform: translateX(0); }
-    .drawer .close-btn {
-      position: absolute; top: 1rem; right: 1rem;
-      background: none; border: none; color: var(--primary); font-size: 2rem; cursor: pointer;
-    }
-    .drawer .profile-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 1rem; }
-    .drawer .name { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
-    .drawer .social { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; }
-    .drawer .social a { color: var(--primary); font-size: 1.1rem; }
-    .drawer nav { width: 100%; }
-    .drawer nav a { display: block; color: var(--text-light); padding: 0.6rem 1rem; border-radius: 8px; margin-bottom: 0.2rem; text-decoration: none; font-weight: 500; transition: background 0.2s, color 0.2s; }
-    .drawer nav a.active, .drawer nav a:hover { background: var(--primary); color: #fff; }
-    .drawer-backdrop {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.3);
-      z-index: 150;
-      display: none;
-    }
-    .drawer-backdrop.open { display: block; }
-    /* Main content */
-    .main-content {
-      flex: 1;
-      margin-left: 220px;
-      padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-      transition: margin 0.3s;
-    }
-    .card-section {
+    /* Additional styles for inner-page cards */
+    .ip-writeup-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      gap: var(--spacing-lg);
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .card {
-      background: var(--card);
-      border-radius: 1rem;
-      box-shadow: var(--shadow);
-      padding: 2rem 1.5rem;
+
+    .ip-writeup-card {
+      background: var(--rh-white);
+      padding: var(--spacing-xl);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      transition: box-shadow 0.2s, transform 0.2s;
+      gap: var(--spacing-md);
     }
-    .card:hover { box-shadow: 0 8px 32px rgba(71, 118, 230, 0.13); transform: translateY(-4px); }
-    .card h3 { color: var(--primary); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.7rem; }
-    .card p { color: #444; margin-bottom: 1.1rem; }
-    .card a {
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      color: #fff;
-      padding: 0.6rem 1.2rem;
+
+    .ip-writeup-card:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 4px 16px rgba(20, 157, 221, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .ip-writeup-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .ip-writeup-icon i {
+      width: 28px;
+      height: 28px;
+      color: var(--rh-white);
+      stroke-width: 2;
+    }
+
+    .ip-writeup-card h3 {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--rh-dark);
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+
+    .ip-writeup-card p {
+      color: var(--rh-gray-dark);
+      margin: 0;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .ip-writeup-card .ip-btn {
+      background: var(--primary-color);
+      color: var(--rh-white);
+      padding: 12px 24px;
       border-radius: 6px;
       text-decoration: none;
       font-weight: 500;
-      transition: background 0.2s;
+      font-size: 15px;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 8px;
+      align-self: flex-start;
     }
-    .card a:hover { background: linear-gradient(90deg, var(--accent), var(--primary)); }
-    /* Footer */
-    footer {
-      background: var(--bg-dark);
-      color: #eee;
-      text-align: center;
-      padding: 1.2rem 0 0.7rem 0;
-      font-size: 1rem;
-      margin-top: auto;
-      box-shadow: 0 -2px 15px rgba(0,0,0,0.07);
+
+    .ip-writeup-card .ip-btn:hover {
+      background: var(--primary-dark);
+      transform: translateX(4px);
     }
-    /* Responsive */
-    @media (max-width: 991px) {
-      .sidebar { display: none; }
-      .main-content { margin-left: 0; }
+
+    .ip-page-header {
+      margin-bottom: var(--spacing-xl);
     }
-    @media (max-width: 600px) {
-      .main-header { padding: 0.5rem 0.7rem; }
-      .main-content { padding: 1.2rem 0.5rem; }
-      .card-section { gap: 1.2rem; }
-      .card { padding: 1.2rem 0.7rem; }
+
+    .ip-page-header h1 {
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--rh-dark);
+      margin: 0 0 8px 0;
+      letter-spacing: -0.8px;
     }
-    @media (max-width: 991px) {
-      .main-header .menu-toggle { display: block; }
-      .main-header .nav { display: none; }
+
+    .ip-page-header p {
+      font-size: 16px;
+      color: var(--rh-gray);
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .ip-writeup-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+
+      .ip-writeup-card {
+        padding: var(--spacing-md);
+      }
+
+      .ip-page-header h1 {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
-<body>
-  <!-- Drawer (mobile sidebar) -->
-  <div class="drawer" id="drawer">
-    <button class="close-btn" id="drawerClose"><i class="bi bi-x"></i></button>
-    <img src="assets/img/profile-img.jpg" alt="Foto profil Abdurrohman Al Fathi" class="profile-img">
-    <div class="name">Abdurrohman Al Fathi</div>
-    <div class="social">
-      <a href="#" aria-label="Twitter"><i class="bx bxl-twitter"></i></a>
-      <a href="https://www.instagram.com/man13.5791/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-      <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
-      <a href="https://www.credly.com/users/abdurrohman-al-fathi" aria-label="Credly"><i class="fas fa-award"></i></a>
-    </div>
-    <nav>
-      <a href="index.html#hero">Home</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#resume">Resume</a>
-      <a href="index.html#portfolio">Portfolio</a>
-      <a href="index.html#certificates">Certificates</a>
-      <a href="index.html#CTF">CTF</a>
-    </nav>
-  </div>
-  <div class="drawer-backdrop" id="drawerBackdrop"></div>
-  <!-- Header -->
-  <header class="main-header">
-    <a href="index.html" class="brand">
+
+<body class="pd-page">
+
+  <!-- Sidebar Overlay -->
+  <div class="pd-overlay" id="pdOverlay"></div>
+
+  <!-- Mobile Toggle Button -->
+  <button class="pd-sidebar-toggle" id="pdToggle" aria-label="Toggle Menu">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <aside class="pd-sidebar" id="pdSidebar">
+    <div class="pd-profile-image">
       <img src="assets/img/profile-img.jpg" alt="Abdurrohman Al Fathi">
-      Abdurrohman Al Fathi
-    </a>
-    <nav class="nav d-none d-lg-flex">
-      <a href="index.html#hero">Home</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#resume">Resume</a>
-      <a href="index.html#portfolio">Portfolio</a>
-      <a href="index.html#certificates">Certificates</a>
-      <a href="index.html#CTF">CTF</a>
-    </nav>
-    <button class="menu-toggle d-lg-none" id="menuToggle" aria-label="Buka menu"><i class="bi bi-list"></i></button>
-  </header>
-  <!-- Sidebar (desktop only) -->
-  <aside class="sidebar d-none d-lg-flex">
-    <img src="assets/img/profile-img.jpg" alt="Foto profil Abdurrohman Al Fathi" class="profile-img">
-    <div class="name">Abdurrohman Al Fathi</div>
-    <div class="social">
-      <a href="#" aria-label="Twitter"><i class="bx bxl-twitter"></i></a>
-      <a href="https://www.instagram.com/man13.5791/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-      <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
-      <a href="https://www.credly.com/users/abdurrohman-al-fathi" aria-label="Credly"><i class="fas fa-award"></i></a>
     </div>
-    <nav>
-      <a href="index.html#hero">Home</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#resume">Resume</a>
-      <a href="index.html#portfolio">Portfolio</a>
-      <a href="index.html#certificates">Certificates</a>
-      <a href="index.html#CTF">CTF</a>
+
+    <a href="index.html" class="pd-site-title">Abdurrohman Al Fathi</a>
+    <p class="pd-tagline">Cybersecurity Enthusiast | Data Analyst | Ethical Hacker</p>
+
+    <div class="pd-social-links">
+      <a href="https://www.instagram.com/man13.5791/" target="_blank" title="Instagram">
+        <i class="bi bi-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/abdurrohman-al-fathi-b90052309/" target="_blank" title="LinkedIn">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a href="https://www.credly.com/users/abdurrohman-al-fathi" target="_blank" title="Credly">
+        <i class="bi bi-award"></i>
+      </a>
+      <a href="https://github.com/thi-web6" target="_blank" title="GitHub">
+        <i class="bi bi-github"></i>
+      </a>
+    </div>
+
+    <nav class="pd-nav">
+      <ul>
+        <li><a href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+        <li><a href="portfolio-details.html"><i class="bi bi-trophy"></i> My Credentials</a></li>
+        <li><a href="#writeups" class="pd-nav-active"><i class="bi bi-file-text"></i> Write-ups</a></li>
+      </ul>
     </nav>
   </aside>
+
   <!-- Main Content -->
-  <div class="main-content">
-    <h1 style="font-size:2rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem;">Write-Up Cybersecurity</h1>
-    <section class="card-section">
-      <div class="card">
-        <h3>LKS Cybersecurity 2024</h3>
-        <p>Dokumentasi kompetisi keamanan siber tingkat kota.</p>
-        <a href="assets/img/portfolio/lks2024.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
-      </div>
-      <div class="card">
-        <h3>System Exploitation</h3>
-        <p>Analisis teknik eksploitasi sistem dan mitigasinya.</p>
-        <a href="assets/img/portfolio/radarbiru.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
-      </div>
-      <div class="card">
-        <h3>Kisi-Kisi LKS</h3>
-        <p>Rangkuman materi dan soal kompetisi cybersecurity.</p>
-        <a href="assets/img/portfolio/Kisi Kisi Soal LKS Cybersecurity Kota Bekasi.pdf" target="_blank"><i class="fas fa-eye me-1"></i> Lihat Dokumen</a>
+  <main class="pd-main-content">
+
+    <!-- Particles Background -->
+    <div id="particles-js" class="pd-particles-bg"></div>
+
+    <!-- Write-ups Section -->
+    <section id="writeups" class="pd-section pd-section-light">
+      <div class="container">
+        
+        <div class="pd-section-title" data-aos="fade-up" data-aos-duration="800">
+          <div class="pd-section-icon">
+            <i data-feather="file-text"></i>
+          </div>
+          <h2>Write-Up Cybersecurity</h2>
+          <p class="pd-section-subtitle">Professional documentation of cybersecurity competitions and research</p>
+        </div>
+
+        <div class="ip-writeup-grid">
+          
+          <div class="ip-writeup-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="ip-writeup-icon">
+              <i data-feather="award"></i>
+            </div>
+            <h3>LKS Cybersecurity 2024</h3>
+            <p>Dokumentasi kompetisi keamanan siber tingkat kota Bekasi 2024, mencakup analisis soal dan solusi teknis.</p>
+            <a href="assets/img/portfolio/lks2024.pdf" target="_blank" class="ip-btn">
+              <i data-feather="eye"></i> Lihat Dokumen
+            </a>
+          </div>
+
+          <div class="ip-writeup-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="ip-writeup-icon">
+              <i data-feather="terminal"></i>
+            </div>
+            <h3>System Exploitation</h3>
+            <p>Analisis mendalam teknik eksploitasi sistem, vulnerability assessment, dan strategi mitigasi keamanan.</p>
+            <a href="assets/img/portfolio/radarbiru.pdf" target="_blank" class="ip-btn">
+              <i data-feather="eye"></i> Lihat Dokumen
+            </a>
+          </div>
+
+          <div class="ip-writeup-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="ip-writeup-icon">
+              <i data-feather="book-open"></i>
+            </div>
+            <h3>Kisi-Kisi LKS Cybersecurity</h3>
+            <p>Rangkuman materi dan kisi-kisi soal kompetisi LKS Cybersecurity Kota Bekasi sebagai panduan persiapan.</p>
+            <a href="assets/img/portfolio/Kisi Kisi Soal LKS Cybersecurity Kota Bekasi.pdf" target="_blank" class="ip-btn">
+              <i data-feather="eye"></i> Lihat Dokumen
+            </a>
+          </div>
+
+        </div>
+
       </div>
     </section>
-  </div>
-  <footer>
-    © 2025 Dokumentasi Cybersecurity oleh <strong>Abdurrohman Al Fathi</strong>
-  </footer>
-  <!-- Vendor JS Files Offline -->
+
+  </main>
+
+  <!-- Scroll Top Button -->
+  <a href="#" class="pd-scroll-top" id="pdScrollTop">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Preloader -->
+  <div class="pd-preloader" id="pdPreloader"></div>
+
+  <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/bootstrap-icons/bootstrap-icons.js"></script>
-  <script src="assets/vendor/boxicons/js/boxicons.min.js"></script>
-  <!-- Sidebar/Drawer Toggle Script -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <!-- Custom JS -->
   <script>
-    // Drawer (mobile)
-    const menuToggle = document.getElementById('menuToggle');
-    const drawer = document.getElementById('drawer');
-    const drawerBackdrop = document.getElementById('drawerBackdrop');
-    const drawerClose = document.getElementById('drawerClose');
-    function openDrawer() {
-      drawer.classList.add('open');
-      drawerBackdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer() {
-      drawer.classList.remove('open');
-      drawerBackdrop.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    if(menuToggle) menuToggle.onclick = openDrawer;
-    if(drawerClose) drawerClose.onclick = closeDrawer;
-    if(drawerBackdrop) drawerBackdrop.onclick = closeDrawer;
-    // Close drawer on nav click (mobile)
-    drawer.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', closeDrawer);
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // Initialize Feather Icons
+      feather.replace();
+
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        easing: 'ease-out-cubic',
+        once: true,
+        mirror: false,
+        offset: 100
+      });
+
+      // Initialize Particles.js
+      if (document.getElementById('particles-js')) {
+        particlesJS('particles-js', {
+          particles: {
+            number: {
+              value: 50,
+              density: {
+                enable: true,
+                value_area: 800
+              }
+            },
+            color: {
+              value: '#149ddd'
+            },
+            shape: {
+              type: 'circle'
+            },
+            opacity: {
+              value: 0.1,
+              random: true
+            },
+            size: {
+              value: 3,
+              random: true
+            },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: '#149ddd',
+              opacity: 0.1,
+              width: 1
+            },
+            move: {
+              enable: true,
+              speed: 1,
+              direction: 'none',
+              random: true,
+              straight: false,
+              out_mode: 'out',
+              bounce: false
+            }
+          },
+          interactivity: {
+            detect_on: 'canvas',
+            events: {
+              onhover: {
+                enable: false
+              },
+              onclick: {
+                enable: false
+              },
+              resize: true
+            }
+          },
+          retina_detect: true
+        });
+      }
+
+      // Preloader
+      const preloader = document.getElementById('pdPreloader');
+      if (preloader) {
+        window.addEventListener('load', () => {
+          preloader.style.display = 'none';
+        });
+      }
+
+      // Mobile Sidebar Toggle
+      const toggle = document.getElementById('pdToggle');
+      const sidebar = document.getElementById('pdSidebar');
+      const overlay = document.getElementById('pdOverlay');
+      const body = document.body;
+
+      if (toggle) {
+        toggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          sidebar.classList.toggle('pd-sidebar-open');
+          overlay.classList.toggle('pd-active');
+          body.style.overflow = sidebar.classList.contains('pd-sidebar-open') ? 'hidden' : '';
+        });
+      }
+
+      // Close sidebar when clicking overlay
+      if (overlay) {
+        overlay.addEventListener('click', function() {
+          sidebar.classList.remove('pd-sidebar-open');
+          overlay.classList.remove('pd-active');
+          body.style.overflow = '';
+        });
+      }
+
+      // Close sidebar when clicking nav links on mobile
+      const navLinks = document.querySelectorAll('.pd-nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth < 1200) {
+            sidebar.classList.remove('pd-sidebar-open');
+            overlay.classList.remove('pd-active');
+            body.style.overflow = '';
+          }
+        });
+      });
+
+      // Scroll to top button
+      const scrollTop = document.getElementById('pdScrollTop');
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          scrollTop.classList.add('pd-active');
+        } else {
+          scrollTop.classList.remove('pd-active');
+        }
+      });
+
+      if (scrollTop) {
+        scrollTop.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
     });
   </script>
+
 </body>
+
 </html>

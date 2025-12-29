@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="test" content="Age: 17">
+    <script>
+        console.log("✅ JavaScript IS RUNNING in .html file!");
+        const meta = document.querySelector('meta[name="test"]');
+        console.log("Before:", meta.content);
+        meta.content = "Age: 25 (Updated by JavaScript)";
+        console.log("After:", meta.content);
+    </script>
+</head>
+<body>
+    <h1>JavaScript Test in .html File</h1>
+    <p>Open browser console (F12) to see JavaScript execution!</p>
+    <script>
+        document.body.innerHTML += "<p style='color:green;'>✅ JavaScript executed successfully!</p>";
+    </script>
+</body>
+</html>
