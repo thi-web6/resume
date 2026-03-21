@@ -843,8 +843,16 @@
       border-top: 1px solid rgba(71,118,230,0.2);
       box-shadow: 0 -4px 14px rgba(0,0,0,0.15);
       transition: var(--trans);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
     }
     #sidebar-footer:hover { border-top-color:rgba(71,118,230,0.35); }
+    
+    /* Nav harus punya padding bawah supaya tidak tertutup footer */
+    .nav-menu { padding-bottom: 80px; }
 
     /* ═══════════════════════════════════
        TYPED CURSOR
@@ -904,7 +912,7 @@
        HEADER / SIDEBAR
   ════════════════════════════════════════ -->
   <header id="header" role="banner">
-    <div class="d-flex flex-column" style="height:100%; position:relative;">
+    <div class="d-flex flex-column" style="height:100%; position:relative; min-height:100vh;">
 
       <div class="profile">
         <img src="assets/img/profile-img.jpg"
