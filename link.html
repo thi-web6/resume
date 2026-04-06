@@ -41,6 +41,7 @@
         .btn:active { transform: scale(0.95); }
 
         .btn-linkedin { background-color: #0077b5; color: white; }
+        .btn-chrome { background-color: #ffffff; color: #444; border: 2px solid #ddd; }
         .btn-tel { background-color: #28a745; color: white; }
         
         .footer { margin-top: 20px; font-size: 0.8rem; color: #666; }
@@ -52,7 +53,11 @@
         <h2>Abdurrohman Al Fathi</h2>
         
         <button onclick="handleLinkedinClick()" class="btn btn-linkedin">
-            Buka LinkedIn
+            Buka di App LinkedIn
+        </button>
+
+        <button onclick="openInChrome()" class="btn btn-chrome">
+            🌐 Buka di Chrome
         </button>
 
         <a href="tel:+6285776671279" class="btn btn-tel">
@@ -65,24 +70,40 @@
     </div>
 
     <script>
+        var linkedInProfile = "www.linkedin.com/in/abdurrohman-al-fathi/";
+
+        // FUNGSI 1: Untuk Buka App LinkedIn
         function handleLinkedinClick() {
-            var webUrl = "https://www.linkedin.com/in/abdurrohman-al-fathi/";
+            var webUrl = "https://" + linkedInProfile;
             var appUrl = "linkedin://in/abdurrohman-al-fathi/";
-            
             var start = Date.now();
 
-            // 1. Coba panggil Deep Link (Aplikasi)
             window.location.href = appUrl;
 
-            // 2. Logika Fallback:
-            // Cek setelah 1,5 detik, apakah user masih di halaman ini?
             setTimeout(function() {
-                // Jika selisih waktu kurang dari 2 detik, artinya browser belum "pindah" ke aplikasi
                 if (Date.now() - start < 2000) {
-                    // Paksa buka versi Web karena aplikasi gak respon/gak ada
                     window.location.href = webUrl;
                 }
             }, 1500);
+        }
+
+        // FUNGSI 2: Paksa Buka di Chrome (Khusus Android)
+        function openInChrome() {
+            var webUrl = "https://" + linkedInProfile;
+            
+            // Format Intent Chrome buat Android
+            var chromeIntent = "intent://" + linkedInProfile + "#Intent;scheme=https;package=com.android.chrome;end";
+            
+            // Cek apakah user pake Android
+            var isAndroid = /Android/i.test(navigator.userAgent);
+
+            if (isAndroid) {
+                window.location.href = chromeIntent;
+            } else {
+                // Kalau iOS (iPhone), Chrome gak bisa dipanggil paksa via intent, 
+                // Jadi kita lempar ke web browser default (Safari)
+                window.location.href = webUrl;
+            }
         }
     </script>
 
