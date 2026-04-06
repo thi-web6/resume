@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Deep Link LinkedIn</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; gap: 20px; padding: 20px; }
+        a { padding: 15px; background: #0077b5; color: white; text-decoration: none; border-radius: 8px; text-align: center; }
+        .tel { background: #28a745; }
+    </style>
+</head>
+<body>
+
+    <h3>Coba Test di WebView IG:</h3>
+
+    <a href="https://www.linkedin.com/in/abdurrohman-al-fathi/">
+        1. Link Standar (Web)
+    </a>
+
+    <a href="linkedin://in/abdurrohman-al-fathi/">
+        2. Deep Link (Harusnya buka App)
+    </a>
+
+    <a href="tel:+6285776671279" class="tel">
+        3. Test Link Telepon
+    </a>
+
+    <script>
+        // Trik Tambahan: Auto-redirect via JS
+        function openLinkedIn() {
+            window.location.href = "linkedin://in/abdurrohman-al-fathi/";
+            
+            // Kalo dalam 2 detik gak pindah aplikasi (berarti app gak ada), buka web biasa
+            setTimeout(function() {
+                window.location.href = "https://www.linkedin.com/in/abdurrohman-al-fathi/";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
