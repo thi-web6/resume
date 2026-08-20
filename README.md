@@ -28,7 +28,7 @@ Professional portfolio website showcasing my journey as a DevOps Consultant, pen
 
 ## 🚀 About Me
 
-I'm **Abdurrohman Al Fathi**, a DevOps Consultant and penetration tester from Bekasi, Indonesia. Born on February 28, 2008, I'm passionate about **penetration testing**, **Linux system hardening**, **DevSecOps**, and **digital forensics**. Currently active as a student at SMK Taruna Bangsa, serving as OSIS Secretary and Scout member.
+I'm **Abdurrohman Al Fathi**, a DevOps Consultant and penetration tester from Bekasi, Indonesia. Born on February 28, 2008, I'm passionate about **penetration testing**, **Linux system hardening**, **DevSecOps**, and **digital forensics**. Alumni SMK Taruna Bangsa jurusan Rekayasa Perangkat Lunak (Lulus Jul 2026).
 
 ### 📍 Quick Info
 - **Location:** Bekasi Utara, Indonesia
