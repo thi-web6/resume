@@ -1157,7 +1157,7 @@
 
             <div class="resume-item">
               <h4>DevOps Consultant</h4>
-              <h5>Jul 2026 - Present · 2 mos</h5>
+              <h5>Jul 2026 - Present · <span class="dynamic-duration" data-start="2026-07-01"></span></h5>
               <p><em>PT Inovasi Informatika Indonesia · Contract · Hybrid</em></p>
               <ul>
                 <li>Implementasi SonarQube untuk code quality analysis dan security scanning.</li>
@@ -1476,6 +1476,19 @@
       /* 2. Footer Year */
       var fy = document.getElementById('footer-year');
       if (fy) fy.textContent = new Date().getFullYear();
+
+      /* 2b. Dynamic work duration */
+      document.querySelectorAll('.dynamic-duration').forEach(function(el) {
+        var start = new Date(el.getAttribute('data-start'));
+        var now = new Date();
+        var months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+        if (months < 1) {
+          var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+          el.textContent = days + ' days';
+        } else {
+          el.textContent = months + ' mos';
+        }
+      });
 
       /* 3. GitHub API — sessionStorage cache 30 min */
       var GH   = 'thi-web6';
