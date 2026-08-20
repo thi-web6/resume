@@ -75,6 +75,15 @@ Jul 2026 - Present
 - **On-site Trip 2** (16–18 Oktober 2025): Palangka Raya - integrasi log management infrastructure
 
 ### Juri LKS IT Network System Administration
+*Lomba Kompetensi Siswa, SMK YP IPPI Jakarta Pusat*
+23-24 April 2026
+
+- Menilai 8 jam efektif kompetensi peserta membangun infrastruktur jaringan perusahaan dari nol
+- Stack industri: MikroTik RouterOS, Linux Server (disk encryption, SSH, Apache+SSL, WordPress, Nextcloud), Windows Server 2022 (IIS, File/Printer Sharing ACL), Windows 11 Client
+- Penilaian live di depan juri — konfigurasi harus dibuktikan langsung
+- Evaluasi kemampuan troubleshoot: baca log, cek permission, trace koneksi
+
+### Juri LKS IT Network System Administration
 *Lomba Kompetensi Siswa, Jakarta Pusat 1*
 14-15 Mei 2025
 
