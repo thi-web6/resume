@@ -8,7 +8,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-thi--web6-181717?style=for-the-badge&logo=github)](https://github.com/thi-web6)
 [![License](https://img.shields.io/badge/License-ISC-green?style=for-the-badge)](LICENSE)
 
-**Cybersecurity Expert | Pentester | CTF Champion | LKS Judge**
+**DevOps Consultant | Pentester**
 
 [🌐 Live Demo](https://thi-web6.github.io/resume/) • [📧 Contact](mailto:abdurrohmanalfathi.rpl42023@gmail.com) • [📄 Documentation](https://thi-web6.github.io/resume/dokumentasiapk.html)
 
@@ -18,9 +18,9 @@
 
 ## 📖 About This Project
 
-Professional portfolio website showcasing my journey as a cybersecurity enthusiast, competitive CTF player, penetration tester, and technical judge. This repository contains a fully optimized, SEO-friendly, and performance-tuned personal resume website.
+Professional portfolio website showcasing my journey as a DevOps Consultant, penetration tester, and Linux system administrator. This repository contains a fully optimized, SEO-friendly, and performance-tuned personal resume website.
 
-**Featured in**: LKS Cybersecurity Bekasi 2025 (3rd Place), PT. Nesyer Lintas Teknologi Internship, LKS Judge 2025
+**Featured in**: LKS Cybersecurity Bekasi 2025 (3rd Place), PT. Nesyer Lintas Teknologi Internship
 
 ## 🌐 Live Demo
 
@@ -28,7 +28,7 @@ Professional portfolio website showcasing my journey as a cybersecurity enthusia
 
 ## 🚀 About Me
 
-I'm **Abdurrohman Al Fathi**, a cybersecurity enthusiast from Bekasi, Indonesia. Born on February 28, 2008, I'm passionate about **penetration testing**, **CTF competitions**, **Linux system hardening**, and **digital forensics**. Currently active as a student at SMK Taruna Bangsa, serving as OSIS Secretary, Scout member, and LKS technical judge.
+I'm **Abdurrohman Al Fathi**, a DevOps Consultant and penetration tester from Bekasi, Indonesia. Born on February 28, 2008, I'm passionate about **penetration testing**, **Linux system hardening**, **DevSecOps**, and **digital forensics**. Currently active as a student at SMK Taruna Bangsa, serving as OSIS Secretary and Scout member.
 
 ### 📍 Quick Info
 - **Location:** Bekasi Utara, Indonesia
@@ -56,11 +56,11 @@ I'm **Abdurrohman Al Fathi**, a cybersecurity enthusiast from Bekasi, Indonesia.
   *PT. Nesyer Lintas Teknologi, Jakarta Barat*  
   **Client:** Bank Kalimantan Tengah (Palangka Raya)  
   20 Mei 2025 - 20 November 2025 (6 bulan)
-  - Melakukan remote maintenance dan monitoring infrastruktur IT untuk aplikasi perbankan critical client (RTGS, SKN, BI Fast, Middleware), memastikan sistem aman dan tidak ada broken atau downtime.
+   - Melakukan remote maintenance dan monitoring infrastruktur IT untuk client, memastikan sistem aman dan tidak ada broken atau downtime.
   - Melakukan maintenance dan konfigurasi sistem Linux untuk aplikasi web berbasis Apache Tomcat melalui akses remote menggunakan VPN khusus yang disediakan client.
   - Research dan development Grafana dashboard untuk real-time monitoring performa sistem, deteksi anomali, dan security logging, mengintegrasikan Prometheus untuk koneksi ke server monitoring dengan penyesuaian target sesuai kebutuhan client.
-  - Mengintegrasikan sistem monitoring dengan Sysmon untuk performance tracking, alerting, incident response, dan analisis log untuk mendeteksi potensi masalah keamanan dan performa secara remote.
-  - Mengelola workflow otomatisasi dengan Apache Airflow untuk maintenance scheduling, backup automation, dan health checks.
+   - Melakukan performance tracking, alerting, incident response, dan analisis log untuk mendeteksi potensi masalah keamanan dan performa secara remote.
+
   - Memberikan technical support untuk konfigurasi sistem Linux dan troubleshooting melalui VPN, serta berkontribusi dalam optimalisasi proses kerja tim dengan merekomendasikan solusi berbasis data dari hasil pemantauan sistem.
   - Menyusun laporan performa sistem dan rekomendasi perbaikan berdasarkan hasil maintenance remote dan kunjungan on-site.
   - **On-site Trip 1 (18-21 Juni):** Kunjungan ke Palangka Raya untuk maintenance aplikasi perbankan dan implementasi monitoring dashboard langsung di lokasi client.
