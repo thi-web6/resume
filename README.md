@@ -75,7 +75,7 @@ Jul 2026 - Present
 - **On-site Trip 2** (16–18 Oktober 2025): Palangka Raya - integrasi log management infrastructure
 
 ### Juri LKS IT Network System Administration
-*Lomba Kompetensi Siswa, SMK YP IPPI Jakarta Pusat*
+*Lomba Kompetensi Siswa, SMK YP IPPI, Jakarta Pusat 1*
 23-24 April 2026
 
 - Menilai 8 jam efektif kompetensi peserta membangun infrastruktur jaringan perusahaan dari nol
@@ -84,7 +84,7 @@ Jul 2026 - Present
 - Evaluasi kemampuan troubleshoot: baca log, cek permission, trace koneksi
 
 ### Juri LKS IT Network System Administration
-*Lomba Kompetensi Siswa, SMK Said Naum Jakarta Pusat*
+*Lomba Kompetensi Siswa, SMK Said Naum, Jakarta Pusat 1*
 14-15 Mei 2025
 
 - Menilai kompetensi peserta di bidang ITNSA: konfigurasi jaringan, keamanan server, dan administrasi sistem Linux
