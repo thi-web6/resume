@@ -1,4 +1,4 @@
-# 🛡️ Abdurrohman Al Fathi - Cybersecurity Portfolio
+# 🛡️ Abdurrohman Al Fathi - DevOps Consultant & Pentester
 
 <div align="center">
 
@@ -43,52 +43,42 @@ I'm **Abdurrohman Al Fathi**, a DevOps Consultant and penetration tester from Be
 - **Digital Forensics** (80%)
 - **Web Security Analysis** (82%)
 - **Technical Write-Up** (87%)
-- **Penilaian Kompetensi (Juri LKS)** (78%)
-- **Maintenance Sistem Perbankan** (80%)
+- **DevOps & CI/CD** (80%)
+- **Grafana & Prometheus Monitoring** (82%)
 
 ## 🏆 Pencapaian
 - **Peringkat 3 LKS Cybersecurity (CTF)** - Kota Bekasi, 22 Januari 2025
 - **Peringkat 4 LKS Cybersecurity (CTF)** - Kota Bekasi, 23 April 2024
-- **Medali Emas Olimpiade Bahasa Arab, Matematika, Biologi** - Fosnas Event, 9 Januari 2024
 
 ## 💼 Pengalaman
-- **IT Staff Intern - System Administrator & Grafana Researcher**  
-  *PT. Nesyer Lintas Teknologi, Jakarta Barat*  
-  **Client:** Bank Kalimantan Tengah (Palangka Raya)  
-  20 Mei 2025 - 20 November 2025 (6 bulan)
-   - Melakukan remote maintenance dan monitoring infrastruktur IT untuk client, memastikan sistem aman dan tidak ada broken atau downtime.
-  - Melakukan maintenance dan konfigurasi sistem Linux untuk aplikasi web berbasis Apache Tomcat melalui akses remote menggunakan VPN khusus yang disediakan client.
-  - Research dan development Grafana dashboard untuk real-time monitoring performa sistem, deteksi anomali, dan security logging, mengintegrasikan Prometheus untuk koneksi ke server monitoring dengan penyesuaian target sesuai kebutuhan client.
-   - Melakukan performance tracking, alerting, incident response, dan analisis log untuk mendeteksi potensi masalah keamanan dan performa secara remote.
 
-  - Memberikan technical support untuk konfigurasi sistem Linux dan troubleshooting melalui VPN, serta berkontribusi dalam optimalisasi proses kerja tim dengan merekomendasikan solusi berbasis data dari hasil pemantauan sistem.
-  - Menyusun laporan performa sistem dan rekomendasi perbaikan berdasarkan hasil maintenance remote dan kunjungan on-site.
-  - **On-site Trip 1 (18-21 Juni):** Kunjungan ke Palangka Raya untuk maintenance aplikasi perbankan dan implementasi monitoring dashboard langsung di lokasi client.
-  - **On-site Trip 2 (16-18 Oktober):** Kunjungan ke Palangka Raya untuk maintenance sistem monitoring dan integrasi log management infrastructure di lokasi client.
+### DevOps Consultant
+*PT Inovasi Informatika Indonesia · Contract · Hybrid*
+Jul 2026 - Present (2 mos)
 
-- **Juri LKS IT Network System Administration**  
-  *Lomba Kompetensi Siswa, Jakarta Pusat 1*  
-  14-15 Mei 2025  
-  - Menilai kompetensi peserta dalam bidang IT Network System Administration (konfigurasi jaringan, keamanan server, administrasi Linux).
-  - Menyusun kisi-kisi soal dan memberikan feedback teknis kepada peserta.
-  - Berkoordinasi dengan panitia untuk memastikan kelancaran dan objektivitas penilaian.
+- Implementasi SonarQube untuk code quality analysis dan security scanning
+- Reporting dan monitoring hasil analisis kode
+- Konsultasi DevSecOps untuk client
 
-- **Analis Keamanan Aplikasi Web**  
-  *Pengujian Keamanan dan Hardening Sistem*  
-  2023 - 2024  
-  - Melakukan hardening pada Linux CentOS 7 dengan konfigurasi SELinux, Apache CSP, dan mitigasi brute force menggunakan Fail2Ban.
-  - Mengidentifikasi dan mengeksploitasi kerentanan aplikasi web melalui teknik CTF seperti web exploitation dan reconnaissance.
-  - Mengatur deteksi ancaman dengan IDS (Snort/Suricata) untuk SQL Injection dan Cross-Site Scripting.
-  - Menyusun dokumentasi teknis (write-up) untuk setiap proses pentesting dan hardening.
+### IT Staff Intern - System Administrator & Grafana Researcher
+*PT. Nesyer Lintas Teknologi, Jakarta Barat*
+**Client:** Bank Kalimantan Tengah (Palangka Raya)
+20 Mei 2025 - 20 November 2025 (6 bulan)
+
+- Remote maintenance & monitoring infrastruktur IT client via VPN khusus
+- R&D Grafana dashboard untuk real-time monitoring, deteksi anomali, dan security logging - integrasi Prometheus dengan konfigurasi target custom
+- Performance tracking, alerting, incident response, dan log analysis keamanan secara remote
+- Technical support konfigurasi Linux dan troubleshooting via VPN; laporan performa sistem dan rekomendasi perbaikan
+- **On-site Trip 1** (18–21 Juni 2025): Palangka Raya - implementasi monitoring dashboard di lokasi client
+- **On-site Trip 2** (16–18 Oktober 2025): Palangka Raya - integrasi log management infrastructure
 
 ## 📂 Portofolio
 - **Badge Sertifikasi**: Bukti pencapaian kompetensi cybersecurity.
 - **Write-up CTF**: Dokumentasi teknis dari kompetisi CTF.
 - **Project Website Pramuka**: Proyek pengembangan situs untuk Pramuka SMK Taruna Bangsa.
-- **Juri LKS**: Dokumentasi dan pengalaman sebagai juri di LKS ITNSA 2025, termasuk penilaian kompetensi teknis.
 
 ## 📂 Struktur Proyek
-- `index.html`: Halaman utama resume dengan pembaruan desain, portofolio, dan pengalaman terbaru (termasuk maintenance dan juri LKS).
+- `index.html`: Halaman utama resume dengan pembaruan desain, portofolio, dan pengalaman terbaru.
 - `assets/`: Folder berisi gambar, CSS, dan JS.
   - `img/`: Gambar profil, sertifikat, dan portfolio (termasuk badge, write-up, project, dan elemen juri).
   - `css/`: File styling (style.css) dengan optimasi portfolio, certificates, dan section baru.
@@ -276,7 +266,7 @@ resume/
 This project is licensed under the **ISC License**.
 
 ```
-Copyright (c) 2024-2025 Abdurrohman Al Fathi
+Copyright (c) 2024-2026 Abdurrohman Al Fathi
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -303,24 +293,18 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 📈 Updates & Changelog
 
-### Latest Updates (December 2025)
+### Latest Updates (August 2026)
+- ✅ Added DevOps Consultant role at PT Inovasi Informatika Indonesia
+- ✅ Updated hero section to DevOps Consultant, Pentester
+- ✅ Removed RTGS, SKNBI, Sysmon, Airflow references
+- ✅ Updated all meta tags and structured data
+- ✅ Cleaned up resume content
+
+### Previous Updates (December 2025)
 - ✅ Added HowTo schema for tutorial (11 steps)
 - ✅ Added FAQPage schema (8 questions)
 - ✅ Upgraded Person schema to 36 properties
-- ✅ Fixed duplicate Person schema issue
-- ✅ Removed hardcoded age references
 - ✅ Optimized images (93% reduction)
-- ✅ Fixed WebP image usage
-- ✅ Updated sitemap.xml
-- ✅ Fixed robots.txt reference
-- ✅ Enhanced TechArticle schema (22 properties)
-- ✅ Added author entity connections
-
-### Previous Updates (June 2025)
-- Added reverse engineering tutorial
-- Added portfolio detail pages
-- Added LKS judge documentation
-- Initial schema.org implementation
 
 ---
 
