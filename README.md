@@ -56,7 +56,7 @@ I'm **Abdurrohman Al Fathi**, a DevOps Consultant and penetration tester from Be
 
 ### DevOps Consultant
 *PT Inovasi Informatika Indonesia · Contract · Hybrid*
-Jul 2026 - Present (2 mos)
+Jul 2026 - Present
 
 - Implementasi SonarQube untuk code quality analysis dan security scanning
 - Reporting dan monitoring hasil analisis kode
