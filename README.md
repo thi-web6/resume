@@ -43,12 +43,14 @@ I'm **Abdurrohman Al Fathi**, a DevOps Consultant and penetration tester from Be
 - **Digital Forensics** (80%)
 - **Web Security Analysis** (82%)
 - **Technical Write-Up** (87%)
+- **Penilaian Kompetensi (Juri LKS)** (78%)
 - **DevOps & CI/CD** (80%)
 - **Grafana & Prometheus Monitoring** (82%)
 
 ## 🏆 Pencapaian
 - **Peringkat 3 LKS Cybersecurity (CTF)** - Kota Bekasi, 22 Januari 2025
 - **Peringkat 4 LKS Cybersecurity (CTF)** - Kota Bekasi, 23 April 2024
+- **Medali Emas Olimpiade Bahasa Arab, Matematika, Biologi** - Fosnas Event, 9 Januari 2024
 
 ## 💼 Pengalaman
 
@@ -71,6 +73,14 @@ Jul 2026 - Present (2 mos)
 - Technical support konfigurasi Linux dan troubleshooting via VPN; laporan performa sistem dan rekomendasi perbaikan
 - **On-site Trip 1** (18–21 Juni 2025): Palangka Raya - implementasi monitoring dashboard di lokasi client
 - **On-site Trip 2** (16–18 Oktober 2025): Palangka Raya - integrasi log management infrastructure
+
+### Juri LKS IT Network System Administration
+*Lomba Kompetensi Siswa, Jakarta Pusat 1*
+14-15 Mei 2025
+
+- Menilai kompetensi peserta di bidang ITNSA: konfigurasi jaringan, keamanan server, dan administrasi sistem Linux
+- Memastikan standar penilaian adil dan relevan dengan kebutuhan industri
+- Memberikan feedback teknis kepada peserta untuk pengembangan keterampilan ITNSA
 
 ## 📂 Portofolio
 - **Badge Sertifikasi**: Bukti pencapaian kompetensi cybersecurity.
@@ -310,8 +320,6 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 <div align="center">
 
-**Made with ❤️ by [Abdurrohman Al Fathi](https://github.com/thi-web6)**
-
-⭐ Star this repo if you find it helpful!
+**Abdurrohman Al Fathi** | [GitHub](https://github.com/thi-web6)
 
 </div>
