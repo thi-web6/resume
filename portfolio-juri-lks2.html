@@ -50,6 +50,7 @@
   <meta name="theme-color" content="#4776e6">
 
   <!-- Preload Critical Assets -->
+  <link rel="preload" href="images/lks-2026-04.jpg" as="image" type="image/jpeg">
   <link rel="preload" href="assets/css/style.css" as="style">
 
   <!-- Google Fonts -->
@@ -613,18 +614,41 @@
       line-height: 1.6;
     }
 
-    /* Placeholder image styling */
-    .placeholder-img {
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Overlay loading untuk galeri portfolio */
+    #gallery-loading-overlay {
+      position: fixed;
+      z-index: 99999;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(20, 20, 30, 0.85);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 14px;
+      transition: opacity 0.4s;
+    }
+    .gallery-loading-spinner {
+      border: 6px solid #eee;
+      border-top: 6px solid #4776E6;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    .gallery-loading-text {
+      color: #fff;
+      font-size: 1.1rem;
       text-align: center;
-      padding: 20px;
+      max-width: 90vw;
+    }
+    #gallery-loading-overlay.hide {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
     }
   </style>
 
@@ -675,6 +699,41 @@
       },
       "startDate": "2026-04-23",
       "endDate": "2026-04-24"
+    },
+    "associatedMedia": {
+      "@type": "ImageGallery",
+      "associatedMedia": [
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://thi-web6.github.io/resume/images/lks-2026-01.jpg",
+          "description": "Dokumentasi juri LKS ITNSA 2026 - 1"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://thi-web6.github.io/resume/images/lks-2026-02.jpg",
+          "description": "Dokumentasi juri LKS ITNSA 2026 - 2"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://thi-web6.github.io/resume/images/lks-2026-03.jpg",
+          "description": "Dokumentasi juri LKS ITNSA 2026 - 3"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://thi-web6.github.io/resume/images/lks-2026-04.jpg",
+          "description": "Dokumentasi juri LKS ITNSA 2026 - 4"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://thi-web6.github.io/resume/images/lks-2026-05.jpg",
+          "description": "Dokumentasi juri LKS ITNSA 2026 - 5"
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://thi-web6.github.io/resume/images/lks-2026-06.jpg",
+          "description": "Dokumentasi juri LKS ITNSA 2026 - 6"
+        }
+      ]
     }
   }
   </script>
@@ -709,6 +768,11 @@
 </head>
 
 <body>
+  <!-- Overlay loading untuk galeri portfolio -->
+  <div id="gallery-loading-overlay">
+    <div class="gallery-loading-spinner"></div>
+    <div class="gallery-loading-text">Memuat dokumentasi... Mohon tunggu hingga semua foto tampil sempurna.</div>
+  </div>
   <!-- Ganti tombol toggle sidebar agar sama persis dengan index.html -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
   <!-- Mobile Overlay -->
@@ -969,6 +1033,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   observer.observe(body, { attributes: true });
+
+  // Anti blank putih & blur-up: tambahkan class 'loaded' saat gambar selesai load
+  document.querySelectorAll('.gallery-img').forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+    }
+  });
+
+  // Gallery loading overlay logic
+  const overlayGallery = document.getElementById('gallery-loading-overlay');
+  const galleryImgs = document.querySelectorAll('.gallery-img');
+  let loadedCount = 0;
+  let totalImgs = galleryImgs.length;
+
+  function hideOverlay() {
+    if (overlayGallery) overlayGallery.classList.add('hide');
+  }
+
+  if (totalImgs === 0) {
+    hideOverlay();
+  } else {
+    galleryImgs.forEach(img => {
+      if (img.complete && img.naturalHeight !== 0) {
+        loadedCount++;
+        if (loadedCount === totalImgs) hideOverlay();
+      } else {
+        img.addEventListener('load', () => {
+          loadedCount++;
+          if (loadedCount === totalImgs) hideOverlay();
+        });
+        img.addEventListener('error', () => {
+          loadedCount++;
+          if (loadedCount === totalImgs) hideOverlay();
+        });
+      }
+    });
+  }
 });
 
 // Handle smooth scrolling untuk internal links
