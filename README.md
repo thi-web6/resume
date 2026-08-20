@@ -80,7 +80,7 @@ Jul 2026 - Present
 
 - Menilai 8 jam efektif kompetensi peserta membangun infrastruktur jaringan perusahaan dari nol
 - Stack industri: MikroTik RouterOS, Linux Server (disk encryption, SSH, Apache+SSL, WordPress, Nextcloud), Windows Server 2022 (IIS, File/Printer Sharing ACL), Windows 11 Client
-- Penilaian live di depan juri — konfigurasi harus dibuktikan langsung
+- Penilaian live di depan juri, konfigurasi harus dibuktikan langsung
 - Evaluasi kemampuan troubleshoot: baca log, cek permission, trace koneksi
 
 ### Juri LKS IT Network System Administration
